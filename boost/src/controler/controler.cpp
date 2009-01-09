@@ -24,7 +24,9 @@ int Controler::displayCircle(double r)
    Logger::getInstance()->logMessage( "nombre de sommets : " + nb.str(), Logger::DEBUG);
    //fonction boost pour generer la position map
    circle_graph_layout( graph, position, r);
-   
+   std::map<vertex_descriptor, double> v_centrality;
+   tableau_de_poids vc_map(v_centrality);
+   brandes_betweenness_centrality(graph, vc_map);
    return 0;
 
 }
