@@ -49,7 +49,14 @@ void grapheZone::drawPoint(double a, double b)
    _points.push_back(p);
 
    update();
-//   repaint(a, b, 6, 6);
+
+}
+
+void grapheZone::eraseGraph()
+{
+   _points.clear();
+
+   update();
 }
 
 void grapheZone::paintEvent(QPaintEvent * )
@@ -69,12 +76,12 @@ void grapheZone::paintEvent(QPaintEvent * )
 //    {
 //       painter.drawEllipse(_x1, _y1, 6, 6);
 //    }
-std::cout << width() << "  " << height() << std::endl;
+
    for(uint i = 0; i < _points.size(); ++i)
    {
       x = _points[i].first * cx / 2.0 + cx;
       y = _points[i].second * cy / 2.0 + cy;
-// std::cout << x << "   " << y << std::endl;
+
       painter.drawEllipse( x, y, 6, 6);
    }
 

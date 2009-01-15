@@ -25,6 +25,7 @@ class grapheZone : public QWidget
       void setBrush(const QBrush &brush);
 //       void drawLine(int a, int b, int c, int d);
       void drawPoint(double a, double b);
+      void eraseGraph();
 
    protected:
 

@@ -22,6 +22,7 @@
 #include <iostream>
 #include <sstream>
 #include <ctime>
+#include <string>
 #include "aboutWindow.hpp"
 #include "grapheZone.hpp"
 
@@ -59,6 +60,7 @@ class mainWindow : public QMainWindow
       QAction * _openAct;
       QAction * _quitAct;
       QAction * _aboutAct;
+      QAction * _eraseAct;
 
       Controler * _controler;
 
@@ -74,11 +76,13 @@ class mainWindow : public QMainWindow
       inline void setNbArete(int n) { _nbarete.setText(QString::number(n)); }
       inline void setTemps(double n) { _tps.setText(QString::number(n)); }
       inline void setNbClique(int n) { _nbclique.setText(QString::number(n)); }
+      void razCompteur();
       void afficherPoint();
 
    public slots :
       void afficherAbout();
       void choixFichier();
+      void eraseGraph();
 
 
 };
