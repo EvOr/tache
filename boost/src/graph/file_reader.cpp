@@ -17,6 +17,33 @@ void File_reader::change_file_name(std::string new_name){
    peersMap.clear();
    peersVector.clear();
 }
+/// \brief fonction qui test si un point est un stub ou non
+/// \param peersCount nombre de peers de oldVertex
+/// \param clientsCount nombre de clients de oldVertex
+/// \param currentVertex index du point courant
+/// \param oldVertex index du point d'avant
+/// \param vertexType identifieur du type de point ajoute
+void File_reader::stubs_testing(int & peersCount, int & clientsCount, int currentVertex, int & oldVertex, int vertexType){
+   if(currentVertex!=oldVertex){
+      if(peersCount == 0 && clientsCount == 0){
+	 stubsVector.push_back(oldVertex); 
+      }   
+      peersCount=0;
+      clientsCount=0;
+   }
+   switch(vertexType){
+      case P2C:
+	 clientsCount++;
+	 break;
+      case PEER:
+	 peersCount++;
+	 break;
+      default:
+	 break;
+   }
+}
+
+
 
 /// \brief Fonction de lecture du fichier d'adjacence
 /// \param g Matrice d'adjacence à remplir
@@ -32,14 +59,14 @@ void File_reader::parse(Graph & g)
    try
    {
       std::ifstream file(filename.c_str());
-
+      int oldVertex=0, vertexType=-1;
+      int peersCount=1, clientsCount=0;
       if( file.is_open() )
       {
 	 //remplissage de la matrice
 	 while(std::getline(file, line)) {
 	    // std::cout << "je lis la ligne" << file.tellg() << std::endl;
 	    std::istringstream lineStream(line);
-
 	    if(lineStream >> tempString) {
 	       std::istringstream in1(tempString);
 
@@ -47,17 +74,23 @@ void File_reader::parse(Graph & g)
 		  std::istringstream in2(tempString);
 		  //Si tout rentre dans chacun des conteneurs...
 		  if(lineStream >> linkType && in1 >> i1 && in2 >> i2) {
-		     addEdge(i1, i2, linkType, found, e, g);
+		     vertexType=addEdge(i1, i2, linkType, found, e, g);
 		     if(!found) {
 			line_error=true;
+		     }else{
+			stubs_testing(peersCount, clientsCount, i1, oldVertex, vertexType);
+			oldVertex=i1;
 		     }
-		  }else {
-		     line_error=true;
+		  }
+		  else {
+			line_error=true;
+		     }
 		  }
 	       }
 	    }
-	 }
-
+	 if(peersCount == 0 && clientsCount == 0){
+	    stubsVector.push_back(i1); 
+	 }   
 	 file.close();
 
       }
@@ -75,13 +108,13 @@ void File_reader::parse(Graph & g)
    }
    //Fais passer la peers'matrice d'adjacence de 3140 à 1850 peers qui n'ont qu'une seule connection progression fulgurante... A tester sur des cas particuliers... On suppose que toutes les relations de peerings sont mises en double a vers b et b vers a il me semble que c'est le cas mais je n'ai évidemment pas tout vérifier...
    // Algo : Pour chque point stocker le ou les full mesh auxquels il appertient pour ça utiliser une map de vector ou autre chose ?
-  // for(int i=0; i < peers.size(); i++){
+   // for(int i=0; i < peers.size(); i++){
    //   std::cout<<peersVector[i] << " : ";
    //   for(int j=0; j < peers[i].size();j++){
-//	 std::cout<< peers[i][j] << " ; ";
- //     }
-  //    std::cout << std::endl;
-  // }
+   //	 std::cout<< peers[i][j] << " ; ";
+   //     }
+   //    std::cout << std::endl;
+   // }
    std::cout << peers.size() << std::endl;
    std::vector< std::vector<int> >::iterator it,next;
    std::vector<int>::iterator graou, graouNext ;
@@ -102,20 +135,20 @@ void File_reader::parse(Graph & g)
    std::cout << peers.size() << std::endl;
    //Creation de la map...
    std::vector<int>::iterator uguu ;
-  // for(int i=0; i < peers.size(); i++){
+   // for(int i=0; i < peers.size(); i++){
    //   std::cout<<peersVector[i] << " : ";
-    //  for(int j=0; j < peers[i].size();j++){
-//	 std::cout<< peers[i][j] << " ; ";
- //     }
-  //    std::cout << std::endl;
-  // }
+   //  for(int j=0; j < peers[i].size();j++){
+   //	 std::cout<< peers[i][j] << " ; ";
+   //     }
+   //    std::cout << std::endl;
+   // }
    for(uguu=peersVector.begin(); uguu!=peersVector.end();++uguu){
       peersMap[*uguu]=uguu-peersVector.begin();
    }
-  // for(int i=1; i<=5;i++){
+   // for(int i=1; i<=5;i++){
    //   std::cout << peersMap[i] << std::endl;
-  // }
-
+   // }
+   std::cout << stubsVector.size() << std::endl;
 }
 
 //--------------------------------------------
@@ -129,24 +162,29 @@ void File_reader::parse(Graph & g)
 /// \param found booleen resultat
 /// \param e edge_descriptor de l'arrete
 /// \param g double pointeur sur le Graph ou il faut ajouter la relation
-
-void File_reader::addEdge(int i1, int i2, std::string linkType, bool & found, edge_descriptor & e, Graph & g){
+/// \return le type de point
+int File_reader::addEdge(int i1, int i2, std::string linkType, bool & found, edge_descriptor & e, Graph & g){
 
    vertex_descriptor v = boost::vertex(i1,g);
    vertex_descriptor vv = boost::vertex(i2,g);
+   int res;
    //si on veut mettre des poids
    // 		if(found) (**g)[e].weight = xx%13 * 2 + 5;
    if(linkType=="PEER"){	
       // Pas besoin d'ajouter deux fois parce que les arcs en PEER sont presents en double
       boost::tie(e,found) = boost::add_edge( v,vv,g);
-    //  boost::tie(e,found) = boost::add_edge(vv,v,g);
+      res=PEER;
+      //  boost::tie(e,found) = boost::add_edge(vv,v,g);
       addToPeersVector(i1, i2);
       // Peer vers Client
    }else if(linkType=="C2P"){
       boost::tie(e,found) = boost::add_edge(vv,v,g);
+      res=C2P;
    }else if(linkType=="P2C"){
       boost::tie(e,found) = boost::add_edge(v,vv,g);
+      res=P2C;
    }
+   return res;
 }
 /// \brief ajoute les index de vecteurs a la map de traduction
 /// \param index du premier point
