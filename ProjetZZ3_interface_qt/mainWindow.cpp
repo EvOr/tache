@@ -10,6 +10,7 @@ void mainWindow::init()
    initStatus();
    initAction();
    initMenu();
+   razCompteur();
    _about.init();
 
    vlayout->setMenuBar(&_menu);
@@ -18,10 +19,10 @@ void mainWindow::init()
 
    _fenetre.setLayout(vlayout);
 
-   setMinimumSize(640, 480);
-   setWindowTitle("Fenetre Principale");
+   setMinimumSize(740, 480);
+   setWindowTitle("Modelisation de Reseau");
    setCentralWidget(&_fenetre);
-   resize(1024,768);
+   resize(640,480);
 }
 
 
@@ -33,6 +34,9 @@ void mainWindow::initMenu()
 
    _fileMenu.addAction(_openAct);
    _fileMenu.addAction(_quitAct);
+
+   _optionMenu.addAction(_eraseAct);
+
    _aboutMenu.addAction(_aboutAct);
 
    _menu.addMenu(&_fileMenu);
@@ -63,7 +67,7 @@ void mainWindow::initStatus()
 
    _status.setLayout(layout);
 
-   _status.setMinimumSize(X, 80);
+   _status.setMinimumSize(720, 80);
    _status.setMaximumSize(10000, 80);
 
 //    _status.resize(X, 100);
@@ -81,6 +85,10 @@ void mainWindow::initAction()
    _openAct->setShortcut(tr("Ctrl+O"));
    _openAct->setStatusTip("Open a datafile");
    QObject::connect(_openAct, SIGNAL(triggered()), this, SLOT(choixFichier()));
+
+   _eraseAct = new QAction("Erase Graphe", this);
+   _eraseAct->setStatusTip("Erase the graph en re-initialize data structures");
+   QObject::connect(_eraseAct, SIGNAL(triggered()), this, SLOT(eraseGraph()));
 
    _aboutAct = new QAction("About program...", this);
    _aboutAct->setStatusTip("Give information about this program");
@@ -128,8 +136,21 @@ void mainWindow::afficherAbout()
 void mainWindow::choixFichier()
 {
    double t;
+   std::string s;
+//   size_t found = 0, prec = 0;
 
    _datafile = QFileDialog::getOpenFileName(this,"Choose a file...", "./", "All Files (*.*)");
+   
+   //petit traitement pour récupérer le nom du fichier sans le chemin
+//   s = _datafile.toStdString();
+//   while(found!=std::string::npos)
+//   {
+//      prec = found;
+//      found = s.find('/');
+//   }
+//   s = s.substr(prec);
+
+   _status.setTitle("Status : " + _datafile);
 
    if(_controler == NULL)
    {
@@ -137,6 +158,7 @@ void mainWindow::choixFichier()
    }
    else
    {
+      _graphe.eraseGraph();
       _controler->change_file_name(_datafile.toStdString());
    }
 
@@ -156,8 +178,23 @@ void mainWindow::choixFichier()
 
    t = time(0) - t;
    setTemps(t);
-
    afficherPoint();
+}
+
+void mainWindow::eraseGraph()
+{
+   _graphe.eraseGraph();
+   _status.setTitle("Status");
+   razCompteur();
+}
+
+void mainWindow::razCompteur()
+{
+   setTemps(0);
+   setNbSommets(0);
+   setNbArete(0);
+   setNbClique(0);
+
 }
 
 

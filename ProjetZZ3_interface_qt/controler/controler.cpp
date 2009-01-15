@@ -6,7 +6,6 @@ void Controler::change_file_name(std::string name){
    graph.clear();
    file_reader.change_file_name(name);
    mescoords.clear();
-   position.clear();
 }
 
 ///\brief parse le fichier
