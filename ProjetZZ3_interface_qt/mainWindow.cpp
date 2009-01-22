@@ -170,8 +170,10 @@ void mainWindow::choixFichier()
       if(e.getType()==ReaderException::CRITICAL){
 	 Logger::getInstance()->logMessage(e.display(),Logger::ERR_UNEXP);
 	 //TODO faire un popup
+         QMessageBox::warning(this, QString::fromStdString("Erreur Critique !"), QString::fromStdString(e.display()), QMessageBox::Ok, QMessageBox::NoButton);
       }else{
 	 Logger::getInstance()->logMessage(e.display(),Logger::ERR_UNEXP);
+         QMessageBox::warning(this, QString::fromStdString("Attention !"), QString::fromStdString(e.display()), QMessageBox::Ok, QMessageBox::NoButton);
       }
    }
    _controler->displayCircle(1.5);

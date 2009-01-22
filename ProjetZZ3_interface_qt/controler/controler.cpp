@@ -10,7 +10,7 @@ void Controler::change_file_name(std::string name){
 
 ///\brief parse le fichier
 void Controler::parse_file(){
-  file_reader.parse(graph); 
+  file_reader.parse(graph);
 
 }
 

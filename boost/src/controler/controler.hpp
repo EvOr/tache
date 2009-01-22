@@ -19,6 +19,7 @@ class Controler{
       int displayCircle(double r);
       Graph & getGraph(){return graph;};
       inline std::map< vertex_descriptor , coordonnes> get_position(){return mescoords;};
+      inline std::vector<vertex_descriptor> getStubsVector(){return file_reader.getStubsVector();};
 };
 
 #endif

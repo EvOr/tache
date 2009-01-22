@@ -34,8 +34,9 @@ class aboutWindow : public QObject
       void init()
       {
          QVBoxLayout * vlayout = new QVBoxLayout();
-         _fenetre.setGeometry(100,100,300,400);
+         _fenetre.setGeometry(100,100,200,250);
          _fenetre.setWindowTitle("About program...");
+         _fenetre.setMinimumSize(300, 75);
 
          _desc.setText("Jan Villeminot, Bastien Legrand, ZZ3 project.");
 
@@ -46,6 +47,7 @@ class aboutWindow : public QObject
          vlayout->addWidget(_quit);
 
          _fenetre.setLayout(vlayout);
+         _fenetre.resize(300,75);
       }
 
       void afficher()

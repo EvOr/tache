@@ -11,6 +11,7 @@
 #include <QHBoxLayout>
 #include <QMenuBar>
 #include <QMenu>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QtGui>
 #include <QGroupBox>

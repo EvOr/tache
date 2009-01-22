@@ -7,11 +7,14 @@
 #include "controler/controler.hpp"
 #include <boost/graph/dijkstra_shortest_paths.hpp>
 #include <boost/timer.hpp>
+#include <ctime>
 
 
 int main(int argc , char ** argv)
 {
    std::string filename;
+   Graph g2;
+   double t = time(0);
    Logger::createInstance(Logger::DEBUG);
    if(argc > 1)
       filename = argv[1];
@@ -32,7 +35,12 @@ int main(int argc , char ** argv)
 	 Logger::getInstance()->logMessage(e.display(),Logger::ERR_UNEXP);
       }
    }
-   c.displayCircle(1.5);
+
+   centrality(c.getGraph(), g2, c.getStubsVector());
+
+    std::cout << num_vertices(g2) << std::endl;
+   std::cout << "temps de calcul " << time(0) - t << std::endl;
+
    return EXIT_SUCCESS;
 }
 
