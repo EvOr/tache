@@ -78,7 +78,6 @@ class mainWindow : public QMainWindow
       inline void setNbClique(int n) { _nbclique.setText(QString::number(n)); }
       void razCompteur();
       void afficherPoint();
-      void razCompteur();
 
    public slots :
       void afficherAbout();
