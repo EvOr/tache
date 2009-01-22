@@ -16,14 +16,15 @@ class File_reader{
       std::vector< std::vector<vertex_descriptor> > peers;
       std::map<vertex_descriptor, vertex_descriptor> peersMap;
       std::vector<vertex_descriptor> peersVector;
-      std::vector<vertex_descriptor> stubsVector;
+      std::vector< std::pair<vertex_descriptor, int> > ansa;
+      Graph stubsGraph;
    public:
       enum{P2C,C2P,PEER};
       void change_file_name(std::string);
-      File_reader(std::string f):filename(f), peers(), peersMap(), peersVector(){;};
+      File_reader(std::string f):filename(f), peers(), peersMap(), peersVector(), ansa(), stubsGraph(){;};
       void parse(Graph &);
       int getPeerASIndex(int);
-      inline std::vector<vertex_descriptor> getStubsVector(){return stubsVector;};
+      inline Graph& getNonStubsGraph(){return stubsGraph;};
    private:
       int addEdge(vertex_descriptor &, vertex_descriptor &, std::string, bool &, edge_descriptor &, Graph &);
       void addToPeersVector(vertex_descriptor& , vertex_descriptor&);

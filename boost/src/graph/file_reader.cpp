@@ -24,12 +24,34 @@ void File_reader::change_file_name(std::string new_name){
 /// \param oldVertex index du point d'avant
 /// \param vertexType identifieur du type de point ajoute
 void File_reader::stubs_testing(int & peersCount, int & clientsCount, int currentVertex, int & oldVertex, int vertexType, vertex_descriptor & oldVertex_descriptor){
+
    if(currentVertex!=oldVertex){
-      if(peersCount == 0 && clientsCount == 0){
-	 stubsVector.push_back(oldVertex_descriptor); 
-      }   
-      peersCount=0;
-      clientsCount=0;
+      if(!(peersCount == 0 && clientsCount == 0)){
+	 edge_descriptor e;
+	 bool found;
+	 std::vector< std::pair<vertex_descriptor, int> >::iterator it;
+	 for(it=ansa.begin(); it != ansa.end() ; ++it){
+	    int uguu = (*it).second;
+	    vertex_descriptor vv =  (*it).first;
+	    vertex_descriptor v = oldVertex_descriptor;
+	    switch(uguu){
+	       case PEER:
+		  boost::tie(e,found) = boost::add_edge(v, vv, stubsGraph);
+		  break;
+	       case C2P:
+		  boost::tie(e,found) = boost::add_edge(vv, v, stubsGraph);
+		  break;
+	       case P2C:
+		  boost::tie(e,found) = boost::add_edge(v, vv, stubsGraph);
+		  break;
+	       default:
+		  break;
+	    } 
+	 }   
+	 ansa.clear();
+	 peersCount=0;
+	 clientsCount=0;
+      }
    }
    switch(vertexType){
       case P2C:
@@ -47,7 +69,6 @@ void File_reader::stubs_testing(int & peersCount, int & clientsCount, int curren
 
 /// \brief Fonction de lecture du fichier d'adjacence
 /// \param g Matrice d'adjacence à remplir
-/// \param peerGraph Matrice d'adjacence des peers
 /// \throws ReaderException when an error occurs
 void File_reader::parse(Graph & g)
 {
@@ -55,13 +76,15 @@ void File_reader::parse(Graph & g)
    int nbPoint = 0, i1, i2;
    bool line_error = false, found= false;
    edge_descriptor e;
+   vertex_descriptor oldVertex_descriptor;
    std::string line, tempString, linkType;
+   vertex_descriptor v,vv ;
+
    try
    {
       std::ifstream file(filename.c_str());
       int oldVertex=0, vertexType=-1;
-      vertex_descriptor oldVertex_descriptor;
-      int peersCount=1, clientsCount=0;
+      int peersCount=0, clientsCount=0;
       if( file.is_open() )
       {
 	 //remplissage de la matrice
@@ -70,18 +93,17 @@ void File_reader::parse(Graph & g)
 	    std::istringstream lineStream(line);
 	    if(lineStream >> tempString) {
 	       std::istringstream in1(tempString);
-
 	       if(lineStream >> tempString) {
 		  std::istringstream in2(tempString);
 		  //Si tout rentre dans chacun des conteneurs...
 		  if(lineStream >> linkType && in1 >> i1 && in2 >> i2) {
-		     vertex_descriptor v = boost::vertex(i1,g);
-		     vertex_descriptor vv = boost::vertex(i2,g);
-		     vertexType=addEdge(v, vv, linkType, found, e, g );
+		     v = boost::vertex(i1,g);
+		     vv = boost::vertex(i2,g);
+		     vertexType=addEdge(v, vv, linkType, found, e, g);
 		     if(!found) {
 			line_error=true;
 		     }else{
-			stubs_testing(peersCount, clientsCount, i1, oldVertex, vertexType, oldVertex_descriptor );
+			stubs_testing(peersCount, clientsCount, i1, oldVertex, vertexType, oldVertex_descriptor);
 			oldVertex=i1;
 			oldVertex_descriptor = v;
 		     }
@@ -93,7 +115,7 @@ void File_reader::parse(Graph & g)
 	    }
 	 }
 	 if(peersCount == 0 && clientsCount == 0){
-	    stubsVector.push_back(i1); 
+	    stubs_testing(peersCount, clientsCount, i1, oldVertex, vertexType, oldVertex_descriptor);
 	 }   
 	 file.close();
 
@@ -152,7 +174,6 @@ void File_reader::parse(Graph & g)
    // for(int i=1; i<=5;i++){
    //   std::cout << peersMap[i] << std::endl;
    // }
-   std::cout << stubsVector.size() << std::endl;
 }
 
 //--------------------------------------------
@@ -168,7 +189,6 @@ void File_reader::parse(Graph & g)
 /// \param g double pointeur sur le Graph ou il faut ajouter la relation
 /// \return le type de point
 int File_reader::addEdge(vertex_descriptor & v, vertex_descriptor & vv, std::string linkType, bool & found, edge_descriptor & e, Graph & g){
-
    int res;
    //si on veut mettre des poids
    // 		if(found) (**g)[e].weight = xx%13 * 2 + 5;
@@ -186,6 +206,9 @@ int File_reader::addEdge(vertex_descriptor & v, vertex_descriptor & vv, std::str
       boost::tie(e,found) = boost::add_edge(v,vv,g);
       res=P2C;
    }
+   // Ajout a l'adjacence du currentVertex
+   std::pair<vertex_descriptor, int> pai(vv,res);
+   ansa.push_back(pai);
    return res;
 }
 /// \brief ajoute les index de vecteurs a la map de traduction

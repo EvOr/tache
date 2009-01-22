@@ -36,9 +36,9 @@ int main(int argc , char ** argv)
       }
    }
 
-   centrality(c.getGraph(), g2, c.getStubsVector());
+   //centrality(c.getGraph(), g2, c.getStubsVector());
 
-    std::cout << num_vertices(g2) << std::endl;
+    //std::cout << num_vertices(g2) << std::endl;
    std::cout << "temps de calcul " << time(0) - t << std::endl;
 
    return EXIT_SUCCESS;

@@ -25,10 +25,6 @@ std::cout << "il y a " << vd.size() << " feuilles a retirer" << std::endl;
 
    g2 = g;
 
-   for(it = vd.begin(); it != vd.end(); ++it)
-   {
-      remove_vertex(*it, g2);
-   }
 
 }
 
