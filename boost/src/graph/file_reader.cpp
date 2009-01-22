@@ -23,10 +23,10 @@ void File_reader::change_file_name(std::string new_name){
 /// \param currentVertex index du point courant
 /// \param oldVertex index du point d'avant
 /// \param vertexType identifieur du type de point ajoute
-void File_reader::stubs_testing(int & peersCount, int & clientsCount, int currentVertex, int & oldVertex, int vertexType){
+void File_reader::stubs_testing(int & peersCount, int & clientsCount, int currentVertex, int & oldVertex, int vertexType, vertex_descriptor & oldVertex_descriptor){
    if(currentVertex!=oldVertex){
       if(peersCount == 0 && clientsCount == 0){
-	 stubsVector.push_back(oldVertex); 
+	 stubsVector.push_back(oldVertex_descriptor); 
       }   
       peersCount=0;
       clientsCount=0;
@@ -60,6 +60,7 @@ void File_reader::parse(Graph & g)
    {
       std::ifstream file(filename.c_str());
       int oldVertex=0, vertexType=-1;
+      vertex_descriptor oldVertex_descriptor;
       int peersCount=1, clientsCount=0;
       if( file.is_open() )
       {
@@ -74,20 +75,23 @@ void File_reader::parse(Graph & g)
 		  std::istringstream in2(tempString);
 		  //Si tout rentre dans chacun des conteneurs...
 		  if(lineStream >> linkType && in1 >> i1 && in2 >> i2) {
-		     vertexType=addEdge(i1, i2, linkType, found, e, g);
+		     vertex_descriptor v = boost::vertex(i1,g);
+		     vertex_descriptor vv = boost::vertex(i2,g);
+		     vertexType=addEdge(v, vv, linkType, found, e, g );
 		     if(!found) {
 			line_error=true;
 		     }else{
-			stubs_testing(peersCount, clientsCount, i1, oldVertex, vertexType);
+			stubs_testing(peersCount, clientsCount, i1, oldVertex, vertexType, oldVertex_descriptor );
 			oldVertex=i1;
+			oldVertex_descriptor = v;
 		     }
 		  }
 		  else {
-			line_error=true;
-		     }
+		     line_error=true;
 		  }
 	       }
 	    }
+	 }
 	 if(peersCount == 0 && clientsCount == 0){
 	    stubsVector.push_back(i1); 
 	 }   
@@ -116,14 +120,14 @@ void File_reader::parse(Graph & g)
    //    std::cout << std::endl;
    // }
    std::cout << peers.size() << std::endl;
-   std::vector< std::vector<int> >::iterator it,next;
-   std::vector<int>::iterator graou, graouNext ;
+   std::vector< std::vector<vertex_descriptor> >::iterator it,next;
+   std::vector<vertex_descriptor>::iterator graou, graouNext ;
    graou=peersVector.begin();
    it=peers.begin();
    for(next = it, graouNext=graou ; it<peers.end() ; it=next, graou=graouNext){
       next++;
       graouNext++;
-      if((*it).size() <=1){
+      if((*it).size() <= 1){
 	 next=it;
 	 graouNext=graou;
 	 peers.erase(it);   
@@ -134,7 +138,7 @@ void File_reader::parse(Graph & g)
    }
    std::cout << peers.size() << std::endl;
    //Creation de la map...
-   std::vector<int>::iterator uguu ;
+   std::vector<vertex_descriptor>::iterator uguu ;
    // for(int i=0; i < peers.size(); i++){
    //   std::cout<<peersVector[i] << " : ";
    //  for(int j=0; j < peers[i].size();j++){
@@ -163,10 +167,8 @@ void File_reader::parse(Graph & g)
 /// \param e edge_descriptor de l'arrete
 /// \param g double pointeur sur le Graph ou il faut ajouter la relation
 /// \return le type de point
-int File_reader::addEdge(int i1, int i2, std::string linkType, bool & found, edge_descriptor & e, Graph & g){
+int File_reader::addEdge(vertex_descriptor & v, vertex_descriptor & vv, std::string linkType, bool & found, edge_descriptor & e, Graph & g){
 
-   vertex_descriptor v = boost::vertex(i1,g);
-   vertex_descriptor vv = boost::vertex(i2,g);
    int res;
    //si on veut mettre des poids
    // 		if(found) (**g)[e].weight = xx%13 * 2 + 5;
@@ -175,7 +177,7 @@ int File_reader::addEdge(int i1, int i2, std::string linkType, bool & found, edg
       boost::tie(e,found) = boost::add_edge( v,vv,g);
       res=PEER;
       //  boost::tie(e,found) = boost::add_edge(vv,v,g);
-      addToPeersVector(i1, i2);
+      addToPeersVector(v, vv);
       // Peer vers Client
    }else if(linkType=="C2P"){
       boost::tie(e,found) = boost::add_edge(vv,v,g);
@@ -189,14 +191,14 @@ int File_reader::addEdge(int i1, int i2, std::string linkType, bool & found, edg
 /// \brief ajoute les index de vecteurs a la map de traduction
 /// \param index du premier point
 /// \param index du deuxieme point
-void File_reader::addToPeersVector(int i1, int i2){
+void File_reader::addToPeersVector(vertex_descriptor & v, vertex_descriptor & vv){
    bool i1here=false, i2here=false;
    int index1=0, index2=0;
    // PeerGraph::edge_descriptor e;
    bool found;
-   std::vector<int>::iterator it;
+   std::vector<vertex_descriptor>::iterator it;
    for(it = peersVector.begin(); it<peersVector.end() && (!index2 || !index1) ; it++){
-      if(*it == i1) 
+      if(*it == v) 
       {
 	 i1here = true;
 	 index1 = it - peersVector.begin(); 
@@ -207,8 +209,8 @@ void File_reader::addToPeersVector(int i1, int i2){
       //     }
    }
    if(!i1here){
-      peersVector.push_back(i1);
-      peers.push_back(*(new std::vector<int>()));
+      peersVector.push_back(v);
+      peers.push_back(*(new std::vector<vertex_descriptor>()));
       index1=peers.size() - 1;
    }
    // if(!i2here) {
@@ -217,7 +219,7 @@ void File_reader::addToPeersVector(int i1, int i2){
    //  index2=peers.size() - 1;
    // }
 
-   peers[index1].push_back(i2);
+   peers[index1].push_back(vv);
    // peers[index2].push_back(index1);
 }
 

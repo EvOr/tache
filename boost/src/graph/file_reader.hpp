@@ -13,21 +13,21 @@ class File_reader{
    protected:
       std::string filename;
       // std::vector<int> peers;
-      std::vector< std::vector<int> > peers;
-      std::map<int,int> peersMap;
-      std::vector<int> peersVector;
-      std::vector<int> stubsVector;
+      std::vector< std::vector<vertex_descriptor> > peers;
+      std::map<vertex_descriptor, vertex_descriptor> peersMap;
+      std::vector<vertex_descriptor> peersVector;
+      std::vector<vertex_descriptor> stubsVector;
    public:
       enum{P2C,C2P,PEER};
       void change_file_name(std::string);
       File_reader(std::string f):filename(f), peers(), peersMap(), peersVector(){;};
       void parse(Graph &);
       int getPeerASIndex(int);
-      inline std::vector<int> getStubsVector(){return stubsVector;};
+      inline std::vector<vertex_descriptor> getStubsVector(){return stubsVector;};
    private:
-      int addEdge(int, int, std::string, bool &, edge_descriptor &, Graph &);
-      void addToPeersVector(int, int);
-      void stubs_testing(int&, int&, int, int&, int);
+      int addEdge(vertex_descriptor &, vertex_descriptor &, std::string, bool &, edge_descriptor &, Graph &);
+      void addToPeersVector(vertex_descriptor& , vertex_descriptor&);
+      void stubs_testing(int&, int&, int, int&, int, vertex_descriptor &);
 };
 
 #endif
