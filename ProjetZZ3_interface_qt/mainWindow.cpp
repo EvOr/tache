@@ -194,7 +194,6 @@ void mainWindow::razCompteur()
    setNbSommets(0);
    setNbArete(0);
    setNbClique(0);
-
 }
 
 

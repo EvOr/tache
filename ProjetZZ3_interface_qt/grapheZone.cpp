@@ -31,16 +31,16 @@ void grapheZone::setBrush(const QBrush &brush)
    update();
 }
 
-// void grapheZone::drawLine(int a, int b, int c, int d)
-// {
-//    _lineOrPoint = true;
-//    _x1 = a;
-//    _y1 = b;
-//    _x2 = c;
-//    _y2 = d;
-// 
-//    update();
-// }
+void grapheZone::drawLine(int a, int b, int c, int d)
+{
+   std::pair<double, double> p(a, b);
+   std::pair<double, double> p2(c, d);
+
+   _lines.push_back(p);
+   _lines.push_back(p2);
+
+   update();
+}
 
 void grapheZone::drawPoint(double a, double b)
 {
@@ -56,6 +56,8 @@ void grapheZone::eraseGraph()
 {
    _points.clear();
 
+   _lines.clear();
+
    update();
 }
 
@@ -64,7 +66,7 @@ void grapheZone::paintEvent(QPaintEvent * )
    QPainter painter(this);
    painter.setPen(QPen(Qt::red, 2));
    painter.setBrush(_brush);
-   double x, y;
+   double x, y, x2, y2;
    double cx = width() / 2.0;
    double cy = (height() - 10.0) / 2.0 ;
 
@@ -85,6 +87,16 @@ void grapheZone::paintEvent(QPaintEvent * )
       painter.drawEllipse( x, y, 6, 6);
    }
 
+   for(uint i = 0; i < _lines.size(); ++i)
+   {
+      x = _lines[i].first * cx / 2.0 + cx;
+      y = _lines[i].second * cy / 2.0 + cy;
+      ++i;
+      x2 = _lines[i].first * cx / 2.0 + cx;
+      y2 = _lines[i].second * cy / 2.0 + cy;
+
+      painter.drawLine(x, x2, y, y2);
+   }
 
    painter.setPen(palette().dark().color());
    painter.setBrush(Qt::NoBrush);

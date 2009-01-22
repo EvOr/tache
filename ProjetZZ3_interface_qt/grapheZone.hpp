@@ -23,7 +23,7 @@ class grapheZone : public QWidget
 
       void setPen(const QPen &pen);
       void setBrush(const QBrush &brush);
-//       void drawLine(int a, int b, int c, int d);
+      void drawLine(int a, int b, int c, int d);
       void drawPoint(double a, double b);
       void eraseGraph();
 
@@ -35,7 +35,7 @@ class grapheZone : public QWidget
 
       QPen _pen;
       QBrush _brush;
-//       bool _lineOrPoint; //true if line fasle if point
+      std::vector<std::pair<double, double> > _lines;
       std::vector<std::pair<double, double> > _points;
 };
 
