@@ -37,7 +37,6 @@ int main(int argc , char ** argv)
       }
    }
 
-<<<<<<< HEAD:boost/src/main.cpp
    std::map<vertex_descriptor, double> v_centrality;
    tableau_de_poids vc_map(v_centrality);
 
@@ -59,7 +58,6 @@ int main(int argc , char ** argv)
       }
       std::cout << std::endl;
    }
-=======
       //test de centrality
 //    std::map<vertex_descriptor, double> v_centrality;
 //    tableau_de_poids vc_map(v_centrality);
@@ -69,7 +67,6 @@ int main(int argc , char ** argv)
 // 
 //    brandes_betweenness_centrality(c.getNonStubsGraph(), vc_map);
 
->>>>>>> d0e51758dbee4f854bd0c62448936a94c72d6c9d:boost/src/main.cpp
     //std::cout << num_vertices(g2) << std::endl;
 //    std::cout << "temps de calcul " << time(0) - t << std::endl;
 
@@ -86,12 +83,10 @@ int main(int argc , char ** argv)
       //test de kamada
    std::cout << "kamada spring layout" << std::endl;
 
-<<<<<<< HEAD:boost/src/main.cpp
 //   bool ok = boost::kamada_kawai_spring_layout(c.getNonStubsGraph(),position, vc_map, boost::side_length(10.0));
 
   // if(!ok)
     //  std::cout << "probleme de kamada !!" << std::endl;
-=======
 
    WUGraph wug;
    copyGraph(c.getNonStubsGraph(), wug);
@@ -104,7 +99,6 @@ int main(int argc , char ** argv)
       std::cout << " n" << get(boost::vertex_index, wug, *vi1) << "[ pos=\"" << positionMap1[*vi1].x << ", " << positionMap1[*vi1].y << "\" ];" << std::endl;
    }
 
->>>>>>> d0e51758dbee4f854bd0c62448936a94c72d6c9d:boost/src/main.cpp
 
 
    bool ok = boost::kamada_kawai_spring_layout(wug, boost::get(vertex_position, wug), boost::get(boost::edge_weight, wug), boost::side_length(50.0));
