@@ -97,7 +97,31 @@ struct tableau_de_coordonnees
    C * m_p;
 };
 
+struct tableau_de_poids
+: public boost::put_get_helper< double&,tableau_de_poids >
+{
+   typedef std::map< vertex_descriptor , double>  C;
+   public:
 
+   typedef  C::key_type key_type;
+   typedef  C::value_type::second_type value_type;
+   typedef  C::value_type::second_type & ref;
+   typedef C::value_type::second_type & reference;
+   typedef const   C::value_type::second_type & const_ref;
+   typedef boost::lvalue_property_map_tag category;
+
+   tableau_de_poids() : m_p(0) { }
+   tableau_de_poids( C & c) : m_p(&c) {}
+
+   inline ref operator[] (const key_type & k) const {
+      assert(m_p!=0);
+      if(m_p == 0) throw std::runtime_error("no matrix");
+      return (*m_p)[k];
+   }
+
+   private:
+   C * m_p;
+};
 
 //fonction de file_reader_boost.cpp
 //int retrieveNbPointFile(std::ifstream & inIf);

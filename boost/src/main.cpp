@@ -85,7 +85,7 @@ int main(int argc , char ** argv)
       boost::property_map<WUGraph, vertex_position_t>::type positionMap = get(vertex_position, wug);
       for (boost::tie(vi, vi_end) = boost::vertices(wug); vi != vi_end; ++vi)
       {
-         std::cout << " n" << get(boost::vertex_index, wug, *vi) << "[ pos=\"" << (int)positionMap[*vi].x << ", " << (int)positionMap[*vi].y << "\" ];" << std::endl;
+         std::cout << " n" << get(boost::vertex_index, wug, *vi) << "[ pos=\"" << positionMap[*vi].x << ", " << positionMap[*vi].y << "\" ];" << std::endl;
       }
 //    }
 

@@ -111,17 +111,41 @@ void mainWindow::drawPoint(double x, double y, QColor c)
 
 }
 
+void mainWindow::drawLine(double a, double b, double c, double d, QColor col)
+{
+   QPen pen;
+   QBrush brush;
+
+   pen.setColor(QColor(1,0,0));
+   brush.setColor(QColor(1,0,0));
+
+   _graphe.setPen(pen);
+   _graphe.setBrush(brush);
+
+   _graphe.drawLine(a, b, c, d);
+}
 
 void mainWindow::afficherPoint()
 {
    std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
+   std::vector< std::pair<vertex_descriptor , vertex_descriptor> > liens = _controler->get_liens();
    std::map< vertex_descriptor , coordonnes>::iterator it;
+   std::vector< std::pair<vertex_descriptor , vertex_descriptor> >::iterator it2;
 
+   //affichage des points
    for(it = coords.begin(); it != coords.end() ; ++it)
    {
+std::cout << "point : " << "(" << it->second.x << ";" << it->second.y << ")" << std::endl;
       drawPoint(it->second.x, it->second.y);
    }
    setNbSommets(coords.size());
+
+   //affichage des liens
+   for(it2 = liens.begin(); it2 != liens.end() ; ++it2)
+   {
+std::cout << "line : " << "(" << coords[(*it2).first].x << ";" << coords[(*it2).first].y << ") (" << coords[(*it2).second].x << ";" << coords[(*it2).second].y << ")" << std::endl;
+      drawLine(coords[(*it2).first].x, coords[(*it2).first].y, coords[(*it2).second].x, coords[(*it2).second].y);
+   }
 }
 
 

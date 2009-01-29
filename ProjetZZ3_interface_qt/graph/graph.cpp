@@ -46,8 +46,6 @@ void copyGraph(const Graph & g, WUGraph & wug)
          boost::put(weightMap, e, rand() % 10);
 //         wug[e].weight = 1;
    }
-
-   
 }
 
 
