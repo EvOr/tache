@@ -31,11 +31,11 @@ void grapheZone::setBrush(const QBrush &brush)
    update();
 }
 
-void grapheZone::drawLine(int a, int b, int c, int d)
+void grapheZone::drawLine(double a, double b, double c, double d)
 {
    std::pair<double, double> p(a, b);
    std::pair<double, double> p2(c, d);
-
+// std::cout << "line : " << "(" << a << ";" << b << ") (" << c << ";" << d << ")" << std::endl;
    _lines.push_back(p);
    _lines.push_back(p2);
 
@@ -45,7 +45,7 @@ void grapheZone::drawLine(int a, int b, int c, int d)
 void grapheZone::drawPoint(double a, double b)
 {
    std::pair<double, double> p(a, b);
-
+// std::cout << "point : " << "(" << a << ";" << b << ")" << std::endl;
    _points.push_back(p);
 
    update();
@@ -83,7 +83,7 @@ void grapheZone::paintEvent(QPaintEvent * )
    {
       x = _points[i].first * cx / 2.0 + cx;
       y = _points[i].second * cy / 2.0 + cy;
-
+std::cout << "affichage point : " << "(" << x << ";" << y << ")" << std::endl;
       painter.drawEllipse( x, y, 6, 6);
    }
 
@@ -94,8 +94,8 @@ void grapheZone::paintEvent(QPaintEvent * )
       ++i;
       x2 = _lines[i].first * cx / 2.0 + cx;
       y2 = _lines[i].second * cy / 2.0 + cy;
-
-      painter.drawLine(x, x2, y, y2);
+std::cout << "affichage line : " << "(" << x << ";" << y << ") (" << x2 << ";" << y2 << ")" << std::endl;
+      painter.drawLine(x, y, x2, y2);
    }
 
    painter.setPen(palette().dark().color());

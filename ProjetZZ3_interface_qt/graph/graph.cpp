@@ -17,5 +17,35 @@ void full_mesh_detector(Graph * peers){
 //   }
 }
 
+void copyGraph(const Graph & g, WUGraph & wug)
+{
+   boost::graph_traits<Graph>::vertex_iterator vit, vend;
+   Graph::edge_iterator it,end;
+   edge_descriptor_wu e;
+   bool found = false;
+   boost::property_map<WUGraph, boost::edge_weight_t>::type weightMap = get(boost::edge_weight, wug);
+
+   //copie des sommets
+   for( boost::tie ( vit,vend)  = boost::vertices( g ); vit != vend; ++vit)
+   {
+      vertex_descriptor vertex = *vit;
+      vertex_descriptor v1 = boost::add_vertex(wug);
+   }
+
+   std::cout << "graphe WUG " << boost::num_vertices(wug) << std::endl;
+
+   //copie des aretes
+   for( boost::tie ( it,end)  = boost::edges( g ); it != end; ++it)
+   {
+      edge_descriptor edge = *it;
+      vertex_descriptor source = boost::source(edge,g);
+      vertex_descriptor target = boost::target(edge,g);
+      boost::tie(e,found) = boost::add_edge( source, target, wug);
+//       //initialisation du poids a 1
+      if(found)
+         boost::put(weightMap, e, rand() % 10);
+//         wug[e].weight = 1;
+   }
+}
 
 

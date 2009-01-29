@@ -12,6 +12,12 @@
 #include <boost/graph/adjacency_matrix.hpp>
 #include <boost/graph/graph_utility.hpp>
 #include <boost/graph/circle_layout.hpp>
+#include <boost/graph/betweenness_centrality.hpp>
+#include <boost/graph/kamada_kawai_spring_layout.hpp>
+#include <boost/graph/graph_traits.hpp>
+
+enum vertex_position_t { vertex_position }; 
+namespace boost { BOOST_INSTALL_PROPERTY(vertex, position); } 
 
 struct AS : boost::totally_ordered< AS >
 {
@@ -42,25 +48,30 @@ struct ASLink
    std::size_t weight;
 };
 
-//graphe par liste d'adjacence
-typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::bidirectionalS, AS, ASLink> Graph;
-typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::bidirectionalS, AS, ASLink> PeerGraph;
-//TODO
-//typedef boost::adjacency_list<boost::listS, boost::listS, boost::undirectedS, AS, ASLink> PeerGraph;
-typedef Graph::vertex_descriptor vertex_descriptor;
-typedef Graph::edge_descriptor edge_descriptor;
-
-//graphe par matrice d'adjacence
-typedef boost::adjacency_matrix<boost::directedS> AMatrix;
-
-//positionmap pour les algo de placement automatique
-// typedef boost::property_map<AMatrix, boost::vertex_index_t> PositionMap;
 struct coordonnes	
 {
    coordonnes() : x(0),y(0) {}
    double x;
    double y;
 };
+
+struct pos
+{
+   double x;
+   double y;
+};
+
+//graphe par liste d'adjacence
+typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::bidirectionalS, AS, ASLink> Graph;
+typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS, boost::property<boost::vertex_index_t, int, boost::property<vertex_position_t, pos> >, boost::property<boost::edge_weight_t, double> > WUGraph;
+
+typedef Graph::vertex_descriptor vertex_descriptor;
+typedef Graph::edge_descriptor edge_descriptor;
+typedef WUGraph::vertex_descriptor vertex_descriptor_wu;
+typedef WUGraph::edge_descriptor edge_descriptor_wu;
+
+//graphe par matrice d'adjacence
+typedef boost::adjacency_matrix<boost::directedS> AMatrix;
 
 struct tableau_de_coordonnees
 : public boost::put_get_helper< coordonnes &,tableau_de_coordonnees >
@@ -86,7 +97,31 @@ struct tableau_de_coordonnees
    C * m_p;
 };
 
+struct tableau_de_poids
+: public boost::put_get_helper< double&,tableau_de_poids >
+{
+   typedef std::map< vertex_descriptor , double>  C;
+   public:
 
+   typedef  C::key_type key_type;
+   typedef  C::value_type::second_type value_type;
+   typedef  C::value_type::second_type & ref;
+   typedef C::value_type::second_type & reference;
+   typedef const   C::value_type::second_type & const_ref;
+   typedef boost::lvalue_property_map_tag category;
+
+   tableau_de_poids() : m_p(0) { }
+   tableau_de_poids( C & c) : m_p(&c) {}
+
+   inline ref operator[] (const key_type & k) const {
+      assert(m_p!=0);
+      if(m_p == 0) throw std::runtime_error("no matrix");
+      return (*m_p)[k];
+   }
+
+   private:
+   C * m_p;
+};
 
 //fonction de file_reader_boost.cpp
 //int retrieveNbPointFile(std::ifstream & inIf);
@@ -96,5 +131,7 @@ struct tableau_de_coordonnees
 //void addToPeersVector(std::vector<int> * peers, int i1, int i2);
 //fonction de graph.cpp
 int displayCircle( tableau_de_coordonnees  & p, Graph const & g, double r);
+//fonction de copie de graphe
+void copyGraph(const Graph & g, WUGraph & wug);
 
 #endif

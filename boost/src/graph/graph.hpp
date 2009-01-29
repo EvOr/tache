@@ -16,6 +16,8 @@
 #include <boost/graph/kamada_kawai_spring_layout.hpp>
 #include <boost/graph/graph_traits.hpp>
 
+enum vertex_position_t { vertex_position }; 
+namespace boost { BOOST_INSTALL_PROPERTY(vertex, position); } 
 
 struct AS : boost::totally_ordered< AS >
 {
@@ -46,25 +48,34 @@ struct ASLink
    std::size_t weight;
 };
 
-//graphe par liste d'adjacence
-typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::bidirectionalS, AS, ASLink> Graph;
-typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::bidirectionalS, AS, ASLink> PeerGraph;
-//TODO
-//typedef boost::adjacency_list<boost::listS, boost::listS, boost::undirectedS, AS, ASLink> PeerGraph;
-typedef Graph::vertex_descriptor vertex_descriptor;
-typedef Graph::edge_descriptor edge_descriptor;
-
-//graphe par matrice d'adjacence
-typedef boost::adjacency_matrix<boost::directedS> AMatrix;
-
-//positionmap pour les algo de placement automatique
-// typedef boost::property_map<AMatrix, boost::vertex_index_t> PositionMap;
 struct coordonnes	
 {
    coordonnes() : x(0),y(0) {}
    double x;
    double y;
 };
+
+struct pos
+{
+   double x;
+   double y;
+};
+
+//graphe par liste d'adjacence
+typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::bidirectionalS, AS, ASLink> Graph;
+typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS, boost::property<boost::vertex_index_t, int, boost::property<vertex_position_t, pos> >, boost::property<boost::edge_weight_t, double> > WUGraph;
+
+typedef Graph::vertex_descriptor vertex_descriptor;
+typedef Graph::edge_descriptor edge_descriptor;
+typedef WUGraph::vertex_descriptor vertex_descriptor_wu;
+typedef WUGraph::edge_descriptor edge_descriptor_wu;
+
+//graphe par matrice d'adjacence
+typedef boost::adjacency_matrix<boost::directedS> AMatrix;
+
+//positionmap pour les algo de placement automatique
+// typedef boost::property_map<AMatrix, boost::vertex_index_t> PositionMap;
+
 
 struct tableau_de_coordonnees
 : public boost::put_get_helper< coordonnes &,tableau_de_coordonnees >
@@ -112,11 +123,14 @@ struct tableau_de_poids
       if(m_p == 0) throw std::runtime_error("no matrix");
       return (*m_p)[k];
    }
+
    private:
    C * m_p;
 };
 
 
+//fonction de copie de graphe
+void copyGraph(const Graph & g, WUGraph & wug);
 
 //fonction de file_reader_boost.cpp
 //int retrieveNbPointFile(std::ifstream & inIf);

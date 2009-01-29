@@ -23,7 +23,7 @@ class grapheZone : public QWidget
 
       void setPen(const QPen &pen);
       void setBrush(const QBrush &brush);
-      void drawLine(int a, int b, int c, int d);
+      void drawLine(double a, double b, double c, double d);
       void drawPoint(double a, double b);
       void eraseGraph();
 

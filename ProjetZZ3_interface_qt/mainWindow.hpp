@@ -72,6 +72,7 @@ class mainWindow : public QMainWindow
       void initMenu();
       void initStatus();
       void drawPoint(double x, double y, QColor c = Qt::red);
+      void drawLine(double a, double b, double c, double d, QColor col = Qt::red);
 
       inline void setNbSommets(int n) { _nbsommet.setText(QString::number(n)); }
       inline void setNbArete(int n) { _nbarete.setText(QString::number(n)); }
