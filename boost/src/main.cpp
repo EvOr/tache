@@ -36,16 +36,17 @@ int main(int argc , char ** argv)
       }
    }
 
-   std::map<vertex_descriptor, double> v_centrality;
-   tableau_de_poids vc_map(v_centrality);
-
-   std::map< vertex_descriptor , coordonnes> mescoords;
-   tableau_de_coordonnees position(mescoords);
-
-   brandes_betweenness_centrality(c.getNonStubsGraph(), vc_map);
+      //test de centrality
+//    std::map<vertex_descriptor, double> v_centrality;
+//    tableau_de_poids vc_map(v_centrality);
+// 
+//    std::map< vertex_descriptor , coordonnes> mescoords;
+//    tableau_de_coordonnees position(mescoords);
+// 
+//    brandes_betweenness_centrality(c.getNonStubsGraph(), vc_map);
 
     //std::cout << num_vertices(g2) << std::endl;
-   std::cout << "temps de calcul " << time(0) - t << std::endl;
+//    std::cout << "temps de calcul " << time(0) - t << std::endl;
 
 //    std::map<vertex_descriptor, double>::iterator it;
 //    int i = 0;
@@ -57,13 +58,36 @@ int main(int argc , char ** argv)
 //    }
 //    std::cout << i << " vertices classées." << std::endl;
 
+      //test de kamada
    std::cout << "kamada spring layout" << std::endl;
 
-   bool ok = boost::kamada_kawai_spring_layout(c.getNonStubsGraph(),position, vc_map, boost::side_length(10.0));
 
-   if(!ok)
-      std::cout << "probleme de kamada !!" << std::endl;
+   WUGraph wug;
+   copyGraph(c.getNonStubsGraph(), wug);
 
+   circle_graph_layout( wug, boost::get(vertex_position, wug), 1.0);
+   boost::graph_traits<WUGraph>::vertex_iterator vi1, vi_end1; 
+   boost::property_map<WUGraph, vertex_position_t>::type positionMap1 = get(vertex_position, wug);
+   for (boost::tie(vi1, vi_end1) = boost::vertices(wug); vi1 != vi_end1; ++vi1)
+   {
+      std::cout << " n" << get(boost::vertex_index, wug, *vi1) << "[ pos=\"" << positionMap1[*vi1].x << ", " << positionMap1[*vi1].y << "\" ];" << std::endl;
+   }
+
+
+
+   bool ok = boost::kamada_kawai_spring_layout(wug, boost::get(vertex_position, wug), boost::get(boost::edge_weight, wug), boost::side_length(50.0));
+
+//    if(!ok)
+//       std::cout << "probleme de kamada !!" << std::endl;
+//    else
+//    {
+      boost::graph_traits<WUGraph>::vertex_iterator vi, vi_end; 
+      boost::property_map<WUGraph, vertex_position_t>::type positionMap = get(vertex_position, wug);
+      for (boost::tie(vi, vi_end) = boost::vertices(wug); vi != vi_end; ++vi)
+      {
+         std::cout << " n" << get(boost::vertex_index, wug, *vi) << "[ pos=\"" << (int)positionMap[*vi].x << ", " << (int)positionMap[*vi].y << "\" ];" << std::endl;
+      }
+//    }
 
    return EXIT_SUCCESS;
 }
