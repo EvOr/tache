@@ -184,6 +184,10 @@ void File_reader::create_peers_graph(void){
 	 boost::add_edge(*vertex,*adjV,peersGraph);
       }
    }
+   peers.clear();
+   peers.resize(0);
+   peersVector.clear();
+   peers.resize(0);
 }
 
 /// \brief fonction qui test si un point est un stub ou non

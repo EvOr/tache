@@ -4,6 +4,7 @@
 #include "exceptions/ReaderException.hpp"
 #include "utils/logger.hpp"
 #include "graph/file_reader.hpp"
+#include "graph/bron_kerbosch.hpp"
 #include "controler/controler.hpp"
 #include <boost/graph/dijkstra_shortest_paths.hpp>
 #include <boost/timer.hpp>
@@ -41,9 +42,22 @@ int main(int argc , char ** argv)
 
    std::map< vertex_descriptor , coordonnes> mescoords;
    tableau_de_coordonnees position(mescoords);
+   std::cout << boost::num_vertices(c.getNonStubsGraph()) << std::endl;
+//   brandes_betweenness_centrality(c.getNonStubsGraph(), vc_map);
+   std::vector< std::vector<vertex_descriptor> > cliques;
+   mickael::graph::bron_kerbosch_max_cliques(c.getPeersGraph(), cliques);
 
-   brandes_betweenness_centrality(c.getNonStubsGraph(), vc_map);
-
+   std::vector< std::vector<vertex_descriptor> >::iterator it;
+   std::vector<vertex_descriptor>::iterator vertex;
+   int i=0;
+   for( it=cliques.begin(); it != cliques.end() ; it++){
+      std::vector<vertex_descriptor>::iterator adjV;
+      std::cout << "------" << i++ << "------" << std::endl;
+      for(adjV=(*it).begin();adjV != (*it).end(); adjV++){
+	 std::cout<< *adjV << ",";
+      }
+      std::cout << std::endl;
+   }
     //std::cout << num_vertices(g2) << std::endl;
    std::cout << "temps de calcul " << time(0) - t << std::endl;
 
@@ -59,10 +73,10 @@ int main(int argc , char ** argv)
 
    std::cout << "kamada spring layout" << std::endl;
 
-   bool ok = boost::kamada_kawai_spring_layout(c.getNonStubsGraph(),position, vc_map, boost::side_length(10.0));
+//   bool ok = boost::kamada_kawai_spring_layout(c.getNonStubsGraph(),position, vc_map, boost::side_length(10.0));
 
-   if(!ok)
-      std::cout << "probleme de kamada !!" << std::endl;
+  // if(!ok)
+    //  std::cout << "probleme de kamada !!" << std::endl;
 
 
    return EXIT_SUCCESS;
