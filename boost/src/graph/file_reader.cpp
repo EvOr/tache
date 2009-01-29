@@ -134,24 +134,24 @@ void File_reader::addToPeersVector(vertex_descriptor & v, vertex_descriptor & vv
 	 i1here = true;
 	 index1 = it - peersVector.begin(); 
       }
-      //   if(*it == i2) {
-      //	 i2here = true;
-      //	 index2 = it - peersVector.begin();
-      //     }
+         if(*it == vv) {
+      	 i2here = true;
+      	 index2 = it - peersVector.begin();
+           }
    }
    if(!i1here){
       peersVector.push_back(v);
       peers.push_back(*(new std::vector<vertex_descriptor>()));
       index1=peers.size() - 1;
    }
-   // if(!i2here) {
-   //   peersVector.push_back(i2);
-   // peers.push_back(*(new std::vector<int>()));
-   //  index2=peers.size() - 1;
-   // }
+    if(!i2here) {
+      peersVector.push_back(vv);
+    peers.push_back(*(new std::vector<vertex_descriptor>()));
+     index2=peers.size() - 1;
+    }
 
    peers[index1].push_back(vv);
-   // peers[index2].push_back(index1);
+    peers[index2].push_back(v);
 }
 
 /// \brief Cree le graph des peers
