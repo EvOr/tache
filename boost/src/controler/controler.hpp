@@ -20,6 +20,7 @@ class Controler{
       Graph & getGraph(){return graph;};
       inline std::map< vertex_descriptor , coordonnes> get_position(){return mescoords;};
       inline Graph & getNonStubsGraph(){return file_reader.getNonStubsGraph();};
+      inline Graph & getPeersGraph(){return file_reader.getPeersGraph();};
 };
 
 #endif
