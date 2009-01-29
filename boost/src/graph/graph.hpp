@@ -13,6 +13,10 @@
 #include <boost/graph/graph_utility.hpp>
 #include <boost/graph/circle_layout.hpp>
 #include <boost/graph/betweenness_centrality.hpp>
+#include <boost/graph/kamada_kawai_spring_layout.hpp>
+#include <boost/graph/graph_traits.hpp>
+
+
 struct AS : boost::totally_ordered< AS >
 {
    typedef int value_type;
@@ -122,6 +126,6 @@ struct tableau_de_poids
 //void addToPeersVector(std::vector<int> * peers, int i1, int i2);
 //fonction de graph.cpp
 
-void centrality(const Graph & g, Graph & g2, std::vector<vertex_descriptor> vd);
+
 
 #endif

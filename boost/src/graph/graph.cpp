@@ -17,16 +17,4 @@ void full_mesh_detector(Graph * peers){
 //   }
 }
 
-void centrality(const Graph & g, Graph & g2, std::vector<vertex_descriptor> vd)
-{
-   std::vector<vertex_descriptor>::iterator it;
-   int i = 0;
-std::cout << "il y a " << vd.size() << " feuilles a retirer" << std::endl;
-
-   g2 = g;
-
-
-}
-
-
 
