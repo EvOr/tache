@@ -27,7 +27,7 @@ struct AS : boost::totally_ordered< AS >
    typedef int category;
 
    value_type value;
-   AS(int _asn = 0) : value(_asn){}
+   AS(int _asn = 0) : value(_asn) {}
 
    inline bool operator<(AS const & o) const
    {

@@ -17,10 +17,11 @@ class Controler{
       void change_file_name(std::string fn);
       void parse_file();
       int displayCircle(double r);
-      Graph & getGraph(){return graph;};
+      Graph & getGraph(){return graph;}
+      Graph const & getGraph() const {return graph;}
       inline std::map< vertex_descriptor , coordonnes> get_position(){return mescoords;};
-      inline Graph & getNonStubsGraph(){return file_reader.getNonStubsGraph();};
-      inline Graph & getPeersGraph(){return file_reader.getPeersGraph();};
+      //inline Graph & getNonStubsGraph(){return file_reader.getNonStubsGraph();};
+      //inline Graph & getPeersGraph(){return file_reader.getPeersGraph();};
 };
 
 #endif

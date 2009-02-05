@@ -11,7 +11,9 @@ void Controler::change_file_name(std::string name){
 
 ///\brief parse le fichier
 void Controler::parse_file(){
+	std::cout << "parse file " << filename  << "..." << std::endl;
   file_reader.parse(graph); 
+	std::cout << "num_vertices:" << boost::num_vertices(graph) << std::endl;
 
 }
 

@@ -1,6 +1,7 @@
 #include "graph.hpp"
 #include "utils/logger.hpp"
 #include <sstream>
+#include <map>
 void full_mesh_detector(Graph * peers){
   // Algo = retirer les noeuds avec un seul truc voisin... esperer que ca fasse beaucoup, si possible compter et verifier l'utilite avant
   // 1 2 3 prendre la liste des voisin (out_edges je crois) 
@@ -25,15 +26,19 @@ void copyGraph(const Graph & g, WUGraph & wug)
    edge_descriptor_wu e;
    bool found = false;
    boost::property_map<WUGraph, boost::edge_weight_t>::type weightMap = get(boost::edge_weight, wug);
+	std::map< Graph::vertex_descriptor , WUGraph::vertex_descriptor > mapping;
+
 
    //copie des sommets
    for( boost::tie ( vit,vend)  = boost::vertices( g ); vit != vend; ++vit)
    {
-      vertex_descriptor vertex = *vit;
-      vertex_descriptor v1 = boost::add_vertex(wug);
+      Graph::vertex_descriptor vertex = *vit;
+      WUGraph::vertex_descriptor v1 = boost::add_vertex(wug);
+		mapping[vertex] = v1;
+		//std::cout << vertex << "->" << v1 << std::endl;
    }
 
-   std::cout << "graphe WUG " << boost::num_vertices(wug) << std::endl;
+   std::cout << "graphe WUG, nodes=" << boost::num_vertices(wug) << std::endl;
 
    //copie des aretes
    for( boost::tie ( it,end)  = boost::edges( g ); it != end; ++it)
@@ -41,7 +46,9 @@ void copyGraph(const Graph & g, WUGraph & wug)
       edge_descriptor edge = *it;
       vertex_descriptor source = boost::source(edge,g);
       vertex_descriptor target = boost::target(edge,g);
-      boost::tie(e,found) = boost::add_edge( source, target, wug);
+	//	std::cout << source << "," << target << " -> " <<   mapping[source] << "," << mapping[target] << std::endl;
+		found = false;
+      boost::tie(e,found) = boost::add_edge( mapping[source],mapping[target], wug);
 //       //initialisation du poids a 1
       if(found)
          boost::put(weightMap, e, rand() % 10);
