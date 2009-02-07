@@ -25,8 +25,8 @@ struct AS : boost::totally_ordered< AS >
    typedef int key_type;
    typedef int reference;
    typedef int category;
-
    value_type value;
+   bool is_transit;
    AS(int _asn = 0) : value(_asn) {}
 
    inline bool operator<(AS const & o) const
@@ -46,6 +46,7 @@ struct ASLink
       : weight(myw)
    {}	
    std::size_t weight;
+   int link_type;
 };
 
 struct coordonnes	

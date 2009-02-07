@@ -4,7 +4,6 @@
 void Controler::change_file_name(std::string name){
    filename=name;
    graph.clear();
-   file_reader.change_file_name(name);
    mescoords.clear();
   // position.clear();
 }
@@ -12,7 +11,7 @@ void Controler::change_file_name(std::string name){
 ///\brief parse le fichier
 void Controler::parse_file(){
 	std::cout << "parse file " << filename  << "..." << std::endl;
-  file_reader.parse(graph); 
+        parse(filename, graph); 
 	std::cout << "num_vertices:" << boost::num_vertices(graph) << std::endl;
 
 }
@@ -30,6 +29,12 @@ int Controler::displayCircle(double r)
    tableau_de_poids vc_map(v_centrality);
 //   brandes_betweenness_centrality(graph, vc_map);
    return 0;
+
+}
+
+void Controler::load_triplet(std::string const & filename){
+   std::set<std::size_t> transit_as;
+   read_triplet(filename,transit_as);
 
 }
 
