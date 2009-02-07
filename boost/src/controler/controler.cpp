@@ -45,10 +45,13 @@ void Controler::load_triplet(std::string const & filename){
    //Parcours du graph
    for( boost::tie ( vit,vend)  = boost::vertices( graph ); vit != vend; ++vit)
    {
-      found=transit_as.find(*vit);
+      //TODO Gestion des vrais numéros d'AS...
       v=*vit;
+//      int asnumber=graph[].as
+      found=transit_as.find(graph[v].asn);
       //Affectation de la propriété transit
       graph[v].is_transit=(found == transit_as.end())?false:true; 
+      std::cout << graph[v].asn << " : " << graph[v].is_transit << std::endl;
    }
 }
 

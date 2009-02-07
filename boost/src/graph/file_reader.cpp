@@ -68,12 +68,13 @@ void parse(std::string const & filename, Graph & g)
 		  //Si tout rentre dans chacun des conteneurs...
 		  if(lineStream >> linkType && in1 >> i1 && in2 >> i2) {
 		     //
-		     std::cout << i1 << "," << i2 << std::endl;  
+	//	     std::cout << i1 << "," << i2 << std::endl;  
 		     as_number_to_vertex_type::const_iterator found_i1 =  as_number_to_vertex.find(i1);
 		     if( found_i1 == as_number_to_vertex.end())
 		     {
 			v = boost::add_vertex(g);
 			as_number_to_vertex[i1] = v;
+			g[v].asn=i1;
 		     }
 		     else v = found_i1->second;
 
@@ -82,6 +83,7 @@ void parse(std::string const & filename, Graph & g)
 		     {
 			vv = boost::add_vertex(g);
 			as_number_to_vertex[i2] = vv;
+			g[vv].asn=i2;
 		     }
 		     else vv = found_i2->second;
 
@@ -107,6 +109,7 @@ void parse(std::string const & filename, Graph & g)
    {
       throw ReaderException("Erreur lors de la lecture du fichier", filename, ReaderException::CRITICAL);
    }
+
    if(line_error)
    {
       throw ReaderException("Erreur lors de la lecture d'une ou plusieurs ligne", filename, ReaderException::NON_BLOCKING);
@@ -145,7 +148,6 @@ void read_triplet(std::string const & filename,std::set<std::size_t> &  transit_
    }
    catch(const std::exception & e)
    {
-
       throw ReaderException("Erreur lors de la lecture du fichier", filename, ReaderException::CRITICAL);
    }
 }

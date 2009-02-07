@@ -112,7 +112,7 @@ int main(int argc , char ** argv)
 //    std::cout << i << " vertices classées." << std::endl;
 
       //test de kamada
-   std::cout << "circle layout" << std::endl;
+ //  std::cout << "circle layout" << std::endl;
 
 //   bool ok = boost::kamada_kawai_spring_layout(c.getNonStubsGraph(),position, vc_map, boost::side_length(10.0));
 
@@ -125,23 +125,23 @@ int main(int argc , char ** argv)
 
   // --------------------------	
   // Check  connected compinents
-   std::cout << "get connected components..." << std::endl;
-	std::size_t num_compo = get_connected_components(wug);
-	if(num_compo > 1) throw std::runtime_error("graph is not connexe");
+ //  std::cout << "get connected components..." << std::endl;
+//	std::size_t num_compo = get_connected_components(wug);
+//	if(num_compo > 1) throw std::runtime_error("graph is not connexe");
 
-   circle_graph_layout( wug, boost::get(vertex_position, wug), 1.0);
+ //  circle_graph_layout( wug, boost::get(vertex_position, wug), 1.0);
    boost::graph_traits<WUGraph>::vertex_iterator vi1, vi_end1; 
    boost::property_map<WUGraph, vertex_position_t>::type positionMap1 = get(vertex_position, wug);
-   for (boost::tie(vi1, vi_end1) = boost::vertices(wug); vi1 != vi_end1; ++vi1)
-   {
-      std::cout << " n" << get(boost::vertex_index, wug, *vi1) << "[ pos=\"" << positionMap1[*vi1].x << ", " << positionMap1[*vi1].y << "\" ];" << std::endl;
-   }
+  // for (boost::tie(vi1, vi_end1) = boost::vertices(wug); vi1 != vi_end1; ++vi1)
+  // {
+   //   std::cout << " n" << get(boost::vertex_index, wug, *vi1) << "[ pos=\"" << positionMap1[*vi1].x << ", " << positionMap1[*vi1].y << "\" ];" << std::endl;
+  // }
 
 
 
-   bool ok = boost::kamada_kawai_spring_layout(wug, boost::get(vertex_position, wug), boost::get(boost::edge_weight, wug), boost::side_length(50.0));
+  // bool ok = boost::kamada_kawai_spring_layout(wug, boost::get(vertex_position, wug), boost::get(boost::edge_weight, wug), boost::side_length(50.0));
 	
-	std::cout << "kamada spring layout: OK="<< ok << std::endl;
+//	std::cout << "kamada spring layout: OK="<< ok << std::endl;
 
 //    if(!ok)
 //       std::cout << "probleme de kamada !!" << std::endl;
@@ -149,12 +149,12 @@ int main(int argc , char ** argv)
 //    {
       boost::graph_traits<WUGraph>::vertex_iterator vi, vi_end; 
       boost::property_map<WUGraph, vertex_position_t>::type positionMap = get(vertex_position, wug);
-      for (boost::tie(vi, vi_end) = boost::vertices(wug); vi != vi_end; ++vi)
-      {
-         std::cout << " n" << get(boost::vertex_index, wug, *vi) << "[ pos=\"" << positionMap[*vi].x << ", " << positionMap[*vi].y << "\" ];" << std::endl;
-      }
+    //  for (boost::tie(vi, vi_end) = boost::vertices(wug); vi != vi_end; ++vi)
+     // {
+      //   std::cout << " n" << get(boost::vertex_index, wug, *vi) << "[ pos=\"" << positionMap[*vi].x << ", " << positionMap[*vi].y << "\" ];" << std::endl;
+     // }
 //    }
-
+   c.load_triplet("triplets.txt");
    return EXIT_SUCCESS;
 }
 

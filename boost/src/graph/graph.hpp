@@ -27,6 +27,8 @@ struct AS : boost::totally_ordered< AS >
    typedef int category;
    value_type value;
    bool is_transit;
+   int asn;
+
    AS(int _asn = 0) : value(_asn) {}
 
    inline bool operator<(AS const & o) const
