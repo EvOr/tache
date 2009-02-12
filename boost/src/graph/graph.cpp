@@ -58,4 +58,51 @@ void copyGraph(const Graph & g, WUGraph & wug)
 
 }
 
+void copyGraph_noStub(const Graph & g, Graph & g2)
+{
+   boost::graph_traits<Graph>::vertex_iterator vit, vend;
+   Graph::edge_iterator it,end;
+   edge_descriptor e;
+   bool found;
+
+   //mapping
+   typedef  std::map< int ,  Graph::vertex_descriptor> as_number_to_vertex_type;
+   as_number_to_vertex_type as_number_to_vertex;
+   std::map< Graph::vertex_descriptor , Graph::vertex_descriptor > mapping;
+
+   //copie des sommets
+   for( boost::tie ( vit,vend)  = boost::vertices( g ); vit != vend; ++vit)
+   {
+      Graph::vertex_descriptor vertex = *vit;
+      if(g[vertex].is_transit == true)
+      {
+         Graph::vertex_descriptor v1 = boost::add_vertex(g2);
+         //mise a jour infos pour nouveau sommet
+         g2[v1].asn = g[vertex].asn;
+         g2[v1].is_transit = g[vertex].is_transit;
+         //on garde trace des AS ajoutés nouveau graph pour pouvoir ensuite ajouter que les aretes qui les relient
+         as_number_to_vertex[g[vertex].asn] = vertex;
+         //on garde trave des correspondances de sommet pour pouvoir faire les aretes car bien qu'étant de meme type, les vertex descriptor appartiennent a leur graphe respectif
+         mapping[vertex] = v1;
+      }
+   }
+
+   //copie des aretes
+   for( boost::tie ( it,end)  = boost::edges( g ); it != end; ++it)
+   {
+      edge_descriptor edge = *it;
+      vertex_descriptor source = boost::source(edge,g);
+      vertex_descriptor target = boost::target(edge,g);
+      //si les deux sommets ont été ajouté précédémment, on ajoute l'arete qui les relie
+      as_number_to_vertex_type::const_iterator found_i1 =  as_number_to_vertex.find(g[source].asn);
+      as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(g[target].asn);
+      if(found_i1 != as_number_to_vertex.end() && found_i2 != as_number_to_vertex.end())
+      {
+         boost::tie(e,found) = boost::add_edge( source, target, g2);
+         g2[e].link_type = g[edge].link_type;
+         g2[e].weight = g[edge].weight;
+      }
+   }
+}
+
 

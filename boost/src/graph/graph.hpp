@@ -134,6 +134,7 @@ struct tableau_de_poids
 
 //fonction de copie de graphe
 void copyGraph(const Graph & g, WUGraph & wug);
+void copyGraph_noStub(const Graph & g, Graph & g2);
 
 //fonction de file_reader_boost.cpp
 //int retrieveNbPointFile(std::ifstream & inIf);
