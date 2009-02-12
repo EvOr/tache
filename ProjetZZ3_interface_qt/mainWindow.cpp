@@ -96,33 +96,15 @@ void mainWindow::initAction()
 }
 
 
-void mainWindow::drawPoint(double x, double y, QColor c)
+void mainWindow::drawPoint(double x, double y, Qt::GlobalColor c)
 {
-   QPen pen;
-   QBrush brush;
-
-   pen.setColor(QColor(1,0,0));
-   brush.setColor(QColor(1,0,0));
-
-   _graphe.setPen(pen);
-   _graphe.setBrush(brush);
-
-   _graphe.drawPoint(x, y);
+   _graphe.drawPoint(x, y, c);
 
 }
 
-void mainWindow::drawLine(double a, double b, double c, double d, QColor col)
+void mainWindow::drawLine(double a, double b, double c, double d, Qt::GlobalColor col)
 {
-   QPen pen;
-   QBrush brush;
-
-   pen.setColor(QColor(1,0,0));
-   brush.setColor(QColor(1,0,0));
-
-   _graphe.setPen(pen);
-   _graphe.setBrush(brush);
-
-   _graphe.drawLine(a, b, c, d);
+   _graphe.drawLine(a, b, c, d, col);
 }
 
 void mainWindow::afficherPoint()
@@ -135,7 +117,7 @@ void mainWindow::afficherPoint()
    //affichage des points
    for(it = coords.begin(); it != coords.end() ; ++it)
    {
-std::cout << "point : " << "(" << it->second.x << ";" << it->second.y << ")" << std::endl;
+// std::cout << "point : " << "(" << it->second.x << ";" << it->second.y << ")" << std::endl;
       drawPoint(it->second.x, it->second.y);
    }
    setNbSommets(coords.size());
@@ -143,7 +125,7 @@ std::cout << "point : " << "(" << it->second.x << ";" << it->second.y << ")" << 
    //affichage des liens
    for(it2 = liens.begin(); it2 != liens.end() ; ++it2)
    {
-std::cout << "line : " << "(" << coords[(*it2).first].x << ";" << coords[(*it2).first].y << ") (" << coords[(*it2).second].x << ";" << coords[(*it2).second].y << ")" << std::endl;
+// std::cout << "line : " << "(" << coords[(*it2).first].x << ";" << coords[(*it2).first].y << ") (" << coords[(*it2).second].x << ";" << coords[(*it2).second].y << ")" << std::endl;
       drawLine(coords[(*it2).first].x, coords[(*it2).first].y, coords[(*it2).second].x, coords[(*it2).second].y);
    }
 }

@@ -71,8 +71,8 @@ class mainWindow : public QMainWindow
       void initAction();
       void initMenu();
       void initStatus();
-      void drawPoint(double x, double y, QColor c = Qt::red);
-      void drawLine(double a, double b, double c, double d, QColor col = Qt::red);
+      void drawPoint(double x, double y, Qt::GlobalColor c = Qt::red);
+      void drawLine(double a, double b, double c, double d, Qt::GlobalColor col = Qt::blue);
 
       inline void setNbSommets(int n) { _nbsommet.setText(QString::number(n)); }
       inline void setNbArete(int n) { _nbarete.setText(QString::number(n)); }
