@@ -50,6 +50,8 @@ void parse(std::string const & filename, Graph & g)
    //mapping
    typedef  std::map< int ,  Graph::vertex_descriptor> as_number_to_vertex_type;
    as_number_to_vertex_type as_number_to_vertex;
+   typedef boost::tokenizer< boost::char_separator<char> >   tokenizer;
+   boost::char_separator<char> sep("\t");
 
    try
    {
@@ -61,43 +63,37 @@ void parse(std::string const & filename, Graph & g)
 	 while(std::getline(file, line)) {
 	    // std::cout << "je lis la ligne" << file.tellg() << std::endl;
 	    std::istringstream lineStream(line);
-	    if(lineStream >> tempString) {
-	       std::istringstream in1(tempString);
-	       if(lineStream >> tempString) {
-		  std::istringstream in2(tempString);
-		  //Si tout rentre dans chacun des conteneurs...
-		  if(lineStream >> linkType && in1 >> i1 && in2 >> i2) {
-		     //
-	//	     std::cout << i1 << "," << i2 << std::endl;  
-		     as_number_to_vertex_type::const_iterator found_i1 =  as_number_to_vertex.find(i1);
-		     if( found_i1 == as_number_to_vertex.end())
-		     {
-			v = boost::add_vertex(g);
-			as_number_to_vertex[i1] = v;
-			g[v].asn=i1;
-		     }
-		     else v = found_i1->second;
+	    tokenizer tokens(line, sep);
+	    std::vector<std::string> parts(tokens.begin(), tokens.end());
+	    if( parts.size() == 3)
+	    {
+	       i1 = boost::lexical_cast<int>( parts.at(0) );
+	       i2 = boost::lexical_cast<int>( parts.at(1) );
+	       linkType = parts.at(2);
 
-		     as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(i2);
-		     if( found_i2 == as_number_to_vertex.end())
-		     {
-			vv = boost::add_vertex(g);
-			as_number_to_vertex[i2] = vv;
-			g[vv].asn=i2;
-		     }
-		     else vv = found_i2->second;
-
-		     int type = addEdge(v, vv, linkType, found, e, g);
-		     if(!found)	  line_error=true;
-		     else g[e].link_type = type;
-		  }
-		  else {
-		     line_error=true;
-		  }
+	       as_number_to_vertex_type::const_iterator found_i1 =  as_number_to_vertex.find(i1);
+	       if( found_i1 == as_number_to_vertex.end())
+	       {
+		  v = boost::add_vertex(g);
+		  as_number_to_vertex[i1] = v;
+		  g[v].asn=i1;
 	       }
-	       else  line_error=true;
+	       else v = found_i1->second;
+
+	       as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(i2);
+	       if( found_i2 == as_number_to_vertex.end())
+	       {
+		  vv = boost::add_vertex(g);
+		  as_number_to_vertex[i2] = vv;
+		  g[vv].asn=i2;
+	       }
+	       else vv = found_i2->second;
+
+	       int type = addEdge(v, vv, linkType, found, e, g);
+	       if(!found)	  line_error=true;
+	       else g[e].link_type = type;
 	    }
-	    else  line_error=true;
+	    else line_error=true;
 	 }
 	 file.close();
       }
