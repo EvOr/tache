@@ -3,10 +3,7 @@
 #include <boost/tokenizer.hpp>
 #include <boost/lexical_cast.hpp>
 
-//--------------------------------------------
-// METHODES PUBLIQUES
-//--------------------------------------------
-
+typedef  std::map< int ,  Graph::vertex_descriptor> as_number_to_vertex_type;
 /// \brief Ajoute une arette
 /// \param i1 index du premier point 
 /// \param i2 index du deuxieme point
@@ -15,7 +12,7 @@
 /// \param e edge_descriptor de l'arrete
 /// \param g double pointeur sur le Graph ou il faut ajouter la relation
 /// \return le type de point
-int addEdge(vertex_descriptor & v, vertex_descriptor & vv, std::string linkType, bool & found, edge_descriptor & e, Graph & g){
+int addEdge(vertex_descriptor & v, vertex_descriptor & vv, std::string const & linkType, bool & found, edge_descriptor & e, Graph & g){
    int res = PEER;
    //si on veut mettre des poids
    // 		if(found) (**g)[e].weight = xx%13 * 2 + 5;
@@ -36,19 +33,42 @@ int addEdge(vertex_descriptor & v, vertex_descriptor & vv, std::string linkType,
    return res;
 }
 
+void create_edges_from_line(std::vector<std::string> const & parts, vertex_descriptor & v, vertex_descriptor & vv, as_number_to_vertex_type & as_number_to_vertex, Graph & g){
+   int i1,i2;
+
+   i1 = boost::lexical_cast<int>( parts.at(0) );
+   i2 = boost::lexical_cast<int>( parts.at(1) );
+
+   as_number_to_vertex_type::const_iterator found_i1 =  as_number_to_vertex.find(i1);
+   if( found_i1 == as_number_to_vertex.end())
+   {
+      v = boost::add_vertex(g);
+      as_number_to_vertex[i1] = v;
+      g[v].asn=i1;
+   }
+   else v = found_i1->second;
+
+   as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(i2);
+   if( found_i2 == as_number_to_vertex.end())
+   {
+      vv = boost::add_vertex(g);
+      as_number_to_vertex[i2] = vv;
+      g[vv].asn=i2;
+   }
+   else vv = found_i2->second;
+
+}
 
 /// \brief Fonction de lecture du fichier d'adjacence
 /// \param g Matrice d'adjacence à remplir
 /// \throws ReaderException when an error occurs
 void parse(std::string const & filename, Graph & g)
 {
-   int i1, i2;
    bool line_error = false, found= false;
    edge_descriptor e;
-   std::string line, tempString, linkType;
+   std::string line, linkType;
    vertex_descriptor v,vv ;
    //mapping
-   typedef  std::map< int ,  Graph::vertex_descriptor> as_number_to_vertex_type;
    as_number_to_vertex_type as_number_to_vertex;
    typedef boost::tokenizer< boost::char_separator<char> >   tokenizer;
    boost::char_separator<char> sep("\t");
@@ -65,28 +85,8 @@ void parse(std::string const & filename, Graph & g)
 	    std::vector<std::string> parts(tokens.begin(), tokens.end());
 	    if( parts.size() == 3)
 	    {
-	       i1 = boost::lexical_cast<int>( parts.at(0) );
-	       i2 = boost::lexical_cast<int>( parts.at(1) );
+	       create_edges_from_line(parts, v, vv, as_number_to_vertex, g);
 	       linkType = parts.at(2);
-
-	       as_number_to_vertex_type::const_iterator found_i1 =  as_number_to_vertex.find(i1);
-	       if( found_i1 == as_number_to_vertex.end())
-	       {
-		  v = boost::add_vertex(g);
-		  as_number_to_vertex[i1] = v;
-		  g[v].asn=i1;
-	       }
-	       else v = found_i1->second;
-
-	       as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(i2);
-	       if( found_i2 == as_number_to_vertex.end())
-	       {
-		  vv = boost::add_vertex(g);
-		  as_number_to_vertex[i2] = vv;
-		  g[vv].asn=i2;
-	       }
-	       else vv = found_i2->second;
-
 	       int type = addEdge(v, vv, linkType, found, e, g);
 	       if(found) g[e].link_type = type;
 	       else line_error=true;
@@ -111,10 +111,6 @@ void parse(std::string const & filename, Graph & g)
    std::cout << "num vertex:" << boost::num_vertices(g) << std::endl;
 
 }
-
-//--------------------------------------------
-// METHODES PRIVEES
-//--------------------------------------------
 
 void read_triplet(std::string const & filename,std::set<std::size_t> &  transit_as)
 {
