@@ -61,8 +61,6 @@ void parse(std::string const & filename, Graph & g)
       {
 	 //remplissage de la matrice
 	 while(std::getline(file, line)) {
-	    // std::cout << "je lis la ligne" << file.tellg() << std::endl;
-	    std::istringstream lineStream(line);
 	    tokenizer tokens(line, sep);
 	    std::vector<std::string> parts(tokens.begin(), tokens.end());
 	    if( parts.size() == 3)
@@ -90,8 +88,8 @@ void parse(std::string const & filename, Graph & g)
 	       else vv = found_i2->second;
 
 	       int type = addEdge(v, vv, linkType, found, e, g);
-	       if(!found)	  line_error=true;
-	       else g[e].link_type = type;
+	       if(found) g[e].link_type = type;
+	       else line_error=true;
 	    }
 	    else line_error=true;
 	 }
