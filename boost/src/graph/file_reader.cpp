@@ -44,10 +44,10 @@ int add_edge(vertex_descriptor const & v, vertex_descriptor const & vv, int & ty
 /// \param g graph sur lequel les vertices seront rajouter
 void create_vertices_from_line(std::vector<std::string> const & parts, vertex_descriptor & v, vertex_descriptor & vv, as_number_to_vertex_type & as_number_to_vertex, Graph & g){
    int i1,i2;
-
+   
    i1 = boost::lexical_cast<int>( parts.at(0) );
    i2 = boost::lexical_cast<int>( parts.at(1) );
-
+   
    as_number_to_vertex_type::const_iterator found_i1 =  as_number_to_vertex.find(i1);
    if( found_i1 == as_number_to_vertex.end())
    {
