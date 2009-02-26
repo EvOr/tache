@@ -51,6 +51,7 @@ void Controler::load_triplet(std::string const & filename){
       found=transit_as.find(graph[v].asn);
       //Affectation de la propriété transit
       graph[v].is_transit=(found == transit_as.end())?false:true; 
+      if(graph[v].is_transit)
       std::cout << graph[v].asn << " : " << graph[v].is_transit << std::endl;
    }
 }

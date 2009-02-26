@@ -11,28 +11,28 @@
 #include <ctime>
 #include <map>
 #include <set> 
-#include <connected_components.hpp>
-#include <stdexcept>
+//#include <connected_components.hpp>
+//#include <stdexcept>
 
 
-template <typename graph_type>
-std::size_t get_connected_components(graph_type const & g)
-{
-	std::vector<int> component(boost::num_vertices(g));
-    std::size_t num = static_cast<std::size_t>(connected_components(g, &component[0]));
-
-	/*
-	DEBUG
-    //-- reorganize connected compo
-    for(std::size_t ii = 0; ii <  component.size() ; ++ii)
-    {
-        int  num_compo = static_cast<std::size_t> ( component[ii] );
-         typename graph_type::vertex_descriptor node = boost::vertex(  ii, g);
-		std::cout << "node " << node << ": " << num_compo << std::endl;
-    }
-	*/
-	return num;
-}
+// template <typename graph_type>
+// std::size_t get_connected_components(graph_type const & g)
+// {
+// 	std::vector<int> component(boost::num_vertices(g));
+//     std::size_t num = static_cast<std::size_t>(connected_components(g, &component[0]));
+// 
+// 	/*
+// 	DEBUG
+//     //-- reorganize connected compo
+//     for(std::size_t ii = 0; ii <  component.size() ; ++ii)
+//     {
+//         int  num_compo = static_cast<std::size_t> ( component[ii] );
+//          typename graph_type::vertex_descriptor node = boost::vertex(  ii, g);
+// 		std::cout << "node " << node << ": " << num_compo << std::endl;
+//     }
+// 	*/
+// 	return num;
+// }
 
 int main(int argc , char ** argv)
 {
@@ -72,23 +72,23 @@ int main(int argc , char ** argv)
 
 	//Cliques
 	//----------
-	if (0)
-	{
-		std::vector< std::vector<vertex_descriptor> > cliques;
-		mickael::graph::bron_kerbosch_max_cliques(c.getGraph(), cliques);
-
-		std::vector< std::vector<vertex_descriptor> >::iterator it;
-		std::vector<vertex_descriptor>::iterator vertex;
-		int i=0;
-		for( it=cliques.begin(); it != cliques.end() ; it++){
-			std::vector<vertex_descriptor>::iterator adjV;
-			std::cout << "------" << i++ << "------" << std::endl;
-			for(adjV=(*it).begin();adjV != (*it).end(); adjV++){
-				std::cout<< *adjV << ",";
-			}
-			std::cout << std::endl;
-		}
-	}
+// 	if (0)
+// 	{
+// 		std::vector< std::vector<vertex_descriptor> > cliques;
+// 		mickael::graph::bron_kerbosch_max_cliques(c.getGraph(), cliques);
+// 
+// 		std::vector< std::vector<vertex_descriptor> >::iterator it;
+// 		std::vector<vertex_descriptor>::iterator vertex;
+// 		int i=0;
+// 		for( it=cliques.begin(); it != cliques.end() ; it++){
+// 			std::vector<vertex_descriptor>::iterator adjV;
+// 			std::cout << "------" << i++ << "------" << std::endl;
+// 			for(adjV=(*it).begin();adjV != (*it).end(); adjV++){
+// 				std::cout<< *adjV << ",";
+// 			}
+// 			std::cout << std::endl;
+// 		}
+// 	}
       //test de centrality
 //    std::map<vertex_descriptor, double> v_centrality;
 //    tableau_de_poids vc_map(v_centrality);
@@ -154,7 +154,7 @@ int main(int argc , char ** argv)
       //   std::cout << " n" << get(boost::vertex_index, wug, *vi) << "[ pos=\"" << positionMap[*vi].x << ", " << positionMap[*vi].y << "\" ];" << std::endl;
      // }
 //    }
-   c.load_triplet("triplets.txt");
+//    c.load_triplet("triplets.txt");
    return EXIT_SUCCESS;
 }
 
