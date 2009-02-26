@@ -1,0 +1,58 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[top=2cm, bottom=3cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[pdftex]{graphicx}
+\usepackage{graphics}
+\usepackage{latexsym}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{tikz}
+% \usepackage{placeins}
+% \usepackage[french, figure, boxed, longend]{algorithm2e}
+\usepackage[francais,english]{babel}
+
+
+% En-t�tes et pieds de page
+\pagestyle{fancy}
+\headheight 35pt
+\lhead{\textbf{\begin{small}Rapport Projet 2008-2009\end{small}}}
+\chead{\textsc{\begin{large}Etude de la topologie de l'Internet\end{large}}}
+\rhead{\textbf{\begin{small}\end{small}}}
+\lfoot{2008}
+\rfoot{\thepage}
+\cfoot{}
+
+\newcommand{\boost}{\textit{Boost}}
+
+%opening
+\title{}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+%TODOpour les définitions :
+% clique / full-mesh
+% Autonomous System AS
+% graphe connexe
+% centralit\'e
+
+\newpage
+\section{Visualisation de la topologie inter-domaine de l'Internet}
+
+\input{tomographie_internet}
+
+\input{topologie_internet}
+
+\input{analyse_topologie}
+
+\input{representation_internet}
+
+\end{document}

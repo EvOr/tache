@@ -2,12 +2,13 @@
 #ifndef _MYTHREAD_
 #define _MYTHREAD_
 
+#include <Qt>
 #include <QMessageBox>
 #include <QThread>
 #include <QMainWindow>
-#include "mainWindow.hpp"
+#include "./mainWindow.hpp"
 
-class myThread : public QThread
+class MyThread : public QThread
 {
    //Q_OBJECT
 
@@ -15,7 +16,8 @@ class myThread : public QThread
       QMainWindow * _mainWin;
 
    public:
-      myThread(QMainWindow * mw)
+      MyThread() {}
+      MyThread(QMainWindow * mw)
       {
           _mainWin = mw;
       }
@@ -24,6 +26,6 @@ class myThread : public QThread
 };
 
 
-
 #endif
 
+	
