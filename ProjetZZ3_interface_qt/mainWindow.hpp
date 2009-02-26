@@ -26,6 +26,7 @@
 #include <string>
 #include "aboutWindow.hpp"
 #include "grapheZone.hpp"
+#include "myThread.hpp"
 
 #include "./controler/controler.hpp"
 #include "./graph/graph.hpp"
@@ -57,6 +58,7 @@ class mainWindow : public QMainWindow
       QLabel _labeltps;
       QString _datafile; //conversion en std::string via toStdString()
       aboutWindow _about;
+      myThread * _infoThread;
 
       QAction * _openAct;
       QAction * _quitAct;
@@ -67,6 +69,7 @@ class mainWindow : public QMainWindow
 
 
    public :
+      mainWindow() {}
       void init();
       void initAction();
       void initMenu();

@@ -11,6 +11,7 @@
 #define __ANSI_CODES__
 
 #include <string>
+#include <algorithm>
 
 namespace ansi
 {

@@ -6,6 +6,7 @@ void mainWindow::init()
    QVBoxLayout * vlayout = new QVBoxLayout();
    _controler = NULL;
 //    _graphe = new QLabel(&_fenetre);
+   _infoThread = new myThread(this);
 
    initStatus();
    initAction();
@@ -168,7 +169,7 @@ void mainWindow::choixFichier()
       _controler->change_file_name(_datafile.toStdString());
    }
 
-
+   _infoThread->start();
     try{
       t = time(0);
       _controler->parse_file();
@@ -182,7 +183,10 @@ void mainWindow::choixFichier()
          QMessageBox::warning(this, QString::fromStdString("Attention !"), QString::fromStdString(e.display()), QMessageBox::Ok, QMessageBox::NoButton);
       }
    }
+
+
    _controler->displayCircle(1.5);
+   _infoThread->exit();
 
    t = time(0) - t;
    setTemps(t);
