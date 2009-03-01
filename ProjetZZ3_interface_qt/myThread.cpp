@@ -1,9 +1,11 @@
 
 #include "myThread.hpp"
 
-void MyThread::run()
+void myThread::run()
 {
    QMessageBox::warning(_mainWin, QString::fromStdString("Info"), QString::fromStdString("Calcul en cours..."), QMessageBox::NoButton, QMessageBox::NoButton);
+
+   std::cout << "Un petit coup dans le thread..." << std::endl;
 
    exec();
 }

@@ -6,7 +6,7 @@ void mainWindow::init()
    QVBoxLayout * vlayout = new QVBoxLayout();
    _controler = NULL;
 //    _graphe = new QLabel(&_fenetre);
-   _infoThread = new MyThread(this);
+   _infoThread = new myThread(this);
 
    initStatus();
    initAction();

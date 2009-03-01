@@ -36,6 +36,8 @@
 #define X 800
 #define Y 600
 
+class myThread;
+
 class mainWindow : public QMainWindow
 {
    Q_OBJECT
@@ -58,7 +60,7 @@ class mainWindow : public QMainWindow
       QLabel _labeltps;
       QString _datafile; //conversion en std::string via toStdString()
       aboutWindow _about;
-      MyThread * _infoThread;
+      myThread * _infoThread;
 
       QAction * _openAct;
       QAction * _quitAct;

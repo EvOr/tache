@@ -8,16 +8,18 @@
 #include <QMainWindow>
 #include "./mainWindow.hpp"
 
-class MyThread : public QThread
+class mainWindow;
+
+class myThread : public QThread
 {
    //Q_OBJECT
 
    protected:
-      QMainWindow * _mainWin;
+      mainWindow * _mainWin;
 
    public:
-      MyThread() {}
-      MyThread(QMainWindow * mw)
+      myThread() {}
+      myThread(mainWindow * mw)
       {
           _mainWin = mw;
       }
