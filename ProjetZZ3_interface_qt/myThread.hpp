@@ -6,7 +6,9 @@
 #include <QMessageBox>
 #include <QThread>
 #include <QMainWindow>
-#include "./mainWindow.hpp"
+
+#include <iostream>
+
 #include "./calculWindow.hpp"
 
 class mainWindow;

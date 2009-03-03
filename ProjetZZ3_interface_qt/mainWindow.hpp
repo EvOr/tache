@@ -19,6 +19,7 @@
 #include <QAction>
 #include <QFileDialog>
 #include <QString>
+#include <QInputDialog>
 
 #include <iostream>
 #include <sstream>
@@ -36,7 +37,7 @@
 #define X 800
 #define Y 600
 
-class myThread;
+class dialog;
 
 class mainWindow : public QMainWindow
 {
@@ -66,6 +67,7 @@ class mainWindow : public QMainWindow
       QAction * _quitAct;
       QAction * _aboutAct;
       QAction * _eraseAct;
+      QAction * _infoAct;
 
       Controler * _controler;
 
@@ -90,6 +92,7 @@ class mainWindow : public QMainWindow
       void afficherAbout();
       void choixFichier();
       void eraseGraph();
+      void afficherInfoAs();
 
 
 };
