@@ -1,7 +1,7 @@
 
 
-#ifndef _ABOUTWINDOW_
-#define _ABOUTWINDOW_
+#ifndef _CALCULWINDOW_
+#define _CALCULWINDOW_
 
 #include <Qt>
 #include <QObject>
@@ -17,7 +17,7 @@
 #include <QGroupBox>
 #include <QPixmap>
 
-class aboutWindow : public QObject
+class calculWindow : public QObject
 {
    Q_OBJECT
  
@@ -32,10 +32,10 @@ class aboutWindow : public QObject
       {
          QVBoxLayout * vlayout = new QVBoxLayout();
          _fenetre.setGeometry(100,100,200,250);
-         _fenetre.setWindowTitle("About program...");
+         _fenetre.setWindowTitle("Program running...");
          _fenetre.setMinimumSize(300, 75);
 
-         _desc.setText("Jan Villeminot, Bastien Legrand, ZZ3 project.");
+         _desc.setText("Calculs en cours...");
 
          _quit = new QPushButton("Quit", &_fenetre);
          QObject::connect( _quit, SIGNAL(clicked()), &_fenetre, SLOT(close()) );

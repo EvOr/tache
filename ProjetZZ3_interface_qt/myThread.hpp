@@ -7,6 +7,7 @@
 #include <QThread>
 #include <QMainWindow>
 #include "./mainWindow.hpp"
+#include "./calculWindow.hpp"
 
 class mainWindow;
 
@@ -14,16 +15,9 @@ class myThread : public QThread
 {
    //Q_OBJECT
 
-   protected:
-      mainWindow * _mainWin;
-
    public:
       myThread() {}
-      myThread(mainWindow * mw)
-      {
-          _mainWin = mw;
-      }
-
+      
       void run();
 };
 
