@@ -14,7 +14,7 @@ typedef  std::map< int ,  Graph::vertex_descriptor> as_number_to_vertex_type;
 /// \param e edge_descriptor de l'arrete
 /// \param g Graph ou il faut ajouter la relation
 /// \return le type de point
-int add_edge(vertex_descriptor const & v, vertex_descriptor const & vv, int & type, std::string const & linkType, bool & found, edge_descriptor & e, Graph & g){
+void add_edge(vertex_descriptor const & v, vertex_descriptor const & vv, int & type, std::string const & linkType, bool & found, edge_descriptor & e, Graph & g){
    // found a false permet si erreur de typage sur le type de l'un des nodes de throw l'exception en fin de boucle...
    found=false;
    //si on veut mettre des poids
