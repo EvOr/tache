@@ -6,22 +6,20 @@
 #include <QMessageBox>
 #include <QThread>
 #include <QMainWindow>
-#include "./mainWindow.hpp"
 
-class MyThread : public QThread
+#include <iostream>
+
+#include "./calculWindow.hpp"
+
+class mainWindow;
+
+class myThread : public QThread
 {
    //Q_OBJECT
 
-   protected:
-      QMainWindow * _mainWin;
-
    public:
-      MyThread() {}
-      MyThread(QMainWindow * mw)
-      {
-          _mainWin = mw;
-      }
-
+      myThread() {}
+      
       void run();
 };
 

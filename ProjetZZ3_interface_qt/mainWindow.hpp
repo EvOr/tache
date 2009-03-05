@@ -19,6 +19,7 @@
 #include <QAction>
 #include <QFileDialog>
 #include <QString>
+#include <QInputDialog>
 
 #include <iostream>
 #include <sstream>
@@ -35,6 +36,8 @@
 
 #define X 800
 #define Y 600
+
+class dialog;
 
 class mainWindow : public QMainWindow
 {
@@ -58,12 +61,13 @@ class mainWindow : public QMainWindow
       QLabel _labeltps;
       QString _datafile; //conversion en std::string via toStdString()
       aboutWindow _about;
-      MyThread * _infoThread;
+      myThread * _infoThread;
 
       QAction * _openAct;
       QAction * _quitAct;
       QAction * _aboutAct;
       QAction * _eraseAct;
+      QAction * _infoAct;
 
       Controler * _controler;
 
@@ -88,6 +92,7 @@ class mainWindow : public QMainWindow
       void afficherAbout();
       void choixFichier();
       void eraseGraph();
+      void afficherInfoAs();
 
 
 };
