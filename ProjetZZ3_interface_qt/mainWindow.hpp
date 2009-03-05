@@ -26,6 +26,7 @@
 #include <string>
 #include "aboutWindow.hpp"
 #include "grapheZone.hpp"
+#include "./myThread.hpp"
 
 #include "./controler/controler.hpp"
 #include "./graph/graph.hpp"
@@ -57,6 +58,7 @@ class mainWindow : public QMainWindow
       QLabel _labeltps;
       QString _datafile; //conversion en std::string via toStdString()
       aboutWindow _about;
+      MyThread * _infoThread;
 
       QAction * _openAct;
       QAction * _quitAct;
@@ -67,12 +69,13 @@ class mainWindow : public QMainWindow
 
 
    public :
+      mainWindow() {}
       void init();
       void initAction();
       void initMenu();
       void initStatus();
-      void drawPoint(double x, double y, QColor c = Qt::red);
-      void drawLine(double a, double b, double c, double d, QColor col = Qt::red);
+      void drawPoint(double x, double y, Qt::GlobalColor c = Qt::red);
+      void drawLine(double a, double b, double c, double d, Qt::GlobalColor col = Qt::blue);
 
       inline void setNbSommets(int n) { _nbsommet.setText(QString::number(n)); }
       inline void setNbArete(int n) { _nbarete.setText(QString::number(n)); }

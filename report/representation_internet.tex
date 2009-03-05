@@ -1,0 +1,21 @@
+% \documentclass[a4paper,10pt]{article}
+
+% \begin{document}
+
+\subsection{Repr\'esentation de la topologie}
+
+Repr\'esenter Internet sous la forme d'un graphe peut s'av\'erer particulièrement difficile. En effet, si l'on regarde les donn\'ees r\'ecolt\'ees au niveau de diff\'erentes sources, on s'apperçoit que le graphe \`a repr\'esenter est grand : il comporte pour la topologie IPv4 plus de 40000 sommets, et un nombre tout aussi cons\'equent d'ar\`etes.
+\par
+La topologie en IPv6 est \`a peine plus petite. Cela vient du fait que cette technologie n'est pas encore aussi largement r\'epandue que l'IPv4.
+
+\par
+Au tout d\'ebut du projet, nous essayons de repr\'esenter le graphe complet, avec tous ses sommets et toutes ses ar\^etes. Le r\'esultat obtenu \'est, comme on peut s'y attendre, confu, et illisible. Il nous faut donc, tr\`es rapidement, envisager des solutions pour all\'eger un peu le tout.
+\par
+Voici une capture d\'ecran du programme lorsqu'il repr\'esente le graphe dans son int\'egralit\'e :
+%TODO insérer ici une capture d'écran avbec le graphe complet
+
+\par
+Nous essayons de nettoyer le graphe en enlevant les AS feuilles qui sont tr\`es nombreux et pas tr\`es pertinents pour une \'etude de la topologie du coeur de l'Internet. Dans un premier temps, on cible les AS qui n'ont ni client, ni PEER. Ce sont n\'ecessairement des feuilles, et par cons\'equent, nous pouvons les retirer du graphe pour faciliter sa lecture, et d'\'eventuels calculs.
+\par
+Ensuite, notre tuteur de projet, Monsieur Meulle, nous a donn\'e un nouveau fichier, avec des relations entre AS sous la forme de triplets, permettant d'identifier tr\`es rapidement les AS feuilles.
+%\end{document}

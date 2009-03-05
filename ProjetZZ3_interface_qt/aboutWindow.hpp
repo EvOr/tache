@@ -19,7 +19,6 @@
 #include <QAction>
 
 
-
 class aboutWindow : public QObject
 {
    Q_OBJECT

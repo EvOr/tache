@@ -21,10 +21,8 @@ class grapheZone : public QWidget
 
    public slots:
 
-      void setPen(const QPen &pen);
-      void setBrush(const QBrush &brush);
-      void drawLine(double a, double b, double c, double d);
-      void drawPoint(double a, double b);
+      void drawLine(double a, double b, double c, double d, Qt::GlobalColor col);
+      void drawPoint(double a, double b, Qt::GlobalColor col);
       void eraseGraph();
 
    protected:
@@ -33,10 +31,10 @@ class grapheZone : public QWidget
 
    private:
 
-      QPen _pen;
-      QBrush _brush;
       std::vector<std::pair<double, double> > _lines;
       std::vector<std::pair<double, double> > _points;
+      std::vector<Qt::GlobalColor> _pointsColor;
+      std::vector<Qt::GlobalColor> _linesColor;
 };
 
 #endif
