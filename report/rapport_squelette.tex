@@ -2,6 +2,7 @@
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{lmodern}
 \usepackage[top=2cm, bottom=3cm, left=1.5cm, right=1.5cm]{geometry}
 \usepackage{fancyhdr}
 \usepackage[pdftex]{graphicx}
@@ -14,17 +15,29 @@
 \usepackage[francais,english]{babel}
 
 
-% En-t�tes et pieds de page
+% % En-t�tes et pieds de page
+% \pagestyle{fancy}
+% \headheight 35pt
+% \lhead{\textbf{\begin{small}Rapport Projet 2008-2009\end{small}}}
+% \chead{\textsc{\begin{large}Etude de la topologie de l'Internet\end{large}}}
+% \rhead{\textbf{\begin{small}\end{small}}}
+% \lfoot{2008}
+% \rfoot{\thepage}
+% \cfoot{}
+
 \pagestyle{fancy}
-\headheight 35pt
-\lhead{\textbf{\begin{small}Rapport Projet 2008-2009\end{small}}}
-\chead{\textsc{\begin{large}Etude de la topologie de l'Internet\end{large}}}
-\rhead{\textbf{\begin{small}\end{small}}}
-\lfoot{2008}
-\rfoot{\thepage}
-\cfoot{}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+\fancyhead{} % clear all header fields
+\fancyhead[L]{Etude de la topologie de l'Internet}
+\fancyhead[R]{\rightmark}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[C]{\thepage}
+
 
 \newcommand{\boost}{\textit{Boost}}
+\newcommand{\Hrule}{\rule{\linewidth}{0.5mm}}
 
 %opening
 \title{Etude du coeur de l'Internet}
@@ -32,21 +45,42 @@
 
 \begin{document}
 
-\maketitle
+\input{titre}
 
 \newpage
+\thispagestyle{empty}
 \tableofcontents
 
 \newpage
+\thispagestyle{empty}
+\listoffigures
+
+
+\newpage
+\selectlanguage{francais}
+\addtocontents{toc}{\protect\contentsline{section}{R\'esum\'e}{}}
 \begin{abstract}
 
 \end{abstract}
+\thispagestyle{empty}
 
 
 \newpage
+\selectlanguage{english}
+\addtocontents{toc}{\protect\contentsline{section}{Abstract}{}}
+\begin{abstract}
+
+\end{abstract}
+\thispagestyle{empty}
+\selectlanguage{francais}
+
+\newpage
+\fancyhead[R]{Lexique}
 \input{lexique}
 
+
 \newpage
+\fancyhead[R]{\rightmark}
 \section{Visualisation de la topologie inter-domaine de l'Internet}
 
 \input{tomographie_internet}
@@ -56,5 +90,14 @@
 \input{analyse_topologie}
 
 \input{representation_internet}
+
+\newpage
+\input{partie2}
+
+\newpage
+\input{partie3}
+
+\newpage
+\input{partie4}
 
 \end{document}

@@ -17,6 +17,7 @@
 #include <QGroupBox>
 #include <QPixmap>
 
+
 class calculWindow : public QObject
 {
    Q_OBJECT
@@ -28,10 +29,12 @@ class calculWindow : public QObject
       QPushButton * _quit;
 
    public :
-      void init()
+      void init(QWidget * parent)
       {
          QVBoxLayout * vlayout = new QVBoxLayout();
-         _fenetre.setGeometry(100,100,200,250);
+         _fenetre.setParent(parent);
+         _fenetre.setWindowFlags(Qt::Window);
+         //_fenetre.setGeometry(100,100,200,250);
          _fenetre.setWindowTitle("Program running...");
          _fenetre.setMinimumSize(300, 75);
 
@@ -45,6 +48,8 @@ class calculWindow : public QObject
 
          _fenetre.setLayout(vlayout);
          _fenetre.resize(300,75);
+
+         _fenetre.hide();
       }
 
       void setText(std::string text) { _desc.setText(QString::fromStdString(text)); }
@@ -52,6 +57,11 @@ class calculWindow : public QObject
       void afficher()
       {
          _fenetre.show();
+      }
+
+      void cacher()
+      {
+         _fenetre.hide();
       }
 
 };

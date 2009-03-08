@@ -6,13 +6,13 @@ void mainWindow::init()
    QVBoxLayout * vlayout = new QVBoxLayout();
    _controler = NULL;
 //    _graphe = new QLabel(&_fenetre);
-   _infoThread = new myThread();
 
    initStatus();
    initAction();
    initMenu();
    razCompteur();
-   _about.init();
+   _about.init(this);
+   _calcul.init(this);
 
    vlayout->setMenuBar(&_menu);
    vlayout->addWidget(&_graphe);
@@ -174,8 +174,8 @@ void mainWindow::choixFichier()
       _controler->change_file_name(_datafile.toStdString());
    }
 
-   _infoThread->start();
     try{
+      _calcul.afficher();
       t = time(0);
       _controler->parse_file();
    }catch(ReaderException & e){
@@ -191,7 +191,8 @@ void mainWindow::choixFichier()
 
 
    _controler->displayCircle(1.5);
-   _infoThread->exit();
+
+   _calcul.cacher();
 
    t = time(0) - t;
    setTemps(t);
