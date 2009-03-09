@@ -1,0 +1,24 @@
+\par
+Doxygen est un logiciel libre de documentation automatique de code. Il a \'et\'e en grande partie \'ecrit par Dimitri van Heesch. Son nom est la contraction de \textit{dox} (pour docs, de l'anglais documents) et \textit{gen} (de l'anglais generator). Il est capable de g\'en\'erer de la documentation pour des codes \'ecrits en C, C++, Java, Python et d'autres langages encore. Il s'appuie pour cela sur un certains nombre de commentaires \'ecrits dans le code avec une syntaxe sp\'eciale. La documenntation g\'en\'er\'ee peut \^etre en HTML, ou en \LaTeX.
+\par
+Doxygen extrait en particulier les prototypes et documentations des fonctions, les fichiers inclus, la documentation des structures de donn\'ees, les prototypes et la documentation des classes. Il peut repr\'esenter leur hi\'erarchie sous forme de sch\'ema UML. Il garde un index de tous les idenntifiants, et permet une navigation avec HTML dans les fichiers sources comment\'es.
+\par
+Voici un petit exemple d'utilisation de la syntaxe Doxygen pour documenter une fonction :
+\begin{figure}[ht]
+\centering
+\frame{
+\parbox{16cm}{
+   $/// \backslash \textrm{brief Ajoute une arette} \\
+   /// \backslash \textrm{param i1 index du premier point} \\
+   /// \backslash \textrm{param i2 index du deuxieme point} \\
+   /// \backslash \textrm{param linkType descripteur du type d'arrete} \\
+   /// \backslash \textrm{param found booleen resultat} \\
+   /// \backslash \textrm{param e edge\_descriptor de l'arrete} \\
+   /// \backslash \textrm{param g double pointeur sur le Graph ou il faut ajouter la     relation} \\
+   /// \backslash \textrm{return le type de point}$
+}
+}
+\caption{\label{exemple_doxygen} Exemple de syntaxe Doxygen}
+\end{figure}
+
+On peut y voir une br\`eve description du r\^ole de la fonction, des informations sur ses diff\'erents param\`etre et son type de retour.
