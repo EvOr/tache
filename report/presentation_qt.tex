@@ -1,0 +1,16 @@
+\par
+Qt, prononcer ``cute'' de l'anglais joli, est une biblioth\`eque logicielle orient\'ee objet et d\'evelopp\'ee en C++ par la soci\'et\'e \textit{Qt Software}, anciennement connue sous le nom de \textit{Trolltech}. Elle offre des composants graphique permettant entre autre l'acc\`s aux donn\'ees, les connexions r\'eseaux, la gestion des files d'ex\'ecution et pleins d'autres choses encore. Cette biblioth\`eque est aujourd'hui dans sa version quatre.
+\subparagraph{}
+Qt permet la portabilit\'e des applications par simple recompilation du code source. Elle est support\'ee sous des environnements tels que Unix/Linux, Windows et Mac OS X.
+\subparagraph{}
+Qt est principalement connue pour \^etre la biblioth\`eque sur laquelle repose l'environnement graphique KDE, l'un des environnements de bureau les plus utilis\'e dans le monde Linux. Un certains nombres d'applications tr\`es connues du grand public et recens\'ees sur le site de \textit{Trolltech} utilisent Qt : VLC Media Player, Skype, Google Earth...
+
+\par
+L'outil Qt repose sur trois parties essentielles : Qt Designer, les slots et signaux, et le compilateur de meta-objet MOC.
+\subparagraph{}
+Qt Designer est un outil graphique permettant de créer facilement des interfaces graphiques avec Qt, d'y ajouter des panneaux et des boutons et d'y connecter des fonctions sous la forme de signaux et de slots. Au cours de notre projet, nous n'avons que tr\`es peu utilis\'e cet outil, pr\'ef\'erant explorer les \'etapes de cr\'eation d'une interface graphique en r\'ealisant nous m\^eme tout le code.
+\subparagraph{}
+Les slots et signaux sont les m\'ecanismes sp\'ecifiques \`a Qt qui lui permettent de g\'erer les \'echanges d'informations entre les diff\'erents \'el\'ements d'une interface graphique. Il s'agit en fait d'une impl\'ementation du patron de conception observateur.
+Les objets Qt poss\`edent des slots et des signaux. Un objets peut \'emettre des signaux qui seront re\c cus par les slots d'un autre objet. Ainsi, si on veut cr\'eer un bouton quitter dans une fen\^etre, pour le rendre fonctionnel, il faut connecter le signal correspondant à l'action \textit{je clique sur le bouton} au slot \textit{la fen\^etre se ferme}.
+\subparagraph{}
+Le compilateur de m\'eta-objets MOC (pour meta object compiler) est un pr\'eprocesseur qu iest appliqu\'e au code source de l'application avant sa compilation et qui r\'eunit les informations n\'ecessaires au fonctionnement des slots et signaux et \'eventuellement \`a l'introspection. L'introspection est la capacit\'e d'un programme \`a connaitre son \'etat, examiner ses structures internes et \'eventuellement modifier des objets le composant au cours de l'\'execution. Cela va de pair avec les slots et signaux, puisque pour cacher une fen\^etre, on change sons \'etat de visible \`a non visible.
