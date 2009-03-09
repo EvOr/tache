@@ -25,9 +25,11 @@ struct AS : boost::totally_ordered< AS >
    typedef int key_type;
    typedef int reference;
    typedef int category;
-
    value_type value;
-   AS(int _asn = 0) : value(_asn){}
+   bool is_transit;
+   int asn;
+
+   AS(int _asn = 0) : value(_asn) {}
 
    inline bool operator<(AS const & o) const
    {
@@ -46,6 +48,7 @@ struct ASLink
       : weight(myw)
    {}	
    std::size_t weight;
+   int link_type;
 };
 
 struct coordonnes	
@@ -73,6 +76,10 @@ typedef WUGraph::edge_descriptor edge_descriptor_wu;
 //graphe par matrice d'adjacence
 typedef boost::adjacency_matrix<boost::directedS> AMatrix;
 
+//positionmap pour les algo de placement automatique
+// typedef boost::property_map<AMatrix, boost::vertex_index_t> PositionMap;
+
+
 struct tableau_de_coordonnees
 : public boost::put_get_helper< coordonnes &,tableau_de_coordonnees >
 {
@@ -96,6 +103,7 @@ struct tableau_de_coordonnees
    private:
    C * m_p;
 };
+
 
 struct tableau_de_poids
 : public boost::put_get_helper< double&,tableau_de_poids >
@@ -123,6 +131,11 @@ struct tableau_de_poids
    C * m_p;
 };
 
+
+//fonction de copie de graphe
+void copyGraph(const Graph & g, WUGraph & wug);
+
+
 //fonction de file_reader_boost.cpp
 //int retrieveNbPointFile(std::ifstream & inIf);
 //void reader(std::string inFile, AMatrix ** m, Graph ** g);
@@ -130,8 +143,7 @@ struct tableau_de_poids
 //void addEdge(int i1, int i2, std::string linkType, bool & found, edge_descriptor & e, Graph ** g, std::vector<int> * peers);
 //void addToPeersVector(std::vector<int> * peers, int i1, int i2);
 //fonction de graph.cpp
-int displayCircle( tableau_de_coordonnees  & p, Graph const & g, double r);
-//fonction de copie de graphe
-void copyGraph(const Graph & g, WUGraph & wug);
+
+
 
 #endif
