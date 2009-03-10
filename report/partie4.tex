@@ -10,8 +10,12 @@ Enfin, les erreurs retournées par gcc à la compilation de la librairie sont in
 
 Tout au long du projet, la méthode la plus efficace pour avancer lorsque nous bloquions sur \boost a été d'appeler à l'aide notre tuteur de projet. 
 
+\subsection{D\'eveloppement avec Qt}
+\input{part4_lib_graph}
+
 \subsection{Expérimentation sur le code}
 Notre connaissance grandissante des librairies utilisées nous a permis de pratiquer diverses expérimentations sur nos algorithmes, traitements et affichages.
+
 \subsubsection{Expérimentation avec boost}
 \paragraph{Recherche des peers\\}
 \par La recherche des peers a été développé en deux étapes. La première étape fut de trouver un moyen de recenser les Peers à partir de fichier de routage uniquement, afin de permettre de trouver les cliques avec un algorithme ``maison''. Cette méthode se basait sur le ciblage des AS qui n'avaient ni client, ni peer : ce sont n\'ecessairement des stubs. A ce moment là, nous stockions plusieurs graphs dans l'objet contrôleur dont le principale, et celui sans les stubs... 
@@ -22,8 +26,5 @@ En revanche, cette méthode présupposait que le fichier était ordonné et bien
 Les liens entre AS sont plac\'ees sous la forme de triplets : {AS1, AS2, AS3} signifiant que pour joindre l'AS3, l'AS1 a du passer par l'AS2. Les AS du milieu sont donc forcément des AS de transit, les AS stubs sont alors facilement identifiables comme \'etant tous les autres... 
 
 C'est à ce moment-là que le structure actuelle du programme a été clairement établie, nous ne stockons qu'un seul graphe dans le controlleur et celui-ci réalise un traitement de création d'un graphe spécifique en fonction de ce qui lui ait demandé. Un fonctionnement proche d'une base de données décrit en partie 3.
-
-\subsection{D\'eveloppement avec Qt}
-\input{part4_lib_graph}
 
 
