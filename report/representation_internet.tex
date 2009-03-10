@@ -4,23 +4,26 @@
 
 \subsection{Repr\'esentation de la topologie}
 
-Repr\'esenter Internet sous la forme d'un graphe peut s'av\'erer particulièrement difficile. En effet, si l'on regarde les donn\'ees r\'ecolt\'ees au niveau de diff\'erentes sources, on s'apperçoit que le graphe \`a repr\'esenter est grand : il comporte pour la topologie IPv4 plus de 40000 sommets, et un nombre tout aussi cons\'equent d'ar\`etes.
+Repr\'esenter Internet sous la forme d'un graphe peut s'av\'erer particulièrement difficile. En effet, si l'on regarde les donn\'ees r\'ecolt\'ees au niveau de diff\'erentes sources, on s'aperçoit que le graphe \`a repr\'esenter est immense : pour la topologie IPv4, il comporte plus de 40000 sommets et un nombre tout aussi cons\'equent d'ar\`etes.
 \par
 La topologie en IPv6 est \`a peine plus petite. Cela vient du fait que cette technologie n'est pas encore aussi largement r\'epandue que l'IPv4.
 
 \par
-Au tout d\'ebut du projet, nous essayons de repr\'esenter le graphe complet, avec tous ses sommets et toutes ses ar\^etes. Le r\'esultat obtenu \'est, comme on peut s'y attendre, confu, et illisible. Il nous faut donc, tr\`es rapidement, envisager des solutions pour all\'eger un peu le tout.
+Au tout d\'ebut du projet, nous avons essayé de repr\'esenter le graphe complet, avec tous ses sommets et toutes ses ar\^etes. Le r\'esultat obtenu \'est, comme on peut s'y attendre, confu et illisible. Il nous a donc fallu envisager des solutions pour all\'eger nos traitements et notre affichage.
 \par
 Voici une capture d\'ecran du programme lorsqu'il repr\'esente le graphe dans son int\'egralit\'e :
 %TODO insérer ici une capture d'écran avbec le graphe complet
-
+%TODO faire une figure et la référencer dans le paragraphe
 \par
-Nous essayons de nettoyer le graphe en enlevant les AS feuilles qui sont tr\`es nombreux et pas tr\`es pertinents pour une \'etude de la topologie du coeur de l'Internet. Dans un premier temps, on cible les AS qui n'ont ni client, ni PEER. Ce sont n\'ecessairement des feuilles, et par cons\'equent, nous pouvons les retirer du graphe pour faciliter sa lecture, et d'\'eventuels calculs.
+Le principe est de nettoyer le graphe en enlevant les AS feuilles qui sont tr\`es nombreux et pas nécessairement tr\`es pertinents pour une \'etude de la topologie du coeur de l'Internet. 
 \par
-Ensuite, notre tuteur de projet, Monsieur Meulle, nous a donn\'e un nouveau fichier, avec des relations entre AS sous la forme de triplets, permettant d'identifier tr\`es rapidement les AS feuilles.
+%TODO Deplacer en partie IV, c'est l'élaboration du logiciel, contrairement à la partie 1 qui traite d'autre chose...
+Dans un premier temps, on cible les AS qui n'ont ni client, ni PEER. Ce sont n\'ecessairement des feuilles, et par cons\'equent, nous pouvons les retirer du graphe pour faciliter sa lecture et alléger nos calculs.
+\par Ensuite, notre tuteur de projet, Monsieur Meulle, nous a donn\'e un nouveau fichier, avec des relations entre AS sous la forme de triplets, permettant d'identifier tr\`es rapidement les AS feuilles.
 Les liens entre AS sont plac\'ees sous la forme de triplets : {AS1, AS2, AS3} signifiant que ppour joindre l'AS3, l'AS1 a du passer par l'AS2. Ainsi, on peut identifier les AS de transit (ici l'AS2). Les AS feuilles sont alors facilement identifiables comme \'etant ceux qui ne jouent jamais le r\^ole d'As de transit dans les triplets.
+%TODO Fin du déplacer...
 \par
-\'Etant donn\'e qu'Internet joue aujourd'hui un r\^ole important dans notre vie de tous les jours, tant au niveau professionnel que priv\'e, plusieurs \'etudes ont d\'ej\`a \'et\'e men\'ees pour en comprendre mieux la structure.
+\'Etant donn\'e qu'Internet joue aujourd'hui un r\^ole important dans notre vie de tous les jours, tant au niveau professionnel que priv\'e, plusieurs \'etudes ont d\'ej\`a \'et\'e men\'ees pour mieux en comprendre la structure.
 On trouve ainsi plusieurs ouvrage dans la litt\'erature et sur le net qui parle de ce sujet. On peut aussi trouver divers repr\'esentation graphique de l'Internet.
 %TODO on pourrait ajouter cette image avec un commentaire, elle est sympa : http://en.wikipedia.org/wiki/File:Internet_map_1024.jpg
 

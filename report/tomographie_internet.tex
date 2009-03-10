@@ -5,20 +5,23 @@
 \subsection{Tomographie de l'Internet inter-domaine}
 
 \subsubsection{Pr\'esentation d'Internet}
+
 \par
 Aujourd'hui, le r\'eseau le plus connu de part le monde est Internet. Il est le fruit combin\'e de la recherche militaire et de l'inter\^et que lui ont ensuite port\'e les universitaires.
 \par
+%TODO Déplacer en Accroche d'introduction doit pas être là ce truc... mais gg pala ça a la classe pour l'accroche.
 Au d\'ebut utilis\'e pour relier entre eux les principaux sites militaires des \'Etats-Unis, puis les universit\'es, Internet relie aujourd'hui des millions de foyers de part le monde, mais que se cache-t-il r\'eellement derri\`ere cette appellation?
 \par
-Internet est en fait un r\'eseau de r\'eseaux. Des r\'eseaux ind\'ependants appartenant \`a des entreprises priv\'ees, ou des op\'erateurs t\'el\'ephoniques. Ces r\'eseaux ind\'ependants sont appel\'es AS, et lorsque l'on parle de repr\'esenter Internet sous forme de graphe, il s'agit en fait de repr\'esenter les liens entre les diff\'erents AS. Mais, avant de vouloir repr\'esenter les liens entre les AS, encore faut-il les connaitre.
+%TODO Fin deplacer
+Internet est en fait un r\'eseau de r\'eseaux. Des r\'eseaux ind\'ependants appartenant \`a des entreprises priv\'ees, ou à des op\'erateurs t\'el\'ephoniques. Ces r\'eseaux ind\'ependants sont appel\'es AS, et lorsque l'on parle de repr\'esenter Internet sous forme de graphe, il s'agit en fait de repr\'esenter les liens entre ces diff\'erents AS. Cependant, avant de vouloir repr\'esenter ces liens encore faut-il les connaitre.
 
 \subsubsection{Origine des donn\'ees}
 \par
 Il existe diff\'erents outils pour connaitre les liens entre les diff\'erents AS. Nous utilisons les donn\'ees du site \textit{www.caida.org} qui se basent sur trois outils pour obtenir leurs listes :
 \begin{description}
- \item[traceroute] c'est un outil permettant de capturer les adresses IP des diff\'erents \'equipements r\'eseau sur un chemin entre une source et une destination en utilisant des paquets sonde UDP ou ICMP,
- \item[BGP] il s'agit du protocole de routage inter-domaine utilis\'e pour le routage entre les AS. C'est un protocole qui utilise des tables de routage o\`u figurent des chemins d'AS, on peut ainsi avoir une idée des liens entre les diff\'erents AS,
- \item[WHOIS] c'est une collection de bases de donn\'ees contenant des informations utiles aux op\'erateurs t\'el\'ephoniques, malheureusement, ces bases de donn\'ees sont maintenues \`a la main et ne sont pas toujours tr\`es fiables. La plus sures est la RIPE WHOIS qui regroupe des informations collect\'ees par la RIPE (service d'information sur les R\'eseaux IP Europ\'eens).
+ \item[traceroute : ] outil permettant de capturer les adresses IP des diff\'erents \'equipements r\'eseau sur un chemin entre une source et une destination en utilisant des paquets sonde UDP ou ICMP.
+ \item[BGP : ] protocole de routage inter-domaine utilis\'e pour le routage entre les AS. Ses tables de routage contiennent des chemins d'AS, on peut ainsi avoir une idée des liens entre les diff\'erents AS.
+ \item[WHOIS : ] collection de bases de donn\'ees contenant des informations utiles aux op\'erateurs t\'el\'ephoniques. Malheureusement, ces bases de donn\'ees sont maintenues \`a la main et ne  sont donc pas toujours tr\`es fiables. La plus sûre est la RIPE WHOIS qui regroupe des informations collect\'ees par la RIPE (service d'information sur les R\'eseaux IP Europ\'eens).
 \end{description}
 \par
 Le croisement de ces diff\'erentes sources permet de faire correspondre des adresses IP avec des num\'eros d'AS et de savoir quels AS sont connect\'es avec quels autres et par quels types de liens.
