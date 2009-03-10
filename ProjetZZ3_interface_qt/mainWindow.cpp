@@ -128,12 +128,16 @@ void mainWindow::afficherPoint()
    }
    setNbSommets(coords.size());
 
+   
    //affichage des liens
+   int nbliens = 0;
    for(it2 = liens.begin(); it2 != liens.end() ; ++it2)
    {
 // std::cout << "line : " << "(" << coords[(*it2).first].x << ";" << coords[(*it2).first].y << ") (" << coords[(*it2).second].x << ";" << coords[(*it2).second].y << ")" << std::endl;
       drawLine(coords[(*it2).first].x, coords[(*it2).first].y, coords[(*it2).second].x, coords[(*it2).second].y);
+      nbliens++;
    }
+   setNbArete(nbliens / 2);
 }
 
 
@@ -175,7 +179,7 @@ void mainWindow::choixFichier()
    }
 
     try{
-      _calcul.afficher();
+     // _calcul.afficher();
       t = time(0);
       _controler->parse_file();
    }catch(ReaderException & e){
@@ -192,7 +196,7 @@ void mainWindow::choixFichier()
 
    _controler->displayCircle(1.5);
 
-   _calcul.cacher();
+   //_calcul.cacher();
 
    t = time(0) - t;
    setTemps(t);

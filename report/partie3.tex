@@ -32,4 +32,52 @@ Le menu comporte trois types d'entr\'ees :
  \item[About] permet l'affichage d'informations sur le programme.
 \end{description}
 
+\subsection{L'exp\'erience utilisateur}
+\par
+Lors du lancement du programme, l'utilisateur se retrouve devant un fen\^etre o\`u la zone d'affichage est vide et les compteurs de la zone de notification sontt tous \`a z\'ero comme c'est le cas sur la figure \ref{ecran_principal}.
+\par
+\`A ce stade l\`a, l'utilisation des options ne lui est d'aucune utilit\'e. Il peut aller dans le menu \textit{About} pour avoir des informations sur le programme, comme montrt\'e figure \ref{ecran_about}.
 
+\begin{figure}[ht]
+\centering
+ \fbox
+ {
+ \includegraphics[width=16cm]{./schema/capture_ecran_about.png}
+ }
+  \caption{\label{ecran_about}Informations sur le programme}
+\end{figure}
+
+\par
+Il peut aussi d\'ecider d'aller explorer le menu \textit{Fichier}, ce qui lui laissera le choix entre ouvrir un fichier de donn\'ees pour construire un graphe ou quitter le programme. Ce menu est illustr\'e figure \ref{ecran_fichier}.
+
+\begin{figure}[ht]
+\centering
+ \fbox
+ {
+ \includegraphics[width=16cm]{./schema/capture_ecran_fichier.png}
+ }
+  \caption{\label{ecran_fichier}Ecran principal du programme}
+\end{figure}
+
+S'il choisit d'ouvrir un fichier de donn\'ees, une nouvelle fen\^etre de navigation s'ouvre et lui demande de choisir son fichier, c'est la figure \ref{ecran_donnees}
+
+\begin{figure}[ht]
+\centering
+ \fbox
+ {
+ \includegraphics[width=16cm]{./schema/capture_ecran_donnees.png}
+ }
+  \caption{\label{ecran_donnees}Ecran principal du programme}
+\end{figure}
+
+L'utilisateur choisit un fichier de donn\'ees \`a ouvrir et le logiciel se charge d'afficher le graphe correspondant en organisant les sommets sur un polyg\^one r\'egulier \`a n c\^ot\'es.
+La barre de status est mise \`a jour avec des informations telles que le nombre de sommets, le nombre d'ar\^etes ou le nombre de clique. Il obtient ainsi un \'ecran comme on peut en voir un figure \ref{ecran_graph}
+
+\begin{figure}[ht]
+\centering
+ \fbox
+ {
+ \includegraphics[width=16cm]{./schema/capture_ecran_graph.png}
+ }
+  \caption{\label{ecran_graph}Ecran principal du programme}
+\end{figure}
