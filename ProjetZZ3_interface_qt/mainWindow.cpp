@@ -38,6 +38,7 @@ void mainWindow::initMenu()
 
    _optionMenu.addAction(_eraseAct);
    _optionMenu.addAction(_infoAct);
+   _optionMenu.addAction(_stubAct);
 
    _aboutMenu.addAction(_aboutAct);
 
@@ -99,6 +100,10 @@ void mainWindow::initAction()
    _infoAct = new QAction("Information about an As", this);
    _infoAct->setStatusTip("Give informations about a specific AS.");
    QObject::connect(_infoAct, SIGNAL(triggered()), this, SLOT(afficherInfoAs()));
+
+   _stubAct = new QAction("Display the graph without its stub", this);
+   _stubAct->setStatusTip("Display the graph without its stub.");
+   QObject::connect(_stubAct, SIGNAL(triggered()), this, SLOT(afficherNonStub()));
 }
 
 
@@ -225,4 +230,7 @@ void mainWindow::afficherInfoAs()
 
 }
 
-
+void mainWindow::afficherNonStub()
+{
+   
+}

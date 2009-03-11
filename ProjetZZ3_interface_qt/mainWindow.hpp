@@ -64,6 +64,7 @@ class mainWindow : public QMainWindow
       myThread * _infoThread;
 
       QAction * _openAct;
+      QAction * _stubAction;
       QAction * _quitAct;
       QAction * _aboutAct;
       QAction * _eraseAct;
@@ -93,6 +94,7 @@ class mainWindow : public QMainWindow
       void choixFichier();
       void eraseGraph();
       void afficherInfoAs();
+      void afficherNonStub();
 
 
 };
