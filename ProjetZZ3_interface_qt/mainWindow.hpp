@@ -66,13 +66,16 @@ class mainWindow : public QMainWindow
       myThread * _infoThread;
 
       QAction * _openAct;
-      QAction * _stubAction;
+      QAction * _stubAct;
       QAction * _quitAct;
       QAction * _aboutAct;
       QAction * _eraseAct;
       QAction * _infoAct;
 
       Controler * _controler;
+
+      void enableAction() { _stubAct->setEnabled(true); _infoAct->setEnabled(true); _eraseAct->setEnabled(true); }
+      void disableAction() { _stubAct->setEnabled(false); _infoAct->setEnabled(false); _eraseAct->setEnabled(false); }
 
 
    public :

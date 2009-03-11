@@ -92,6 +92,7 @@ void mainWindow::initAction()
    _eraseAct = new QAction("Erase Graphe", this);
    _eraseAct->setStatusTip("Erase the graph en re-initialize data structures");
    QObject::connect(_eraseAct, SIGNAL(triggered()), this, SLOT(eraseGraph()));
+   
 
    _aboutAct = new QAction("About program...", this);
    _aboutAct->setStatusTip("Give information about this program");
@@ -100,10 +101,14 @@ void mainWindow::initAction()
    _infoAct = new QAction("Information about an As", this);
    _infoAct->setStatusTip("Give informations about a specific AS.");
    QObject::connect(_infoAct, SIGNAL(triggered()), this, SLOT(afficherInfoAs()));
+   
 
    _stubAct = new QAction("Display the graph without its stub", this);
    _stubAct->setStatusTip("Display the graph without its stub.");
    QObject::connect(_stubAct, SIGNAL(triggered()), this, SLOT(afficherNonStub()));
+
+ 
+   disableAction();
 }
 
 
@@ -190,8 +195,7 @@ void mainWindow::choixFichier()
    }catch(ReaderException & e){
       if(e.getType()==ReaderException::CRITICAL){
 	 Logger::getInstance()->logMessage(e.display(),Logger::ERR_UNEXP);
-	 //TODO faire un popup
-         QMessageBox::warning(this, QString::fromStdString("Erreur Critique !"), QString::fromStdString(e.display()), QMessageBox::Ok, QMessageBox::NoButton);
+	 QMessageBox::warning(this, QString::fromStdString("Erreur Critique !"), QString::fromStdString(e.display()), QMessageBox::Ok, QMessageBox::NoButton);
       }else{
 	 Logger::getInstance()->logMessage(e.display(),Logger::ERR_UNEXP);
          QMessageBox::warning(this, QString::fromStdString("Attention !"), QString::fromStdString(e.display()), QMessageBox::Ok, QMessageBox::NoButton);
@@ -206,6 +210,7 @@ void mainWindow::choixFichier()
    t = time(0) - t;
    setTemps(t);
    afficherPoint();
+   enableAction();
 }
 
 void mainWindow::eraseGraph()
@@ -213,6 +218,7 @@ void mainWindow::eraseGraph()
    _graphe.eraseGraph();
    _status.setTitle("Status");
    razCompteur();
+   disableAction();
 }
 
 void mainWindow::razCompteur()
@@ -237,5 +243,26 @@ void mainWindow::afficherInfoAs()
 
 void mainWindow::afficherNonStub()
 {
+   QString tripletFile = QFileDialog::getOpenFileName(this,"Choose a triplet file...", "./", "All Files (*.*)");
+   
+
+   if(tripletFile.isEmpty())
+   {
+      Logger::getInstance()->logMessage("File error",Logger::ERR_UNEXP);
+      QMessageBox::warning(this, QString::fromStdString("file Error !"), QString::fromStdString("You must chose a triplet file to display graph without its stub !"), QMessageBox::Ok, QMessageBox::NoButton);
+   }
+   else
+   {
+      try{
+         _controler->load_triplet(tripletFile.toStdString());
+      }
+      catch(ReaderException & e)
+      {
+         Logger::getInstance()->logMessage(e.display(),Logger::ERR_UNEXP);
+         QMessageBox::warning(this, QString::fromStdString("Erreur Critique !"), QString::fromStdString(e.display()), QMessageBox::Ok, QMessageBox::NoButton);
+      }
+   }
    
 }
+
+
