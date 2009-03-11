@@ -19,6 +19,7 @@
 #include <QAction>
 #include <QFileDialog>
 #include <QString>
+#include <QInputDialog>
 
 #include <iostream>
 #include <sstream>
@@ -26,6 +27,7 @@
 #include <string>
 #include "aboutWindow.hpp"
 #include "grapheZone.hpp"
+#include "./myThread.hpp"
 
 #include "./controler/controler.hpp"
 #include "./graph/graph.hpp"
@@ -34,6 +36,8 @@
 
 #define X 800
 #define Y 600
+
+class dialog;
 
 class mainWindow : public QMainWindow
 {
@@ -57,16 +61,19 @@ class mainWindow : public QMainWindow
       QLabel _labeltps;
       QString _datafile; //conversion en std::string via toStdString()
       aboutWindow _about;
+      myThread * _infoThread;
 
       QAction * _openAct;
       QAction * _quitAct;
       QAction * _aboutAct;
       QAction * _eraseAct;
+      QAction * _infoAct;
 
       Controler * _controler;
 
 
    public :
+      mainWindow() {}
       void init();
       void initAction();
       void initMenu();
@@ -85,6 +92,7 @@ class mainWindow : public QMainWindow
       void afficherAbout();
       void choixFichier();
       void eraseGraph();
+      void afficherInfoAs();
 
 
 };

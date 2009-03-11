@@ -6,6 +6,7 @@ void mainWindow::init()
    QVBoxLayout * vlayout = new QVBoxLayout();
    _controler = NULL;
 //    _graphe = new QLabel(&_fenetre);
+   _infoThread = new myThread();
 
    initStatus();
    initAction();
@@ -36,6 +37,7 @@ void mainWindow::initMenu()
    _fileMenu.addAction(_quitAct);
 
    _optionMenu.addAction(_eraseAct);
+   _optionMenu.addAction(_infoAct);
 
    _aboutMenu.addAction(_aboutAct);
 
@@ -93,6 +95,10 @@ void mainWindow::initAction()
    _aboutAct = new QAction("About program...", this);
    _aboutAct->setStatusTip("Give information about this program");
    QObject::connect(_aboutAct, SIGNAL(triggered()), this, SLOT(afficherAbout()));
+
+   _infoAct = new QAction("Information about an As", this);
+   _infoAct->setStatusTip("Give informations about a specific AS.");
+   QObject::connect(_infoAct, SIGNAL(triggered()), this, SLOT(afficherInfoAs()));
 }
 
 
@@ -168,7 +174,7 @@ void mainWindow::choixFichier()
       _controler->change_file_name(_datafile.toStdString());
    }
 
-
+   _infoThread->start();
     try{
       t = time(0);
       _controler->parse_file();
@@ -182,7 +188,10 @@ void mainWindow::choixFichier()
          QMessageBox::warning(this, QString::fromStdString("Attention !"), QString::fromStdString(e.display()), QMessageBox::Ok, QMessageBox::NoButton);
       }
    }
+
+
    _controler->displayCircle(1.5);
+   _infoThread->exit();
 
    t = time(0) - t;
    setTemps(t);
@@ -202,6 +211,18 @@ void mainWindow::razCompteur()
    setNbSommets(0);
    setNbArete(0);
    setNbClique(0);
+}
+
+void mainWindow::afficherInfoAs()
+{
+   bool ok;
+   int value = -1;
+   std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
+//   QString text = QInputDialog::getText(this, "Information about an AS", "AS Number :", QLineEdit::Normal, "", &ok);
+   value = QInputDialog::getInteger(this, "Information about an AS", "AS Number : ", 0, 0, coords.size(), 1, &ok);    
+   if (ok && value > -1)
+       QMessageBox::information(this, QString::fromStdString("AS Information"), "You request information about the AS number " + QString::number(value), QMessageBox::Ok, QMessageBox::NoButton);
+
 }
 
 
