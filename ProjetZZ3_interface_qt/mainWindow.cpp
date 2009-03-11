@@ -36,9 +36,11 @@ void mainWindow::initMenu()
    _fileMenu.addAction(_openAct);
    _fileMenu.addAction(_quitAct);
 
-   _optionMenu.addAction(_eraseAct);
    _optionMenu.addAction(_infoAct);
    _optionMenu.addAction(_stubAct);
+   _optionMenu.addAction(_zoomAct);
+   _optionMenu.addSeparator();
+   _optionMenu.addAction(_eraseAct);
 
    _aboutMenu.addAction(_aboutAct);
 
@@ -103,10 +105,13 @@ void mainWindow::initAction()
    QObject::connect(_infoAct, SIGNAL(triggered()), this, SLOT(afficherInfoAs()));
    
 
-   _stubAct = new QAction("Display the graph without its stub", this);
+   _stubAct = new QAction("Display without stub", this);
    _stubAct->setStatusTip("Display the graph without its stub.");
    QObject::connect(_stubAct, SIGNAL(triggered()), this, SLOT(afficherNonStub()));
 
+   _zoomAct = new QAction("Zoom", this);
+   _zoomAct->setStatusTip("Zoom on the neighborhood of a specific AS.");
+   QObject::connect(_zoomAct, SIGNAL(triggered()), this, SLOT(zoom()));
  
    disableAction();
 }
@@ -147,7 +152,7 @@ void mainWindow::afficherPoint()
       drawLine(coords[(*it2).first].x, coords[(*it2).first].y, coords[(*it2).second].x, coords[(*it2).second].y);
       nbliens++;
    }
-   setNbArete(nbliens / 2);
+   setNbArete(nbliens);
 }
 
 
@@ -234,7 +239,6 @@ void mainWindow::afficherInfoAs()
    bool ok;
    int value = -1;
    std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
-//   QString text = QInputDialog::getText(this, "Information about an AS", "AS Number :", QLineEdit::Normal, "", &ok);
    value = QInputDialog::getInteger(this, "Information about an AS", "AS Number : ", 0, 0, coords.size(), 1, &ok);    
    if (ok && value > -1)
        QMessageBox::information(this, QString::fromStdString("AS Information"), "You request information about the AS number " + QString::number(value), QMessageBox::Ok, QMessageBox::NoButton);
@@ -264,5 +268,71 @@ void mainWindow::afficherNonStub()
    }
    
 }
+
+void mainWindow::drawGraphTmp()
+{
+   std::map< vertex_descriptor , coordonnes> coords = _controler->get_position_tmp();
+   std::vector< std::pair<vertex_descriptor , vertex_descriptor> > liens = _controler->get_liens_tmp();
+   std::map< vertex_descriptor , coordonnes>::iterator it;
+   std::vector< std::pair<vertex_descriptor , vertex_descriptor> >::iterator it2;
+
+   _graphe.eraseGraph();
+
+std::cout << "dessin du graph tmp" << std::endl;
+   //affichage des points
+   for(it = coords.begin(); it != coords.end() ; ++it)
+   {
+      drawPoint(it->second.x, it->second.y);
+   }
+   setNbSommets(coords.size());
+
+   
+   //affichage des liens
+   int nbliens = 0;
+   for(it2 = liens.begin(); it2 != liens.end() ; ++it2)
+   {
+      drawLine(coords[(*it2).first].x, coords[(*it2).first].y, coords[(*it2).second].x, coords[(*it2).second].y);
+      nbliens++;
+   }
+   setNbArete(nbliens);
+
+std::cout << "fin de dessin du graph tmp avec : " << nbliens << " liens." << std::endl;
+}   
+
+void mainWindow::zoom()
+{
+   //on demande à l'utilisateur l'AS sur lequel il veut zoomer.
+   bool ok;
+   int value = -1;
+   double t;
+   std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
+
+   value = QInputDialog::getInteger(this, "Zoom on AS number ?", "AS Number : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);
+
+   if (ok && value > -1)
+   {
+      int l = _controler->findAS(value);  
+
+      if( l > -1)
+      {
+         t = time(0);
+         _controler->getFirstNeighbors(value);
+         t = t - time(0);
+         setTemps(t);
+
+         drawGraphTmp();
+      }
+      else
+      {
+         QMessageBox::warning(this, QString::fromStdString("Zoom"), "Bad request : AS number " + QString::number(value) + " not in the graph !", QMessageBox::Ok, QMessageBox::NoButton);
+      }
+
+   }
+   else
+   {
+    QMessageBox::warning(this, QString::fromStdString("Zoom"), "Bad request !" + QString::number(value), QMessageBox::Ok, QMessageBox::NoButton);
+   }   
+}
+
 
 

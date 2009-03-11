@@ -71,11 +71,12 @@ class mainWindow : public QMainWindow
       QAction * _aboutAct;
       QAction * _eraseAct;
       QAction * _infoAct;
+      QAction * _zoomAct;
 
       Controler * _controler;
 
-      void enableAction() { _stubAct->setEnabled(true); _infoAct->setEnabled(true); _eraseAct->setEnabled(true); }
-      void disableAction() { _stubAct->setEnabled(false); _infoAct->setEnabled(false); _eraseAct->setEnabled(false); }
+      void enableAction() { _stubAct->setEnabled(true); _infoAct->setEnabled(true); _eraseAct->setEnabled(true); _zoomAct->setEnabled(true); }
+      void disableAction() { _stubAct->setEnabled(false); _infoAct->setEnabled(false); _eraseAct->setEnabled(false); _zoomAct->setEnabled(false); }
 
 
    public :
@@ -93,6 +94,7 @@ class mainWindow : public QMainWindow
       inline void setNbClique(int n) { _nbclique.setText(QString::number(n)); }
       void razCompteur();
       void afficherPoint();
+      void drawGraphTmp();
 
    public slots :
       void afficherAbout();
@@ -100,7 +102,7 @@ class mainWindow : public QMainWindow
       void eraseGraph();
       void afficherInfoAs();
       void afficherNonStub();
-
+      void zoom();
 
 };
 

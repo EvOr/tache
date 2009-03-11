@@ -335,4 +335,82 @@ Graph & Controler::getGraphAsNumSup(int i)
    return g2;
 }
 
+Graph & Controler::getFirstNeighbors(int i)
+{
+   Graph g2;
+   Graph::edge_iterator it,end;
+   edge_descriptor e;
+   bool found;
+   int k = 0;
+
+
+   //ajout de l'AS
+   Graph::vertex_descriptor myVertex = findAS(i);
+   Graph::vertex_descriptor v1 = boost::add_vertex(g2);
+   //mise a jour infos pour nouveau sommet
+   g2[v1].asn = graph[myVertex].asn;
+   g2[v1].is_transit = graph[myVertex].is_transit;
+
+   for( boost::tie ( it,end)  = boost::edges( graph ); it != end; ++it)
+   {
+      edge_descriptor edge = *it;
+      vertex_descriptor source = boost::source(edge,graph);
+      vertex_descriptor target = boost::target(edge,graph);     
+ 
+      if(graph[source].asn == i)
+      {
+         //ajout du sommet
+k++;
+         Graph::vertex_descriptor v2 = boost::add_vertex(g2);
+         g2[v2].asn = graph[source].asn;
+         g2[v2].is_transit = graph[source].is_transit;
+         //ajout du lien
+	      boost::tie(e,found) = boost::add_edge( v1, v2, g2);
+	      g2[e].link_type = graph[edge].link_type;
+	      g2[e].weight = graph[edge].weight;
+      }
+      else if(graph[target].asn == i)
+      {
+k++;
+         //ajout du sommet
+         Graph::vertex_descriptor v2 = boost::add_vertex(g2);
+         g2[v2].asn = graph[source].asn;
+         g2[v2].is_transit = graph[source].is_transit;
+         //ajout du lien
+	      boost::tie(e,found) = boost::add_edge( v2, v1, g2);
+	      g2[e].link_type = graph[edge].link_type;
+	      g2[e].weight = graph[edge].weight;
+      }
+   }
+
+   //on remplit ensuite le tableau de coordonnées temporaires
+   circle_graph_layout( g2, position_tmp, 1.5);
+std::cout << "graphe temporaire a : " << k << " sommets." << std::endl;
+   return g2;
+
+}
+
+Graph::vertex_descriptor Controler::findAS(int i)
+{
+   boost::graph_traits<Graph>::vertex_iterator vit, vend;
+   Graph::vertex_descriptor ret = -1;
+
+   for( boost::tie ( vit,vend)  = boost::vertices( graph ); vit != vend; ++vit)
+   {
+      //Graph::vertex_descriptor vertex = *vit;
+      if(graph[*vit].asn == i)
+      {
+         //std::cout << "trouve" << std::endl;
+         ret = *vit;
+         break;
+      }
+   }
+
+   return ret;
+}
+
+int Controler::getNumberOfAs()
+{
+   return mescoords.size();
+}
 
