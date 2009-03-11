@@ -1,5 +1,4 @@
 \section{Développement du logiciel}
-\subsection{Décodeurs d'entrée}
 \subsection{Développement avec boost}
 La prise en main de \textit{Boost} a été la principale difficulté du projet. En effet, la documentation de \textit{Boost}, celle fournie avec la librairie et disponible sur le site officiel, ne ressemble en rien aux documentations de la stl ou de java... C'est d'autant plus difficile que la philosophie de développement de \boost est assez éloignée de ce que nous connaissions juqu'alors et finalement assez éloignée de la programmation objet : la plupart des méthodes que nous utilisons sont en fait des fonctions.
 
@@ -13,6 +12,103 @@ Tout au long du projet, la méthode la plus efficace pour avancer lorsque nous b
 \subsection{D\'eveloppement avec Qt}
 \input{part4_lib_graph}
 
+\subsection{Décodeurs d'entrée}
+Le fichier contenant les liens entre les AS est une succession de lignes ``\verb|AS1 AS2 TYPE|'' représentant le lien entre l'AS1 et l'AS2 et son type. Or nous nous ne souhaitons conserver que le numéro de l'AS. C'est à dire une ligne de type ``\verb|1 2 TYPE|''. C'est pourquoi, la première étape lorsque nous récupérons un fichier de données est d'effectuer un traitement à l'aide de sed (figure \ref{sed}) afin de retirer les ``\verb|AS|'' et d'accélérer les traitements lors de la lecture du fichier. 
+\begin{figure}[ht]
+   \begin{center}
+      \begin{tabular}{l}
+         \hline
+         \verb|sed -i -e "s/AS//g" nom_du_fichier|\\
+         \hline
+      \end{tabular}
+   \end{center}
+\caption{\label{sed} Ligne de commande du traitement de sed}
+\end{figure}
+
+L'étape de lecture à proprement parler peut commencer une fois ce pré-traitement effectué par l'utilisateur. 
+
+\subsubsection{Méthode C++}
+
+Au début du projet, nous avons utilisé une méthode ``C++'' classique pour lire et parser le fichier. 
+Représenté en figure \ref{parse_cpp}, le parsing dit classique est beaucoup moins performant que le parsing de boost, en outre il augmente considérablement le nombre de \verb|if| imbriqués ce qui rend le code plus difficile à lire, il faut ajouter autant de \verb|else| pour la gestion des erreurs qui a été retirée du présent rapport. L'avantage de cette méthode est que nous récupérons directement \verb|asn1| et \verb|asn2| les numéros des AS correspondant à la ligne du fichier en cours de lecture en tant qu'entier.
+
+\begin{figure}[ht]
+   \begin{center}
+      \begin{tabular}{l}
+        \hline 
+        \verb|std::ifstream file(filename.c_str());|\\
+	\verb|if( file.is_open() )|\\
+	\verb|{|\\
+   	\verb|    while(std::getline(file, line)) {|\\
+      	\verb|    std::istringstream lineStream(line);|\\
+      	\verb|    if(lineStream >> tempString) {|\\
+        \verb|        std::istringstream in1(tempString);|\\
+        \verb|        if(lineStream >> tempString) {|\\
+        \verb|            std::istringstream in2(tempString);|\\
+        \verb|            //Si tout rentre dans chacun des conteneurs...|\\
+        \verb|            if(lineStream >> linkType && in1 >> asn1 && in2 >> asn2) {|\\
+        \verb|                //TRAITEMENT|\\
+        \verb|           }|\\
+        \verb|        }|\\
+        \verb|    }|\\
+        \verb|}|\\
+        \hline
+      \end{tabular}
+   \end{center}
+\caption{\label{parse_cpp} Exemple de parsing de fichier en C++ classique}
+\end{figure}
+
+
+
+
+\subsubsection{Méthode Boost}
+Le parsin avec boost utilise un tokenizer et et un char_separator qui permet de décrire à boost comment parser la chaine qu'il reçoit en entrée. Représentée en figure \ref{parse_boost}, Cette méthode de découper les fichiers est beaucoup plus performantes que celle du C++ classique. Si la ligne n'est pas conformé à nos critères la taille du vector de string est différente de 3 et nous retournons une erreur (ici non représentée). 
+
+Contrairement à la version C++, si la ligne est découpée correctment, nous ne récupérons pas directement des entiers. Heureusement boost dispose d'outils de ``cast'' très performant, qui permettent notamment de ``caster'' un \verb|string| en \verb|int| (figure \ref{cast_boost}) sans pertes de performances visibles. A titre d'exemple, la méthode C++ classique prenait environ 8 secondes à s'exécuter, tandis que celle de boost ne prend plus que 4 secondes, les deux mesures contiennent les traitements et ont été exécuter sur un fichier d'environ 150000 lignes...
+
+\begin{figure}[ht]
+   \begin{center}
+      \begin{tabular}{l}
+        \hline 
+ 	\verb|typedef boost::tokenizer< boost::char_separator<char> > tokenizer;|\\
+ 	\verb|boost::char_separator<char> sep("\t");|\\
+	\verb||\\
+	\verb|std::ifstream file(filename.c_str());|\\
+	\verb|if( file.is_open() )|\\
+	\verb|{|\\
+	\verb|    while(std::getline(file, line)) {|\\
+	\verb|        tokenizer tokens(line, sep);|\\
+	\verb|        std::vector<std::string> parts(tokens.begin(), tokens.end());|\\
+	\verb|        if( parts.size() == 3)|\\
+	\verb|        {|\\
+	\verb|            //TRAITEMENT|\\
+	\verb|        }|\\
+	\verb|    }|\\
+	\verb|}|\\
+        \hline
+      \end{tabular}
+   \end{center}
+\caption{\label{parse_boost} Exemple de parsing de fichier en C++ avec boost}
+\end{figure}
+ 
+
+\begin{figure}[ht]
+   \begin{center}
+      \begin{tabular}{l}
+        \hline 
+ 	\verb|asn1 = boost::lexical_cast<int>(parts.at(0));|\\
+        \hline
+      \end{tabular}
+   \end{center}
+\caption{\label{cast_boost} Exemple de ``cast'' avec les outils de boost}
+\end{figure}
+
+\subsubsection{Gestion des erreurs}
+
+La gestion des erreurs lors du parsing du fichier se fait de manière un peu particulière. Afin de rendre le bloc parsing de fichier totalement indépendant du reste, nous avons choisi d'utiliser un simple booléen qui indique si une erreur s'est produite à cause de la lecture d'une ligne, dans le cas où l'erreur est critique (fichier inexistant, illisible ou toutes autres raisons de ce type), un autre type d'erreur est détectée. 
+
+Pour signaler, l'erreur à la couche supérieure (le controlleur), nous remontons une exception \verb|ReaderException| de nature \verb|CRITICAL| n'importe quand ou \verb|NON_BLOCKING| une fois le graphe rempli de maniètre à empêcher ou non l'exécution de la suite du code.
+
 \subsection{Expérimentation sur le code}
 Notre connaissance grandissante des librairies utilisées nous a permis de pratiquer diverses expérimentations sur nos algorithmes, traitements et affichages.
 
@@ -25,6 +121,13 @@ En revanche, cette méthode présupposait que le fichier était ordonné et bien
 \par Notre tuteur de projet, Monsieur Meulle, nous a fourni un nouveau fichier, avec des relations entre AS sous la forme de triplets, permettant d'identifier tr\`es rapidement les AS feuilles.
 Les liens entre AS sont plac\'ees sous la forme de triplets : {AS1, AS2, AS3} signifiant que pour joindre l'AS3, l'AS1 a du passer par l'AS2. Les AS du milieu sont donc forcément des AS de transit, les AS stubs sont alors facilement identifiables comme \'etant tous les autres... 
 
-C'est à ce moment-là que le structure actuelle du programme a été clairement établie, nous ne stockons qu'un seul graphe dans le controlleur et celui-ci réalise un traitement de création d'un graphe spécifique en fonction de ce qui lui ait demandé. Un fonctionnement proche d'une base de données décrit en partie 3.
+C'est à ce moment-là que le structure actuelle du programme a été clairement établie, nous ne stockons qu'un seul graphe dans le controlleur et celui-ci réalise un traitement de création d'un graphe spécifique en fonction de ce qui lui ait demandé. Un fonctionnement proche d'une base de données décrit en \ref{mvcText}.
 
 
+\begin{figure}[!ht]
+\begin{center}
+        \includegraphics[width=0.7\textwidth]{./schema/file_parser.png}
+\caption{Le fonctionnement du file\_parser (EVOR dit : ``Sch\'ema useless'' }
+\label{file_parser}
+\end{center}
+\end{figure}
