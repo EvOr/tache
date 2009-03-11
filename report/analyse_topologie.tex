@@ -10,21 +10,21 @@ Pour analyser la topologie de l'Internet \`a partir du graphe le repr\'esentant,
 
 \subsubsection{Les cliques}
 
-Tout d'abord, la recherche des cliques permet d'identifier les endroits o\`u les AS sont reli\'es deux \` deux entre eux, un de ces ensembles est constitu\'e des op\'erateurs \textit{Tiers One}. On peut aussi retrouver localement d'autres cliques.
+Tout d'abord, la recherche des cliques permet d'identifier les endroits o\`u les AS sont tous reli\'es deux \`a deux, un de ces ensembles est constitu\'e des op\'erateurs du \textit{Tier One}. On retrouve aussi d'autres cliques localement.
 %TODO peut etre a compléter
 
 \subsubsection{La centralit\'e}
 
 \par
-Ensuite, comme expliqu\'e dans la pr\'esentation de la topologie de l'Internet, le graphe a une structure connexe, c'est-\`a-dire que si on prend deux sommets quelconques, il existe un chemin entre ces deux sommets.
+Ensuite, comme il a été expliqu\'e lors de la pr\'esentation de la topologie de l'Internet, le graphe a une structure connexe, c'est-\`a-dire que si l'on prend deux sommets quelconques, il existe un chemin entre ces deux sommets.
 Ce chemin passe par un certain nombre d'ar\^etes, et il est int\'eressant de savoir si telle ou telle ar\^ete est plus importante.
 \par
-Prenons un exemple : deux AS A et B qui sont reli\'es entre eux. Il y a donc une ar\^ete sur notre graphe entre A et B. Supposons qu'il n'existe pas d'autre lien que celui entre A et B pour que les clients de A joignent les clients de B. Ce lien a donc une importance capitale car quand on prend l'ensemble des routes partant des clients de A vers les clients de B, elles passent par ce lien.
+Prenons l'exemple de deux AS A et B reli\'es entre eux. Nous savons qu'il existe une ar\^ete sur notre graphe entre A et B, supposons alors qu'il n'existe pas d'autres liens que celui entre A et B pour que les clients de A puissent joindre les clients de B. Ce lien revet donc une importance capitale puisque l'ensemble des routes partant des clients de A vers les clients de B passent par celui-ci.
 \par
-Si on d\'ecide d'assigner des poids aux liens ou aux sommets, on souhaite alors tenir compte de leur importance dans la structure globale.
+Il nous faut alors assigner des poids aux liens ou aux sommets afin de tenir compte de leur importance dans la structure globale.
 
 \par
-En th\'eorie des graphes, il existe un outil permettant dans un graphe d'\'evaluer l'importance des sommets ou des ar\^etes, il s'agit de la \textit{centralit\'e}. La centralit\'e permet de calcul un ratio pour une ar\^ete ou pour un sommet, celui du nombre de chemins passant par cette ar\^ete ou ce sommet par rapport au nombre de chemin total dans le graphe. Plus ce ratio est important plus le noeud ou l'ar\^ete est vital pour garder le caract\`ere connexe du graphe. La centralit\'e se calcul gr\^ace \`a la formule suivante :
+En th\'eorie des graphes, il existe un outil permettant d'\'evaluer l'importance des sommets ou des ar\^etes d'un graphe : la \textit{centralit\'e}. La centralit\'e permet de calculer le ratio du nombre de chemins passant par cette ar\^ete ou ce sommet par rapport au nombre de chemins total dans le graphe. Plus ce ratio est important plus le noeud ou l'ar\^ete est vital pour garder le caract\`ere connexe du graphe. La centralit\'e se calcule gr\^ace \`a la formule suivante :
 
 \begin{figure}[!ht]
    \centering

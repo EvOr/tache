@@ -28,10 +28,12 @@ class aboutWindow : public QObject
       QPushButton * _quit;
 
    public :
-      void init()
+      void init(QWidget * parent)
       {
          QVBoxLayout * vlayout = new QVBoxLayout();
-         _fenetre.setGeometry(100,100,200,250);
+         _fenetre.setParent(parent);
+         _fenetre.setWindowFlags(Qt::Window);
+         //_fenetre.setGeometry(100,100,200,250);
          _fenetre.setWindowTitle("About program...");
          _fenetre.setMinimumSize(300, 75);
 
@@ -44,7 +46,9 @@ class aboutWindow : public QObject
          vlayout->addWidget(_quit);
 
          _fenetre.setLayout(vlayout);
-         _fenetre.resize(300,75);
+         _fenetre.resize(350,75);
+
+         _fenetre.hide();
       }
 
       void setText(std::string text) { _desc.setText(QString::fromStdString(text)); }

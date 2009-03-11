@@ -11,16 +11,19 @@
 
 #include "./calculWindow.hpp"
 
-class mainWindow;
 
 class myThread : public QThread
 {
    //Q_OBJECT
 
+   protected:
+      calculWindow _fenetre;
+
    public:
-      myThread() {}
-      
+      myThread(QWidget * parent) { init(parent); QThread::start(); }
+      void init(QWidget * parent);      
       void run();
+      //void exit();
 };
 
 

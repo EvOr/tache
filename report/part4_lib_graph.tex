@@ -1,0 +1,47 @@
+\par
+Le developpement avec Qt s'est fait \`a l'aide de la documentation tr\`es fournie du site de \textit{TrollTeech}. Celui propose un aper\c cu des diff\'erentes classes, ainsi qu'un certain nombre d'exemples pour aider les d\'eveloppeur.
+\par
+La principale difficult\'e de d\'evelopper avec Qt r\'eside dans la compr\'ehension des slots et signaux. Ceux sont eux qui font toute l'interactivit\'e d'une interface graphique. Pour rendre op\'erationnelle une entr\'ee dans un menu, il faut connecter l'action qu'elle repr\'esente au slot correspondant dans son objet parent.
+\par
+Notre fen\^etre principale contient donc les d\'eclarations des actions correspondant aux diff\'erentes entr\'es des menus, par exemple sur la figure \ref{exemple_action_qt}, on voit la d\'eclaration de l'action permettant de quitter le programme en fermant toutes les fen\^etres.
+\begin{figure}[ht]
+   \begin{center}
+      \begin{tabular}{l}
+         \hline
+         \verb|QAction * _quitAct;|\\
+         \hline
+      \end{tabular}
+   \end{center}
+\caption{\label{exemple_action_qt} Exemple de d\'eclaration d'action Qt}
+\end{figure}
+Ensuite, lors de l'initialiation de la fen\^etre, il faut associer les 
+entr\'ees du menu \`a une action, ce qui est pr\'esent\'e figure \ref{exemple_menu_qt}.
+
+\begin{figure}[ht]
+   \begin{center}
+      \begin{tabular}{l}
+         \hline
+         \verb|_fileMenu.addAction(_quitAct);|\\
+         \hline
+      \end{tabular}
+   \end{center}
+\caption{\label{exemple_menu_qt} Exemple de d'association d'action Qt \`a une entr\'e d'un menu}
+\end{figure}
+
+Enfin, il faut associer l'action \`a un slot d'un des \'el\'ement du programme si on veut que cela fasse quelque chose lorsque l'on clique sur l'entr\'e du menu. Figure \ref{exemple_initAction_qt}, on peut voir que l'action est d'abord cr\'e\'ee avec un nom, et attach\'ee \`a un objet, ici \textit{this} fait r\'ef\'erence \`a la fen\^etre principale. On assigne ensuite un raccourcis et une description \`a l'action. Finalement, l'\'etape la plus importante, on connecte l'action au slot de fermeture de la fen\^etre principale.
+
+\begin{figure}[ht]
+   \begin{center}
+      \begin{tabular}{l}
+         \hline
+         \verb|_quitAct = new QAction("Quit", this);|\\
+         \verb|_quitAct->setShortcut(tr("Ctrl+Q"));|\\
+         \verb|_quitAct->setStatusTip("Quit the program");|\\
+         \verb|QObject::connect(_quitAct, SIGNAL(triggered()), this, SLOT(close()));|\\
+         \hline
+      \end{tabular}
+   \end{center}
+\caption{\label{exemple_initAction_qt} Exemple d'initialisation d'un action Qt}
+\end{figure}
+
+Ces \'etapes doivent \^etre r\'ealis\'ees pour toutes les actions. Il est \`a noter que l'on peut d\'eclarer \`a volont\'e des slots dans un objet. Ces slots sont en r\'ealit\'es des fonctions qui ne sont d\'eclar\'ee ni en \textit{public}, \textit{private} ou \textit{protected} mais en tant que \textit{slots} (qui peuvent \^etre publics ou priv\'es). On peut ainsi cr\'eer des fonctionalit\'es comme bon nous semble pour le programme.

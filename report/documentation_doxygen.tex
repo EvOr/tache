@@ -1,0 +1,28 @@
+\par
+Doxygen est un outil permettant la génération de documentation à propos de code, il est utilisable avec la plupart des langages de programmation actuels (C/C++, Java, python, Groovy). Son nom est la contraction de \textit{dox} (pour docs, de l'anglais documents) et \textit{gen} (de l'anglais generator). Il a été en grande partie \'ecrit par Dimitri van Heesch. La documentation g\'en\'er\'ee peut \^etre soit en HTML, soit en \LaTeX.
+
+\par Il s'appuie pour cela sur un certains nombre de commentaires \'ecrits dans le code avec une syntaxe sp\'ecifique (voir figure \ref{exemple_doxygen}). Il se base aussi sur une analyse du code qui lui permet d'extraire les prototypes des fonctions, des classes, les fichiers inclus et la documentation relative à ceux-ci.
+
+\par Il peut ensuite repr\'esenter leur hi\'erarchie sous forme de sch\'emas UML. Il crée ensuite une documentation homogène permettant de naviguer à partir d'un index vers les différentes pages de documentation créées.
+
+	La figure 3 nous montre comment définir une br\`eve description du r\^ole de la méthodes, des informations sur ses diff\'erents param\`etres et sur ce qu'elle retourne.
+\begin{figure}[ht]
+
+
+        \begin{center}
+                \begin{tabular}{l}
+                        \hline
+                        \verb|\brief Ajoute une arete|\\
+                        \verb|\param i1 index du premier point|\\
+                        \verb|\param i2 index du deuxieme point} |\\
+                        \verb|\param linkType descripteur du type d'arete|\\
+			\verb|\param found booleen resultat |\\
+			\verb|\param e edge_descriptor de l'arete|\\
+			\verb|\param g reference sur le Graph ou il faut ajouter la relation|\\
+			\verb|\return le type de point|\\
+                        \hline
+                \end{tabular}
+        \end{center}
+
+\caption{\label{exemple_doxygen} Exemple de syntaxe Doxygen}
+\end{figure}
