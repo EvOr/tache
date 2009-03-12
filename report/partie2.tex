@@ -4,7 +4,7 @@ Le but du projet est de produire un logiciel qui permette la visualisation de la
 \subsubsection{Objectifs de l'application}
 \label{obj}
 \paragraph{Analyse de la topologie}
-Construire un graphe contenant la topologie d'internet, et permettant son analyse en se servant des méthodes disponibles dans la librairie graphe de \textit{Boost}.
+Construire un graphe contenant la topologie d'internet et permettant son analyse en se servant des méthodes disponibles dans la librairie graphe de \textit{Boost}.
 
 \paragraph{Affichage de la topologie}
 Réaliser une interface agréable dans la librairie de notre choix et lui permettre d'afficher l'intégralité de l'analyse réalisée.
@@ -16,7 +16,7 @@ Au delà, de l'objectif de réalisation d'une application et de l'organisation q
 \paragraph{}L'objectif principal est bien évidemment d'apprendre à maîtriser la librairie boost de C++, principalement sa partie sur les graphs. Il était aussi question d'approfondir notre connaissance de la topologie d'internet.
 
 \paragraph{Objectifs personnels suppl\'ementaires : }
-\paragraph{} De plus, nous nous sommes nous-même fixés des objectifs. En effet, l'utilisation d'une librairie graphique pour représenter la topologie d'internet était nécessaire mais son choix nous était réservé. Nous avons choisi d'utiliser Qt, et ce pour deux raisons, la première est que nous voulions approfondir le cours sur Qt que nous allions avoir dans le cadre de nos études à l'ISIMA.
+\paragraph{} En outre, nous nous sommes nous-même fixés des objectifs. En effet, l'utilisation d'une librairie graphique pour représenter la topologie d'internet était nécessaire mais son choix nous était réservé. Nous avons choisi d'utiliser Qt, et ce pour deux raisons. La première est que nous voulions approfondir le cours sur Qt que nous allions avoir dans le cadre de nos études à l'ISIMA.
 
 La seconde est que, sous la pression de Nokia, cette librairie est récemment passé sous licence LGPL ce qui veut dire que les développeurs d'applications commerciales vont pouvoir développer gratuitement autour de Qt (sans payer les très onéreuses licences jusqu'à présent nécessaires pour vendre quelque chose). Il est fort probable que Qt prennent beaucoup plus d'ampleur dans les prochaines années.
 
@@ -30,7 +30,7 @@ En contre-partie, cela demande une bonne organisation. En effet, quelques soient
 
 \subsubsection{Méthode de travail}
 
-Afin d'optimiser la production, nous avons adopté une méthode de développement par itération. En fait, nous nous sommes répartis les tâches selon des fonctionnalités ``élémentaires'', par exemple afficher le graph avec Circle Graph Layout ou réaliser l'extension du file\_parser permettant de trouver les AS de transit. Après avoir isolé l'ensemble des fonctionnalités nécessaires d'une semaine à l'autre, nous affectons des priorités aux une est aux autres afin de pouvoir répartir les tâches entre les différents membres du binôme.
+Afin d'optimiser la production, nous avons adopté une méthode de développement par itération. En fait, nous nous sommes répartis les tâches selon des fonctionnalités ``élémentaires'', par exemple afficher le graph avec Circle Graph Layout ou réaliser l'extension du file\_parser permettant de trouver les AS de transit. Après avoir isolé l'ensemble des fonctionnalités nécessaires d'une semaine à l'autre, nous affectons des priorités aux une est aux autres afin de pouvoir mieux répartir les tâches entre les différents membres du binôme.
 
 \subsubsection{La librairie graph de boost}
 \input{presentation_boost}
@@ -147,4 +147,13 @@ Ces objets possèdent un certain nombre d'attributs nécessaires au bon fonction
 \end{center}
 \end{figure}
 
-\subsubsection{Première idée de représentation}
+\subsubsection{Représentation idéale}
+Idéalement la représentation que nous souhaitions obtenir de vait tendre vers celle de la figure \ref{ideal}. 
+\begin{figure}[H]
+\begin{center}
+        \includegraphics[width=0.8\textwidth]{./schema/Internet_map_1024_transparent.png}
+\caption{Représenation idéale d'internet avec le programme}
+\label{ideal}
+\end{center}
+\end{figure}
+

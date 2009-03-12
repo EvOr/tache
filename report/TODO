@@ -1,22 +1,13 @@
-Partie I :
+Partie II :
+Cliques, complet ?
 
-Développer un peu plus la partie sur la topologie et la tomographie.
-Approfondir, mettre en rapport avec le projet.
+Partie III : 
+Rentrer dans le détails des fonctionnalités :
+Centralité
+Truc de stubs
+Précisé pour IPv4/IPv6 vis à vis des données dont on dispoe
+Montre les limites du truc au niveau de ça entre autre.
+Affichage des informations sur un point 
+Et faut détailler l'affichage du menu du haut...
 
-Parler du document Three View of The Internet Topology
-
-Partie II: => OK
-Voir ce que tu peux dire des objectifs que j'ai écris et si tu vois des trucs à rajouter
-Voir ce que tu peux dire vis à vis du déroulement du projet
-Partie III:
-
-Caractéristiques d'internet retrouvées dans notre application
-
-Partie IV : => OK
-Développement avec Qt
-	montrer la structure d'un objet Qt avec du code, le truc des signals et des slots
-
-Description des problèmes rencontrés  => OK 
-	Thread Qt, Kamada Kawai pourquoi ne pas afficher le prototype de la fonction avec boost, et l'appel qu'il faut en faire, expliquer aussi la difficulté d'analyser la documentation rebondir sur ce qui est dit vis à vis de la difficulté de développer avec boost
-
-
+Partie IV :

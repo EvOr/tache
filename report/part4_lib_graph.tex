@@ -1,7 +1,7 @@
 \par
 Le developpement avec Qt s'est fait \`a l'aide de la documentation tr\`es fournie du site de \textit{TrollTeech}. Celui propose un aper\c cu des diff\'erentes classes, ainsi qu'un certain nombre d'exemples pour aider les d\'eveloppeur.
 \par
-La principale difficult\'e de d\'evelopper avec Qt r\'eside dans la compr\'ehension des slots et signaux. Ceux sont eux qui font toute l'interactivit\'e d'une interface graphique. Pour rendre op\'erationnelle une entr\'ee dans un menu, il faut connecter l'action qu'elle repr\'esente au slot correspondant dans son objet parent.
+La principale difficult\'e de d\'evelopper avec Qt r\'eside dans la compr\'ehension des slots et signaux. Ce sont eux qui font toute l'interactivit\'e d'une interface graphique. Pour rendre op\'erationnelle une entr\'ee dans un menu, il faut connecter l'action qu'elle repr\'esente au slot correspondant dans son objet parent.
 \par
 Notre fen\^etre principale contient donc les d\'eclarations des actions correspondant aux diff\'erentes entr\'es des menus, par exemple sur la figure \ref{exemple_action_qt}, on voit la d\'eclaration de l'action permettant de quitter le programme en fermant toutes les fen\^etres.
 \begin{figure}[H]
@@ -47,28 +47,31 @@ Enfin, il faut associer l'action \`a un slot d'un des \'el\'ement du programme s
 Ces \'etapes doivent \^etre r\'ealis\'ees pour toutes les actions. Il est \`a noter que l'on peut d\'eclarer \`a volont\'e des slots dans un objet. Ces slots sont en r\'ealit\'es des fonctions qui ne sont d\'eclar\'ee ni en \textit{public}, \textit{private} ou \textit{protected} mais en tant que \textit{slots} (qui peuvent \^etre publics ou priv\'es). On peut ainsi cr\'eer des fonctionalit\'es comme bon nous semble pour le programme.
 
 \par
-Lors de la cr\'eation d'un objet Qt, on utilise un macro : \textit{Q\_OBJECT} qui permet la gestion des slots et signaux au moment des diff\'erentes \'etapes de la compilation.
+Lors de la cr\'eation d'un objet Qt, on utilise un macro : \verb|Q_OBJECT| qui permet la gestion des slots et signaux au moment des diff\'erentes \'etapes de la compilation.
 
 \par
-Voici l'exemple de la classe \textit{mainWindow} de notre programme qui est la fen\^etre  principale de l'interface graphique :
+Voici l'exemple de la classe \verb|mainWindow| de notre programme qui est la fen\^etre  principale de l'interface graphique :
 
 \begin{figure}[H]
    \begin{center}
       \begin{tabular}{l}
          \hline
          \verb|public class mainWindow : public QMainWindow|\\
-         \verb|protected :|\\
-         \verb|...les attributs de la classe...|\\
-         \verb|public :|\\
-         \verb|...les méthodes publiques de la classe...|\\
-         \verb|public slots :|\\
-         \verb|...les slots publiques de la classe...|\\
+\verb|{|\\
+\verb|    Q_OBJECT|\\
+         \verb|    protected :|\\
+         \verb|        //...les attributs de la classe...|\\
+         \verb|    public :|\\
+         \verb|        //...les méthodes publiques de la classe...|\\
+         \verb|    public slots :|\\
+         \verb|        //...les slots publiques de la classe...|\\
+\verb|}|\\
          \hline
       \end{tabular}
    \end{center}
 \caption{\label{exemple_mainWindow_qt} Exemple d'un classe Qt}
 \end{figure}
 
-La classe mainWindow h\'erite de la classe QMainWindow de Qt qui est la classe pour les fen\^etres principales d'un programme dans laquelle on ajoute tous les \'el\'ements composant le programme (menu, zone de dessin, barre de statut) sous forme d'attributs de classe.
-Un certains nombre de m\'ethodes publiques sont d\'efinies pour int\'eragir avec ces diff\'erents \'el\'ements, par exemple : changer tel ou tel affichage dans la zone de dessins.
-Enfin, on retrouve un certain nombre de slots publiques qui correspondent aux actions r\'ealisables dans les menus. Ces slots sont des fonctions qui sont appel\'ees en r\'eponse \`a un clique de souris sur un menu ou un bouton.
+La classe mainWindow h\'erite de la classe QMainWindow de Qt qui est la classe pour les fen\^etres principales d'un programme dans laquelle, on ajoute tous les \'el\'ements composant le programme (menu, zone de dessin, barre de statut) sous forme d'attributs de classe.
+Un certains nombre de m\'ethodes publiques sont d\'efinies pour int\'eragir avec ces \'el\'ements, par exemple : changer tel ou tel affichage dans la zone de dessin.
+Enfin, un certain nombre de slots publiques correspondent aux actions r\'ealisables dans les menus. Ces slots sont des fonctions qui sont appel\'ees en r\'eponse \`a un clique de souris sur un menu ou un bouton.
