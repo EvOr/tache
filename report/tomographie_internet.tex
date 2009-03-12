@@ -13,7 +13,9 @@ Aujourd'hui, le r\'eseau le plus connu de part le monde est Internet. Il est le 
 Au d\'ebut utilis\'e pour relier entre eux les principaux sites militaires des \'Etats-Unis, puis les universit\'es, Internet relie aujourd'hui des millions de foyers de part le monde, mais que se cache-t-il r\'eellement derri\`ere cette appellation?
 \par
 %TODO Fin deplacer
-Internet est en fait un r\'eseau de r\'eseaux. Des r\'eseaux ind\'ependants appartenant \`a des entreprises priv\'ees, ou à des op\'erateurs t\'el\'ephoniques. Ces r\'eseaux ind\'ependants sont appel\'es AS, et lorsque l'on parle de repr\'esenter Internet sous forme de graphe, il s'agit en fait de repr\'esenter les liens entre ces diff\'erents AS. Cependant, avant de vouloir repr\'esenter ces liens encore faut-il les connaitre.
+Internet est en fait un r\'eseau de r\'eseaux. Des r\'eseaux ind\'ependants appartenant \`a des entreprises priv\'ees, des universit\'es ou à des op\'erateurs t\'el\'ephoniques. Ces r\'eseaux ind\'ependants sont appel\'es AS. Chaque r\'eseau est donc connect\'es \`a plusieurs autres r\'eseaux, et lorsque deux ordinateurs appartenant \`a des AS diff\'erents souhaitent communiquer, ils faut router les donner \`a travers Internet. Aucun des \'el\'ements ne connait la totalit\'e de la topologie de la totalit\'e du r\'eseau et les paquets sont dirig\'es suivant des r\`egles de routage locale \`a chaque AS. Dans ces conditions, certains liens sont plus critiques que d'autres.
+\par
+Lorsque l'on parle de repr\'esenter Internet sous forme de graphe, il s'agit en fait de repr\'esenter les liens entre les diff\'erents AS. Cependant, avant de vouloir repr\'esenter ces liens encore faut-il les connaitre.
 
 \subsubsection{Origine des donn\'ees}
 \par
@@ -28,10 +30,9 @@ Le croisement de ces diff\'erentes sources permet de faire correspondre des adre
 
 \subsubsection{Internet IPv4 et IPv6}
 \par
-Aujourd'hui, un changement majeur qui est en train de s'op\'erer dans les r\'eseaux est le passage de l'IPv4 \`a l'IPv6. En effet, si IPv4 permet l'utilisation d'un peu plus de quatre milliards d'adresses ($2^32$), IPv6 permet quant \`a lui d'utiliser $2^128$ adresses diff\'erentes, ce qui permet de combler les nouveaux besoins.
+Aujourd'hui, un changement majeur qui est en train de s'op\'erer dans les r\'eseaux est le passage de l'IPv4 \`a l'IPv6. En effet, si IPv4 permet l'utilisation d'un peu plus de quatre milliards d'adresses ($2^{32}$), IPv6 permet quant \`a lui d'utiliser $2^{128}$ adresses diff\'erentes, ce qui permet de combler les nouveaux besoins.
 \par
 La mise en place progressive de l'IPv6 se traduit au sein des grands r\'eseaux par une cohabitation entre les deux syst\`emes. On peut ainsi trouver des informations pour cr\'eer le graphe de topologie pour l'internet IPv4, et aussi pour l'internet IPv6.
-
-%TODO voir pour dire plus sur IPv6, il y aurait 1308 noeuds...
-
+\par
+Au cours de notre projet, nous avons successivement acc\`es aux donn\'ees de l'IPv4 puis de l'IPv6.
 % \end{document}

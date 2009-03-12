@@ -135,13 +135,17 @@ Pour signaler, l'erreur à la couche supérieure (le controlleur), nous remonton
 \subsection{Expérimentation sur le code}
 Notre connaissance grandissante des librairies utilisées nous a permis de pratiquer diverses expérimentations sur nos algorithmes, traitements et affichages.
 \subsubsection{Expérimentation avec Qt}
-\paragraph{A la recherche du Thread perdu\\}
-%TODO pala
+\paragraph{}
+Au cours de la premi\`ere phase du projet, nous avons un module de lecture sur fichier vraiment lent, aussi, il arrive souvent lors du chargement du fichier que notre fen\^etre principale devienne grise. En effet, l'OS cherche \`a signifier par l\`a que la fen\^etre ne répond plus depuis un moment, ce qui \'est normal vu les traitements que le programme r\'ealise en arri\`ere plan.
+Aussi nous d\'ecidons d'afficher une petite fen\^etre annon\c cant que le calcul est en cours. Pour cela, nous effectuons des recherches sur les \textit{QThread}. Ceux-ci doivent permettre \`a notre fen\^etre de chargement de continuer d'\^etre active m\^eme si la fen\^etre principale ne r\'epond plus.
+Nos recherche nous apprennent que l'on ne peut g\'erer de l'affichage en dehors du thread principal en Qt. Donc, pour afficher une fen\^etre de chargement, elle doit être g\'er\'ee par le m\^eme thread que la fen\^etre principale. Ce sont les calculs qui doivent \^etre effectu\'es par un autre thread.
+Avec l'arriv\'ee du second module de lecture de fichier, le processus est devenu plus rapide et l'utilit\'e de cette fen\^etre pour faire patienter l'utilisateur nous semble moins importante, aussi l'id\'ee est rel\'egu\'ee au second plan, et finalement ne se retrouve pas impl\'ement\'ee dans le programme final.
 
 \subsubsection{Expérimentation avec boost}
 
 \paragraph{Kamada Kawai Layout}
-%TODO pala
+Kamda Kawai Layout est une fonctions de \boost permettant de calculer les coordonn\'ees des points d'un graphe. Contrairement \`a Circle Graph Layout qui les pla\c ce sur un cercle, Kamada kawai les organise selon leur poids.
+Kamada Kawai n\'ecessite un graphe connexe, ce qui n'est pas le cas de la topologie IPv6, aussi cette fonction n'est pas impl\'ement\'ee dans la version finale.
 
 \paragraph{Recherche des peers\\}
 \par La recherche des peers a été développé en deux étapes. La première étape fut de trouver un moyen de recenser les Peers à partir de fichier de routage uniquement, afin de permettre de trouver les cliques avec un algorithme ``maison''. Cette méthode se basait sur le ciblage des AS qui n'avaient ni client, ni peer : ce sont n\'ecessairement des stubs. A ce moment là, nous stockions plusieurs graphs dans l'objet contrôleur dont le principale et celui sans les stubs.
