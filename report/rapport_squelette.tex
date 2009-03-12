@@ -77,9 +77,14 @@
 
 \selectlanguage{francais}
 \newpage
+\addtocontents{toc}{\protect\contentsline{section}{Lexique}{}}
 \fancyhead[R]{Lexique}
 \input{lexique}
 
+\newpage
+\addtocontents{toc}{\protect\contentsline{section}{Introduction}{}}
+\fancyhead[R]{Introduction}
+\input{introduction}
 
 \newpage
 \fancyhead[R]{\rightmark}
@@ -101,5 +106,10 @@
 
 \pagebreak
 \input{partie4}
+
+\pagebreak
+\addtocontents{toc}{\protect\contentsline{section}{Conclusion}{}}
+\fancyhead[R]{Introduction}
+\input{conclusion}
 
 \end{document}
