@@ -1,5 +1,24 @@
 \section{Utilisation du logiciel}
+
+Les deux objectifs présentés en \ref{obj} étaient à l'origine plus vagues. Nous avions le choix entre pousser l'analyse très loin et ne pas faire une interface graphique très évoluée, ou trouver un juste milieu. Ambitieux, nous souhaitions pousser l'analyse loin et réaliser une interface graphique évoluée.
+
 \subsection{Fonctionnement global}
+A partir de fichiers de données recensant la topologie d'internet et sa structure. Nous devons, en outre, construire un graphe et permettre son affichage dans une fenêtre en Qt.
+
+Nous venons de voir que la base de l'application est \textit{Boost} et que nous avons adopté le pattern MVC afin de développer de manière plus sereine. La coeur de ce système est la communication entre le modèle et la vue, en d'autres termes : le contrôleur. Voyons ce qu'il permet de faire :
+\begin{itemize}
+ \item Lancer la lecture des fichiers de données afin de construire le graphe,
+\item obtenir le nombre d'AS, de liens, et d'autres informations globales sur le graphe,
+\item de récupérer le graphe sans les stubs,
+\item de récupérer l'adjacence d'un AS,
+\item de récupérer les informations concernant un AS (centrality, numéro),
+\item de ne récupérer qu'une partie du graphe en fonction de la centralité des sommets,
+\item de calculer les coordonnées que les sommets doivent avoir sur l'interface graphique.
+\end{itemize}
+
+
+
+
 
 
 ATTENTION : \'ebauche pour cette partie.
