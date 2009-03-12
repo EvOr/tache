@@ -136,10 +136,13 @@ Pour signaler, l'erreur à la couche supérieure (le controlleur), nous remonton
 Notre connaissance grandissante des librairies utilisées nous a permis de pratiquer diverses expérimentations sur nos algorithmes, traitements et affichages.
 \subsubsection{Expérimentation avec Qt}
 \paragraph{}
-Au cours de la premi\`ere phase du projet, nous avons un module de lecture sur fichier vraiment lent, aussi, il arrive souvent lors du chargement du fichier que notre fen\^etre principale devienne grise. En effet, l'OS cherche \`a signifier par l\`a que la fen\^etre ne répond plus depuis un moment, ce qui \'est normal vu les traitements que le programme r\'ealise en arri\`ere plan.
-Aussi nous d\'ecidons d'afficher une petite fen\^etre annon\c cant que le calcul est en cours. Pour cela, nous effectuons des recherches sur les \textit{QThread}. Ceux-ci doivent permettre \`a notre fen\^etre de chargement de continuer d'\^etre active m\^eme si la fen\^etre principale ne r\'epond plus.
-Nos recherche nous apprennent que l'on ne peut g\'erer de l'affichage en dehors du thread principal en Qt. Donc, pour afficher une fen\^etre de chargement, elle doit être g\'er\'ee par le m\^eme thread que la fen\^etre principale. Ce sont les calculs qui doivent \^etre effectu\'es par un autre thread.
-Avec l'arriv\'ee du second module de lecture de fichier, le processus est devenu plus rapide et l'utilit\'e de cette fen\^etre pour faire patienter l'utilisateur nous semble moins importante, aussi l'id\'ee est rel\'egu\'ee au second plan, et finalement ne se retrouve pas impl\'ement\'ee dans le programme final.
+Au cours de la premi\`ere phase du projet, nous avions un module de lecture sur fichier vraiment lent, aussi, il arrivait souvent lors du chargement du fichier que notre fen\^etre principale devienne grise. En fait, l'OS cherchait \`a signifier par l\`a que la fen\^etre ne réponde plus depuis un moment, ce qui \'est normal au vu des traitements réalisés par le programme.
+
+Aussi nous avons décidé d'afficher une petite fen\^etre annon\c cant ``un calcul est en cours''. Pour cela, nous avons effectué des recherches sur les \textit{QThread}. Ceux-ci devaient permettre \`a notre fen\^etre de chargement de continuer d'\^etre active m\^eme si la fen\^etre principale cessait de répondre.
+
+Nos recherches nous ont appris que Qt ne permet pas de gérer l'affichage en dehors du thread principal. Donc, une fen\^etre de chargement doit être g\'er\'ee par le m\^eme thread que la fen\^etre principale. Ce sont les calculs qui doivent \^etre effectu\'es par un autre thread.
+
+Avec l'arriv\'ee du second module de lecture de fichier, le processus est devenu plus rapide et l'utilit\'e de cette fen\^etre pour faire patienter l'utilisateur nous semble moins importante, aussi l'id\'ee a été rel\'egu\'ee au second plan, et finalement ne se retrouve pas impl\'ement\'ee dans le programme final.
 
 \subsubsection{Expérimentation avec boost}
 

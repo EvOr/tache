@@ -18,13 +18,13 @@ Au coeur de l'Internet, on trouve les op\'erateurs appel\'es \textit{Tier One} q
 %Ils sont tous reli\'es deux \`a deux par des accords de type PEER, et ne peuvent pas se d\'econnecter. Meule nous a expliqué le contraire... Avec ses exemple sur Sprint, de plus tu l'a déjà dit pour la partie connexion en PEER
  Les \textit{Tier One} peuvent atteindre n'importe quelle destination sur Internet sans avoir \`a payer une seule connexion, puisqu'\`a plus ou moins haut niveau, tout AS est client potentiel d'un \textit{Tier One}. On retrouve parmis les \textit{Tier One} quelques grands noms des télécommunications (qui ne sont pas forcément des fournisseurs d'acc\`es) : Orange, Verizon Business, Sprint, AT\&T.
 \par
-Se relient \`a ces grands op\'erateurs d'autres AS qui peuvent eux-m\^eme \^etre reli\'es \`a d'autres et ainsi de suite. En outre, de fa\c con locale, on peut retrouver des full-mesh.
+Se relient \`a ces grands op\'erateurs d'autres AS qui peuvent eux-m\^eme \^etre reli\'es \`a d'autres et ainsi de suite. En outre, de fa\c con locale, on peut retrouver des structure en full-mesh.
 \par
-Globalement, Internet a une structure connexe, c'est-\`a-dire que si l'on prend deux AS au hasard, il existe un chemin qui les relie. Il revient donc \`a chaque AS d'assurer la visibilit\'e de ses clients \`a travers le r\'eseau.
+Globalement, Internet (IPv4) a une structure connexe, c'est-\`a-dire que si l'on prend deux AS au hasard, il existe un chemin qui les relie. Il revient donc \`a chaque AS d'assurer la visibilit\'e de ses clients \`a travers le r\'eseau.
 \par
-En bout de cha\^ine, il y a des stubs. Ce sont des AS qui sont clients d'un ou plusieurs autres AS mais qui n'ont pas de client \`a eux. Quand un AS stub est reli\'e \`a un seul AS, on dit qu'il est \textit{monohom\'e}, si au contraire, il est le client de plusieurs autres AS en m\^eme temps, on dit alors qu'il est \textit{multi-hom\'e}. Le multi-homing permet de palier à la défaillance de l'un de ses fournisseurs d'accès.
+En bout de cha\^ine, il y a des stubs. Ce sont des AS qui sont clients d'un ou plusieurs autres AS mais qui n'ont pas de client \`a eux. Quand un AS stub est reli\'e \`a un seul AS, on dit qu'il est \textit{monohom\'e}. Si, au contraire, il est le client de plusieurs autres AS en m\^eme temps, on dit qu'il est \textit{multi-hom\'e}. Le multi-homing permet de palier à la défaillance de l'un de ses fournisseurs d'accès.
 \par
-C'est pour cela que l'on dit que la topologie d'internet est hierarchique. C'est une sorte de pyramide avec à son sommet le \textit{Tier One} et à sa base les stubs.
+On dit que la topologie d'internet est hierarchique. C'est une sorte de pyramide avec à son sommet le \textit{Tier One} et à sa base les stubs.
 
 \subsubsection{Repr\'esentation d'Internet}
 \par
