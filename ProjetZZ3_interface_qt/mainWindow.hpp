@@ -82,7 +82,7 @@ class mainWindow : public QMainWindow
 
       Controler * _controler;
 
-      void enableAction() { _stubAct->setEnabled(true); _infoAct->setEnabled(true); _eraseAct->setEnabled(true); _zoomAct->setEnabled(true); _unzoomAct->setEnabled(true); _infASNumAct->setEnabled(true); _supASNumAct->setEnabled(true); _centralityAct->setEnabled(true); _cliqueAct->setEnabled(true); }
+      void enableAction() { _stubAct->setEnabled(true); _infoAct->setEnabled(true); _eraseAct->setEnabled(true); _zoomAct->setEnabled(true); _unzoomAct->setEnabled(true); _infASNumAct->setEnabled(true); _supASNumAct->setEnabled(true); }
       void disableAction() { _stubAct->setEnabled(false); _infoAct->setEnabled(false); _eraseAct->setEnabled(false); _zoomAct->setEnabled(false); _unzoomAct->setEnabled(false); _infWeightAct->setEnabled(false); _supWeightAct->setEnabled(false);  _infASNumAct->setEnabled(false);  _supASNumAct->setEnabled(false); _cliqueAct->setEnabled(false); _centralityAct->setEnabled(false); }
 
 

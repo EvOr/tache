@@ -50,8 +50,8 @@ void copyGraph(const Graph & g, WUGraph & wug)
       found = false;
       boost::tie(e,found) = boost::add_edge( mapping[source],mapping[target], wug);
       //       //initialisation du poids a 1
-      if(found)
-	 boost::put(weightMap, e, rand() % 10);
+      //if(found)
+	 //boost::put(weightMap, e, rand() % 10);
       //         wug[e].weight = 1;
    }
 }

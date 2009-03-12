@@ -28,6 +28,7 @@ struct AS : boost::totally_ordered< AS >
    value_type value;
    bool is_transit;
    int asn;
+   double weight;
 
    AS(int _asn = 0) : value(_asn) {}
 

@@ -8,10 +8,10 @@
 class Controler{
    protected:
       Graph graph;
+      Graph noStubGraph;
       std::string filename;
       std::map< vertex_descriptor , coordonnes> mescoords;
-      //std::map<vertex_descriptor, double> mespoids;
-      //tableau_de_poids vc_map;
+      std::map<vertex_descriptor, double> mespoids;
       std::map< vertex_descriptor , coordonnes> mescoords_tmp;
       std::vector< std::pair<vertex_descriptor , vertex_descriptor> > liens;
       std::vector< std::pair<vertex_descriptor , vertex_descriptor> > liens_tmp;

@@ -6,6 +6,7 @@ void Controler::change_file_name(std::string name){
    graph.clear();
    mescoords.clear();
    clique.clear();
+   mespoids.clear();
    // position.clear();
 }
 
@@ -153,6 +154,8 @@ void Controler::getNonStubsGraph(Graph & g2)
 	 g2[e].weight = graph[edge].weight;
       }
    }
+
+   noStubGraph = g2;
 }
 
 void Controler::getGraphWeightInf(int i, Graph & g2)
@@ -168,36 +171,40 @@ void Controler::getGraphWeightInf(int i, Graph & g2)
    std::map< Graph::vertex_descriptor , Graph::vertex_descriptor > mapping;
 
    //copie des sommets
-   for( boost::tie ( vit,vend)  = boost::vertices( graph ); vit != vend; ++vit)
+   for( boost::tie ( vit,vend)  = boost::vertices( noStubGraph ); vit != vend; ++vit)
    {
-      Graph::vertex_descriptor vertex = *vit;
-      Graph::vertex_descriptor v1 = boost::add_vertex(g2);
-      //mise a jour infos pour nouveau sommet
-      g2[v1].asn = graph[vertex].asn;
-      g2[v1].is_transit = graph[vertex].is_transit;
-      //on garde trace des AS ajoutés nouveau graph pour pouvoir ensuite ajouter que les aretes qui les relient
-      as_number_to_vertex[graph[vertex].asn] = vertex;
-      //on garde trave des correspondances de sommet pour pouvoir faire les aretes car bien qu'étant de meme type, les vertex descriptor appartiennent a leur graphe respectif
-      mapping[vertex] = v1;
+      std::map<vertex_descriptor, double>::iterator it = mespoids.find(*vit);
+      if(it->second < i)
+      {
+         Graph::vertex_descriptor vertex = *vit;
+         Graph::vertex_descriptor v1 = boost::add_vertex(g2);
+         //mise a jour infos pour nouveau sommet
+         g2[v1].asn = noStubGraph[vertex].asn;
+         g2[v1].is_transit = noStubGraph[vertex].is_transit;
+         //on garde trace des AS ajoutés nouveau graph pour pouvoir ensuite ajouter que les aretes qui les relient
+         as_number_to_vertex[noStubGraph[vertex].asn] = vertex;
+         //on garde trave des correspondances de sommet pour pouvoir faire les aretes car bien qu'étant de meme type, les vertex descriptor appartiennent a leur graphe respectif
+         mapping[vertex] = v1;
+      }
    }
 
    //copie des aretes
-   for( boost::tie ( it,end)  = boost::edges( graph ); it != end; ++it)
+   for( boost::tie ( it,end)  = boost::edges( noStubGraph ); it != end; ++it)
    {
       edge_descriptor edge = *it;
-      vertex_descriptor source = boost::source(edge,graph);
-      vertex_descriptor target = boost::target(edge,graph);
-      // on ajoute l'arete reliant les deux sommet si elle est inferieure a un certain poids
-      as_number_to_vertex_type::const_iterator found_i1 =  as_number_to_vertex.find(graph[source].asn);
-      as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(graph[target].asn);
-
-      if(g2[e].weight < i)
+      vertex_descriptor source = boost::source(edge,noStubGraph);
+      vertex_descriptor target = boost::target(edge,noStubGraph);
+      //si les deux sommets ont été ajouté précédémment, on ajoute l'arete qui les relie
+      as_number_to_vertex_type::const_iterator found_i1 =  as_number_to_vertex.find(noStubGraph[source].asn);
+      as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(noStubGraph[target].asn);
+      if(found_i1 != as_number_to_vertex.end() && found_i2 != as_number_to_vertex.end())
       {
 	 boost::tie(e,found) = boost::add_edge( mapping[source], mapping[target], g2);
-	 g2[e].link_type = graph[edge].link_type;
-	 g2[e].weight = graph[edge].weight;
+	 g2[e].link_type = noStubGraph[edge].link_type;
+	 g2[e].weight = noStubGraph[edge].weight;
       }
    }
+std::cout << num_vertices(g2) << " " << num_edges(g2) << std::endl;
 }
 
 void Controler::getGraphWeightSup(int i, Graph & g2)
@@ -213,35 +220,40 @@ void Controler::getGraphWeightSup(int i, Graph & g2)
    std::map< Graph::vertex_descriptor , Graph::vertex_descriptor > mapping;
 
    //copie des sommets
-   for( boost::tie ( vit,vend)  = boost::vertices( graph ); vit != vend; ++vit)
-   {
-      Graph::vertex_descriptor vertex = *vit;
-      Graph::vertex_descriptor v1 = boost::add_vertex(g2);
-      //mise a jour infos pour nouveau sommet
-      g2[v1].asn = graph[vertex].asn;
-      g2[v1].is_transit = graph[vertex].is_transit;
-      //on garde trace des AS ajoutés nouveau graph pour pouvoir ensuite ajouter que les aretes qui les relient
-      as_number_to_vertex[graph[vertex].asn] = vertex;
-      //on garde trave des correspondances de sommet pour pouvoir faire les aretes car bien qu'étant de meme type, les vertex descriptor appartiennent a leur graphe respectif
-      mapping[vertex] = v1;
+   for( boost::tie ( vit,vend)  = boost::vertices( noStubGraph ); vit != vend; ++vit)
+   {  
+      std::map<vertex_descriptor, double>::iterator it = mespoids.find(*vit);
+      if(it->second >= i)
+      {
+         Graph::vertex_descriptor vertex = *vit;
+         Graph::vertex_descriptor v1 = boost::add_vertex(g2);
+         //mise a jour infos pour nouveau sommet
+         g2[v1].asn = noStubGraph[vertex].asn;
+         g2[v1].is_transit = noStubGraph[vertex].is_transit;
+         //on garde trace des AS ajoutés nouveau graph pour pouvoir ensuite ajouter que les aretes qui les relient
+         as_number_to_vertex[noStubGraph[vertex].asn] = vertex;
+         //on garde trave des correspondances de sommet pour pouvoir faire les aretes car bien qu'étant de meme type, les vertex descriptor appartiennent a leur graphe respectif
+         mapping[vertex] = v1;
+      }
    }
 
    //copie des aretes
-   for( boost::tie ( it,end)  = boost::edges( graph ); it != end; ++it)
+   for( boost::tie ( it,end)  = boost::edges( noStubGraph ); it != end; ++it)
    {
       edge_descriptor edge = *it;
-      vertex_descriptor source = boost::source(edge,graph);
-      vertex_descriptor target = boost::target(edge,graph);
-      // on ajoute l'arete reliant les deux sommet si elle est superieure ou egale a un certain poids
-      as_number_to_vertex_type::const_iterator found_i1 =  as_number_to_vertex.find(graph[source].asn);
-      as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(graph[target].asn);
-      if(g2[e].weight >= i)
+      vertex_descriptor source = boost::source(edge,noStubGraph);
+      vertex_descriptor target = boost::target(edge,noStubGraph);
+      //si les deux sommets ont été ajouté précédémment, on ajoute l'arete qui les relie
+      as_number_to_vertex_type::const_iterator found_i1 =  as_number_to_vertex.find(noStubGraph[source].asn);
+      as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(noStubGraph[target].asn);
+      if(found_i1 != as_number_to_vertex.end() && found_i2 != as_number_to_vertex.end())
       {
 	 boost::tie(e,found) = boost::add_edge( mapping[source], mapping[target], g2);
-	 g2[e].link_type = graph[edge].link_type;
-	 g2[e].weight = graph[edge].weight;
+	 g2[e].link_type = noStubGraph[edge].link_type;
+	 g2[e].weight = noStubGraph[edge].weight;
       }
    }
+std::cout << num_vertices(g2) << " " << num_edges(g2) << std::endl;
 }
 
 void Controler::getGraphAsNumInf(int i, Graph & g2)
@@ -421,6 +433,9 @@ void Controler::getSubGraph(int i, int j)
    Graph::edge_iterator it,end;
    edge_descriptor e;
 
+   liens_tmp.clear();
+   mescoords_tmp.clear();
+
    //stockage des arêtes
    circle_graph_layout( g2, position_tmp, 1.5);
 
@@ -438,21 +453,24 @@ void Controler::getSubGraph(int i, int j)
 
 void Controler::computeClique()
 {
-   Graph g2;
-   getNonStubsGraph(g2);
-std::cout << "lol " << clique.size() << std::endl;
    if(clique.size() == 0)
    {
-std::cout << "calcul du nombre de cliques" << std::endl;
-   	mickael::graph::bron_kerbosch_max_cliques(g2, clique);
-std::cout << "fin du calcul du nombre de cliques" << std::endl;
+   	mickael::graph::bron_kerbosch_max_cliques(noStubGraph, clique);
    }
 }
 
 
 void Controler::computeCentrality()
 {
-//   brandes_betweenness_centrality(graph, vc_map);
+   tableau_de_poids vc_map(mespoids);
+//std::cout << "calcul centrality" << std::endl;
+   brandes_betweenness_centrality(noStubGraph, vc_map);
+//std::cout << mespoids.size() << std::endl;
+//std::map<vertex_descriptor, double>::iterator it;
+//for(it = mespoids.begin(); it != mespoids.end(); ++it)
+//{
+//   std::cout << it->first << " " << it->second << std::endl;
+//}   
 }
 
 

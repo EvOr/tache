@@ -276,8 +276,7 @@ void mainWindow::afficherInfoAs()
 {
    bool ok;
    int value = -1;
-   std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
-   value = QInputDialog::getInteger(this, "Information about an AS", "AS Number : ", 0, 0, coords.size(), 1, &ok);    
+   value = QInputDialog::getInteger(this, "Information about an AS", "AS Number : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);    
    if (ok && value > -1)
        QMessageBox::information(this, QString::fromStdString("AS Information"), "You request information about the AS number " + QString::number(value), QMessageBox::Ok, QMessageBox::NoButton);
 
@@ -287,6 +286,10 @@ void mainWindow::afficherNonStub()
 {
    QString tripletFile = QFileDialog::getOpenFileName(this,"Choose a triplet file...", "./", "All Files (*.*)");
    
+
+   _centralityAct->setEnabled(true);
+   _cliqueAct->setEnabled(true);
+   _stubAct->setEnabled(false);
 
    if(tripletFile.isEmpty())
    {
@@ -485,15 +488,20 @@ void mainWindow::clique()
 
    _controler->computeClique();
    setNbClique(_controler->getNbClique());
+
+   _cliqueAct->setEnabled(false);
 }
 
 
 void mainWindow::centrality()
 {
+   _infWeightAct->setEnabled(true);
+   _supWeightAct->setEnabled(true);
+   _centralityAct->setEnabled(false);
 
-//   _controler->computeCentrality();
+   _controler->computeCentrality();
 
-   QMessageBox::information(this, QString::fromStdString("Program information."), "Not implemented yet.", QMessageBox::Ok, QMessageBox::NoButton);
+   //QMessageBox::information(this, QString::fromStdString("Program information."), "Not implemented yet.", QMessageBox::Ok, QMessageBox::NoButton);
 
 
 }
