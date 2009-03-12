@@ -5,15 +5,25 @@ void Controler::change_file_name(std::string name){
    filename=name;
    graph.clear();
    mescoords.clear();
+   clique.clear();
    // position.clear();
 }
 
 ///\brief parse le fichier
-void Controler::parse_file(){
-   std::cout << "parse file " << filename  << "..." << std::endl;
+void Controler::parse_file()
+{
    parse(filename, graph); 
-   std::cout << "num_vertices:" << boost::num_vertices(graph) << std::endl;
 
+   //parcours pour voir le nombre max d'AS
+   boost::graph_traits<Graph>::vertex_iterator vit, vend;
+   int n = 0;
+   nbAS = 0;
+   for( boost::tie ( vit,vend)  = boost::vertices( graph ); vit != vend; ++vit)
+   {
+      n = graph[*vit].asn;
+      if(n > nbAS)
+         nbAS = n;
+   }
 }
 
 ///\brief permet d'obtenir une position map en forme de cercle depuis une matrice d'adjacence en vue de l'affichage du graphe avec QT
@@ -96,9 +106,8 @@ void Controler::load_triplet(std::string const & filename){
    }
 }
 
-Graph & Controler::getNonStubsGraph()
+void Controler::getNonStubsGraph(Graph & g2)
 {
-   Graph g2;
    boost::graph_traits<Graph>::vertex_iterator vit, vend;
    Graph::edge_iterator it,end;
    edge_descriptor e;
@@ -137,17 +146,15 @@ Graph & Controler::getNonStubsGraph()
       as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(graph[target].asn);
       if(found_i1 != as_number_to_vertex.end() && found_i2 != as_number_to_vertex.end())
       {
-	 boost::tie(e,found) = boost::add_edge( source, target, g2);
+	 boost::tie(e,found) = boost::add_edge(mapping[source], mapping[target], g2);
 	 g2[e].link_type = graph[edge].link_type;
 	 g2[e].weight = graph[edge].weight;
       }
    }
-   return g2;
 }
 
-Graph & Controler::getGraphWeightInf(int i)
+void Controler::getGraphWeightInf(int i, Graph & g2)
 {
-   Graph g2;
    boost::graph_traits<Graph>::vertex_iterator vit, vend;
    Graph::edge_iterator it,end;
    edge_descriptor e;
@@ -183,17 +190,15 @@ Graph & Controler::getGraphWeightInf(int i)
       as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(graph[target].asn);
       if(g2[e].weight < i)
       {
-	 boost::tie(e,found) = boost::add_edge( source, target, g2);
+	 boost::tie(e,found) = boost::add_edge( mapping[source], mapping[target], g2);
 	 g2[e].link_type = graph[edge].link_type;
 	 g2[e].weight = graph[edge].weight;
       }
    }
-   return g2;
 }
 
-Graph & Controler::getGraphWeightSup(int i)
+void Controler::getGraphWeightSup(int i, Graph & g2)
 {
-   Graph g2;
    boost::graph_traits<Graph>::vertex_iterator vit, vend;
    Graph::edge_iterator it,end;
    edge_descriptor e;
@@ -229,17 +234,15 @@ Graph & Controler::getGraphWeightSup(int i)
       as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(graph[target].asn);
       if(g2[e].weight >= i)
       {
-	 boost::tie(e,found) = boost::add_edge( source, target, g2);
+	 boost::tie(e,found) = boost::add_edge( mapping[source], mapping[target], g2);
 	 g2[e].link_type = graph[edge].link_type;
 	 g2[e].weight = graph[edge].weight;
       }
    }
-   return g2;
 }
 
-Graph & Controler::getGraphAsNumInf(int i)
+void Controler::getGraphAsNumInf(int i, Graph & g2)
 {
-   Graph g2;
    boost::graph_traits<Graph>::vertex_iterator vit, vend;
    Graph::edge_iterator it,end;
    edge_descriptor e;
@@ -278,17 +281,15 @@ Graph & Controler::getGraphAsNumInf(int i)
       as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(graph[target].asn);
       if(found_i1 != as_number_to_vertex.end() && found_i2 != as_number_to_vertex.end())
       {
-	 boost::tie(e,found) = boost::add_edge( source, target, g2);
+	 boost::tie(e,found) = boost::add_edge( mapping[source], mapping[target], g2);
 	 g2[e].link_type = graph[edge].link_type;
 	 g2[e].weight = graph[edge].weight;
       }
    }
-   return g2;
 }
 
-Graph & Controler::getGraphAsNumSup(int i)
+void Controler::getGraphAsNumSup(int i, Graph & g2)
 {
-   Graph g2;
    boost::graph_traits<Graph>::vertex_iterator vit, vend;
    Graph::edge_iterator it,end;
    edge_descriptor e;
@@ -327,21 +328,19 @@ Graph & Controler::getGraphAsNumSup(int i)
       as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(graph[target].asn);
       if(found_i1 != as_number_to_vertex.end() && found_i2 != as_number_to_vertex.end())
       {
-	 boost::tie(e,found) = boost::add_edge( source, target, g2);
-	 g2[e].link_type = graph[edge].link_type;
-	 g2[e].weight = graph[edge].weight;
+      	boost::tie(e,found) = boost::add_edge( mapping[source], mapping[target], g2);
+      	g2[e].link_type = graph[edge].link_type;
+	      g2[e].weight = graph[edge].weight;
       }
    }
-   return g2;
 }
 
-Graph & Controler::getFirstNeighbors(int i)
+void Controler::getFirstNeighbors(int i, Graph & g2)
 {
-   Graph g2;
    Graph::edge_iterator it,end;
    edge_descriptor e;
    bool found;
-   int k = 0;
+   //int k = 0;
 
 
    //ajout de l'AS
@@ -360,10 +359,9 @@ Graph & Controler::getFirstNeighbors(int i)
       if(graph[source].asn == i)
       {
          //ajout du sommet
-k++;
          Graph::vertex_descriptor v2 = boost::add_vertex(g2);
-         g2[v2].asn = graph[source].asn;
-         g2[v2].is_transit = graph[source].is_transit;
+         g2[v2].asn = graph[target].asn;
+         g2[v2].is_transit = graph[target].is_transit;
          //ajout du lien
 	      boost::tie(e,found) = boost::add_edge( v1, v2, g2);
 	      g2[e].link_type = graph[edge].link_type;
@@ -371,7 +369,6 @@ k++;
       }
       else if(graph[target].asn == i)
       {
-k++;
          //ajout du sommet
          Graph::vertex_descriptor v2 = boost::add_vertex(g2);
          g2[v2].asn = graph[source].asn;
@@ -382,12 +379,6 @@ k++;
 	      g2[e].weight = graph[edge].weight;
       }
    }
-
-   //on remplit ensuite le tableau de coordonnées temporaires
-   circle_graph_layout( g2, position_tmp, 1.5);
-std::cout << "graphe temporaire a : " << k << " sommets." << std::endl;
-   return g2;
-
 }
 
 Graph::vertex_descriptor Controler::findAS(int i)
@@ -409,8 +400,48 @@ Graph::vertex_descriptor Controler::findAS(int i)
    return ret;
 }
 
-int Controler::getNumberOfAs()
+void Controler::getSubGraph(int i, int j)
 {
-   return mescoords.size();
+   Graph g2;
+   switch(j)
+   {
+      case 0 : getNonStubsGraph(g2); break;
+      case 1 : getGraphWeightInf(i, g2); break;
+      case 2 : getGraphWeightSup(i, g2); break;
+      case 3 : getGraphAsNumInf(i, g2); break;
+      case 4 : getGraphAsNumSup(i, g2); break;
+      case 5 : getFirstNeighbors(i, g2); break;
+   }
+
+   
+   boost::graph_traits<Graph>::vertex_iterator vit, vend;
+   Graph::edge_iterator it,end;
+   edge_descriptor e;
+
+   //stockage des arêtes
+   circle_graph_layout( g2, position_tmp, 1.5);
+
+   //stockage des liens
+   for( boost::tie ( it,end)  = boost::edges( g2 ); it != end; ++it)
+   {
+      edge_descriptor edge = *it;
+      vertex_descriptor source = boost::source(edge,g2);
+      vertex_descriptor target = boost::target(edge,g2);
+      std::pair<vertex_descriptor, vertex_descriptor> p(source, target);
+      liens_tmp.push_back(p);
+   }
 }
 
+
+void Controler::computeClique()
+{
+   Graph g2;
+   getNonStubsGraph(g2);
+std::cout << "lol " << clique.size() << std::endl;
+   if(clique.size() == 0)
+   {
+std::cout << "calcul du nombre de cliques" << std::endl;
+   	mickael::graph::bron_kerbosch_max_cliques(g2, clique);
+std::cout << "fin du calcul du nombre de cliques" << std::endl;
+   }
+}

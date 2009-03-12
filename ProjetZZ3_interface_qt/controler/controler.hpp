@@ -2,6 +2,7 @@
 #define ____CONTROLLER_HPP_
 #include "../graph/file_reader.hpp"
 #include "../graph/graph.hpp"
+#include "../graph/bron_kerbosch.hpp"
 #include <string>
 
 class Controler{
@@ -14,9 +15,12 @@ class Controler{
       std::vector< std::pair<vertex_descriptor , vertex_descriptor> > liens_tmp;
       tableau_de_coordonnees position;
       tableau_de_coordonnees position_tmp;
+      int nbAS;
+      std::vector< std::vector<vertex_descriptor> > clique;
+      
 
    public:
-      Controler(std::string fn):graph(),filename(fn),mescoords(),position(mescoords),mescoords_tmp(),position_tmp(mescoords_tmp){;};
+      Controler(std::string fn):graph(),filename(fn),mescoords(),position(mescoords),mescoords_tmp(),position_tmp(mescoords_tmp), clique(){;};
       void change_file_name(std::string fn);
       void parse_file();
       int displayCircle(double r);
@@ -26,16 +30,19 @@ class Controler{
       inline std::vector< std::pair<vertex_descriptor , vertex_descriptor> > get_liens() { return liens; }
       inline std::map< vertex_descriptor , coordonnes> get_position_tmp(){return mescoords_tmp;};
       inline std::vector< std::pair<vertex_descriptor , vertex_descriptor> > get_liens_tmp() { return liens_tmp; }
-      int getNumberOfAs();
+      int getNumberOfAs() { return nbAS; }
       void load_triplet(std::string const & filename);
-      Graph & getNonStubsGraph();
-      Graph & getGraphWeightInf(int i);
-      Graph & getGraphWeightSup(int i);
-      Graph & getGraphAsNumInf(int i);
-      Graph & getGraphAsNumSup(int i);
-      Graph & getFirstNeighbors(int i);
+      void getNonStubsGraph(Graph & g2);
+      void getGraphWeightInf(int i, Graph & g2);
+      void getGraphWeightSup(int i, Graph & g2);
+      void getGraphAsNumInf(int i, Graph & g2);
+      void getGraphAsNumSup(int i, Graph & g2);
+      void getFirstNeighbors(int i, Graph & g2);
       Graph::vertex_descriptor findAS(int i);
-
+      void getSubGraph(int i, int j);
+      int getNbClique() {return clique.size(); }
+      void computeClique();
+      
 
       //inline Graph & getPeersGraph(){return file_reader.getPeersGraph();};
 };

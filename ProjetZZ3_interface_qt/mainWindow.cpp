@@ -37,8 +37,16 @@ void mainWindow::initMenu()
    _fileMenu.addAction(_quitAct);
 
    _optionMenu.addAction(_infoAct);
+   _optionMenu.addAction(_cliqueAct);
+   _optionMenu.addSeparator();
    _optionMenu.addAction(_stubAct);
    _optionMenu.addAction(_zoomAct);
+   _optionMenu.addAction(_unzoomAct);
+   _optionMenu.addSeparator();
+   _optionMenu.addAction(_infWeightAct);
+   _optionMenu.addAction(_supWeightAct);
+   _optionMenu.addAction(_infASNumAct);
+   _optionMenu.addAction(_supASNumAct);
    _optionMenu.addSeparator();
    _optionMenu.addAction(_eraseAct);
 
@@ -112,6 +120,30 @@ void mainWindow::initAction()
    _zoomAct = new QAction("Zoom", this);
    _zoomAct->setStatusTip("Zoom on the neighborhood of a specific AS.");
    QObject::connect(_zoomAct, SIGNAL(triggered()), this, SLOT(zoom()));
+
+   _unzoomAct= new QAction("UnZoom", this);
+   _unzoomAct->setStatusTip("Return on the global graph.");
+   QObject::connect(_unzoomAct, SIGNAL(triggered()), this, SLOT(unzoom()));
+
+   _infWeightAct= new QAction("Display AS by inferior weigth", this);
+   _infWeightAct->setStatusTip("Display only AS with a weight inferior to a given one.");
+   QObject::connect(_infWeightAct, SIGNAL(triggered()), this, SLOT(infweight()));
+
+   _supWeightAct= new QAction("Display AS by superior weigth", this);
+   _supWeightAct->setStatusTip("Display only AS with a weight superior to a given one.");
+   QObject::connect(_supWeightAct, SIGNAL(triggered()), this, SLOT(supWeight()));
+
+   _infASNumAct= new QAction("Display AS by inferior number", this);
+   _infASNumAct->setStatusTip("Display only AS with a number inferior to a given one.");
+   QObject::connect(_infASNumAct, SIGNAL(triggered()), this, SLOT(infASNum()));
+
+   _supASNumAct= new QAction("Display AS by superior number", this);
+   _supASNumAct->setStatusTip("Display only AS with a weight superior to a given one.");
+   QObject::connect(_supASNumAct, SIGNAL(triggered()), this, SLOT(supASNum()));
+
+   _cliqueAct= new QAction("compute number of clique", this);
+   _cliqueAct->setStatusTip("Compute number of clique in the graph.");
+   QObject::connect(_cliqueAct, SIGNAL(triggered()), this, SLOT(clique()));
  
    disableAction();
 }
@@ -228,7 +260,7 @@ void mainWindow::eraseGraph()
 
 void mainWindow::razCompteur()
 {
-   setTemps(0);
+   //setTemps(0);
    setNbSommets(0);
    setNbArete(0);
    setNbClique(0);
@@ -316,11 +348,13 @@ void mainWindow::zoom()
       if( l > -1)
       {
          t = time(0);
-         _controler->getFirstNeighbors(value);
+         _controler->getSubGraph(value, 5);
          t = t - time(0);
          setTemps(t);
 
          drawGraphTmp();
+
+          _cliqueAct->setEnabled(false);
       }
       else
       {
@@ -334,5 +368,157 @@ void mainWindow::zoom()
    }   
 }
 
+void mainWindow::unzoom()
+{
+   afficherPoint();
+    _cliqueAct->setEnabled(true);
+}
+
+void mainWindow::infWeight()
+{
+   //on demande à l'utilisateur l'AS sur lequel il veut zoomer.
+   bool ok;
+   int value = -1;
+   double t;
+   std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
+
+   value = QInputDialog::getInteger(this, "Display by weight", "Maximum weight : ", 0, 0, 10000, 1, &ok);
+
+   if (ok && value > -1)
+   {
+      int l = _controler->findAS(value);  
+
+      if( l > -1)
+      {
+         t = time(0);
+         _controler->getSubGraph(value, 1);
+         t = t - time(0);
+         setTemps(t);
+
+         drawGraphTmp();
+      }
+      else
+      {
+         QMessageBox::warning(this, QString::fromStdString("Display by Weight"), "Bad request", QMessageBox::Ok, QMessageBox::NoButton);
+      }
+
+   }
+   else
+   {
+    QMessageBox::warning(this, QString::fromStdString("Display by Weight"), "Bad request !", QMessageBox::Ok, QMessageBox::NoButton);
+   }  
+}
+
+void mainWindow::supWeight()
+{
+   //on demande à l'utilisateur l'AS sur lequel il veut zoomer.
+   bool ok;
+   int value = -1;
+   double t;
+   std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
+
+   value = QInputDialog::getInteger(this, "Display by weight", "Minimum weight : ", 0, 0, 10000, 1, &ok);
+
+   if (ok && value > -1)
+   {
+      int l = _controler->findAS(value);  
+
+      if( l > -1)
+      {
+         t = time(0);
+         _controler->getSubGraph(value, 2);
+         t = t - time(0);
+         setTemps(t);
+
+         drawGraphTmp();
+      }
+      else
+      {
+         QMessageBox::warning(this, QString::fromStdString("Display by Weight"), "Bad request", QMessageBox::Ok, QMessageBox::NoButton);
+      }
+
+   }
+   else
+   {
+    QMessageBox::warning(this, QString::fromStdString("Display by Weight"), "Bad request !", QMessageBox::Ok, QMessageBox::NoButton);
+   }
+}
+
+void mainWindow::infASNum()
+{
+   //on demande à l'utilisateur l'AS sur lequel il veut zoomer.
+   bool ok;
+   int value = -1;
+   double t;
+   std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
+
+   value = QInputDialog::getInteger(this, "Display by AS number", "Maximum AS number : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);
+
+   if (ok && value > -1)
+   {
+      int l = _controler->findAS(value);  
+
+      if( l > -1)
+      {
+         t = time(0);
+         _controler->getSubGraph(value, 3);
+         t = t - time(0);
+         setTemps(t);
+
+         drawGraphTmp();
+      }
+      else
+      {
+         QMessageBox::warning(this, QString::fromStdString("Display by AS number"), "Bad request", QMessageBox::Ok, QMessageBox::NoButton);
+      }
+
+   }
+   else
+   {
+    QMessageBox::warning(this, QString::fromStdString("Display by AS number"), "Bad request !", QMessageBox::Ok, QMessageBox::NoButton);
+   }
+}
+
+void mainWindow::supASNum()
+{
+//on demande à l'utilisateur l'AS sur lequel il veut zoomer.
+   bool ok;
+   int value = -1;
+   double t;
+   std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
+
+   value = QInputDialog::getInteger(this, "Display by AS number", "Minimum AS number : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);
+
+   if (ok && value > -1)
+   {
+      int l = _controler->findAS(value);  
+
+      if( l > -1)
+      {
+         t = time(0);
+         _controler->getSubGraph(value, 4);
+         t = t - time(0);
+         setTemps(t);
+
+         drawGraphTmp();
+      }
+      else
+      {
+         QMessageBox::warning(this, QString::fromStdString("Display by AS number"), "Bad request", QMessageBox::Ok, QMessageBox::NoButton);
+      }
+
+   }
+   else
+   {
+    QMessageBox::warning(this, QString::fromStdString("Display by AS number"), "Bad request !", QMessageBox::Ok, QMessageBox::NoButton);
+   }
+}
 
 
+void mainWindow::clique()
+{
+   QMessageBox::information(this, QString::fromStdString("Program information."), "This may take some minutes.", QMessageBox::Ok, QMessageBox::NoButton);
+
+   _controler->computeClique();
+   setNbClique(_controler->getNbClique());
+}

@@ -72,11 +72,17 @@ class mainWindow : public QMainWindow
       QAction * _eraseAct;
       QAction * _infoAct;
       QAction * _zoomAct;
+      QAction * _unzoomAct;
+      QAction * _infWeightAct;
+      QAction * _supWeightAct;
+      QAction * _infASNumAct;
+      QAction * _supASNumAct;
+      QAction * _cliqueAct;
 
       Controler * _controler;
 
-      void enableAction() { _stubAct->setEnabled(true); _infoAct->setEnabled(true); _eraseAct->setEnabled(true); _zoomAct->setEnabled(true); }
-      void disableAction() { _stubAct->setEnabled(false); _infoAct->setEnabled(false); _eraseAct->setEnabled(false); _zoomAct->setEnabled(false); }
+      void enableAction() { _stubAct->setEnabled(true); _infoAct->setEnabled(true); _eraseAct->setEnabled(true); _zoomAct->setEnabled(true); _unzoomAct->setEnabled(true); _infWeightAct->setEnabled(true); _supWeightAct->setEnabled(true);  _infASNumAct->setEnabled(true); _supASNumAct->setEnabled(true); _cliqueAct->setEnabled(true); }
+      void disableAction() { _stubAct->setEnabled(false); _infoAct->setEnabled(false); _eraseAct->setEnabled(false); _zoomAct->setEnabled(false); _unzoomAct->setEnabled(false); _infWeightAct->setEnabled(false); _supWeightAct->setEnabled(false);  _infASNumAct->setEnabled(false);  _supASNumAct->setEnabled(false); _cliqueAct->setEnabled(false); }
 
 
    public :
@@ -103,6 +109,12 @@ class mainWindow : public QMainWindow
       void afficherInfoAs();
       void afficherNonStub();
       void zoom();
+      void unzoom();
+      void infWeight();
+      void supWeight();
+      void infASNum();
+      void supASNum();
+      void clique();
 
 };
 
