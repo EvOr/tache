@@ -48,7 +48,7 @@ En contre-partie, cela demande une bonne organisation. En effet, quelques soient
 
 \paragraph{} L'une des bases du développement est d'utiliser un gestionnaire de sources afin de pouvoir modifier ses fichiers sans se soucier des conséquences. La première chose que nous avons faite, avant même de passer au développement, est de mettre en place un serveur subversion sur l'une de nos machines. Le problème qui s'est très vite posé est le suivant : quelque soit l'endroit où l'autre travaille, s'il n'a pas accès au serveur, il ne peut pas l'utiliser (\verb|commit/checkout|) et doit donc développer sans gestionnaire de sources (figure \ref{svn})... Il nous fallait un moyen de contrôler nos sources de manière distribuée : git.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \begin{center}
         \includegraphics[width=0.7\textwidth]{./schema/svn.png}
 \caption{La gestion classique des sources : centralisation totale }
@@ -66,7 +66,7 @@ En contre-partie, cela demande une bonne organisation. En effet, quelques soient
 \subparagraph{}Git est distribué, cela veut dire que chaque machine l'utilisant est un serveur et un client. En d'autres termes, chaque développeur peut ``commiter'' et effectuer des \verb|revert| en local. Ce qui permet de développer de manière beaucoup plus efficace, puisque les commits sont effectués en quelques millisecondes (le temps d'afficher la trace). Une fois que le développeur est satisfait de son travail, il peut demander aux autres de \verb|pull| (récupérer les sources) depuis sa machine, ou il peut \verb|push| (envoyer les sources) sur un serveur de fichiers central par exemple (figure \ref{git}). Tout ce que nécessite git pour fonctionner est un client et/ou un serveur ssh.
 
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \begin{center}
         \includegraphics[width=0.8\textwidth]{./schema/git.png}
 \caption{La gestion des sources avec git : Distribution et liberté}
@@ -116,7 +116,7 @@ L'utilisation que nous avons faites de l'objet Graph une fois créé, analysé e
 
 Le but de ce pattern est de permettre aux développeurs de changer la vue en ne modifiant aucune autre partie du code, ou de modifier la partie métier sans modifier le code de la vue. En outre, un tel découpage facilite la répartition des tâches dans l'équipe.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \begin{center}
         \includegraphics[height=0.3\textheight]{./schema/mvcScheme.png}
 \caption{Schéma superficiel du Modèle Vue Controlleur}
@@ -135,7 +135,7 @@ Notre utilisation de l'objet graph ressemble à celui que l'on ferait d'une base
 Ces objets possèdent un certain nombre d'attributs nécessaires au bon fonctionnement de boost en plus de ceux qui nous intéressent : le type et le numéro de l'AS. Pour récupérer le type de l'un de ces objets il suffit de faire \verb|graph[descriptor].type|.
 
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \begin{center}
         \includegraphics[width=0.8\textwidth]{./schema/bdd.png}
 \caption{Représentation des types d'objet du graphe}

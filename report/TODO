@@ -3,16 +3,18 @@ Partie I :
 Développer un peu plus la partie sur la topologie et la tomographie.
 Approfondir, mettre en rapport avec le projet.
 
+Parler du document Three View of The Internet Topology
+
 Partie II:
 Voir ce que tu peux dire des objectifs que j'ai écris et si tu vois des trucs à rajouter
-
+Voir ce que tu peux dire vis à vis du déroulement du projet
 Partie III:
 
 Caractéristiques d'internet retrouvées dans notre application
 
 Partie IV : 
 Développement avec Qt
-	montrer la structure d'un objet Qt avec du code,
+	montrer la structure d'un objet Qt avec du code, le truc des signals et des slots
 
 Description des problèmes rencontrés 
 	Thread Qt, Kamada Kawai pourquoi ne pas afficher le prototype de la fonction avec boost, et l'appel qu'il faut en faire, expliquer aussi la difficulté d'analyser la documentation rebondir sur ce qui est dit vis à vis de la difficulté de développer avec boost

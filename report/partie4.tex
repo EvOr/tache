@@ -20,7 +20,7 @@ Un exemple d'utilisation  concrète de \textit{Boost}, des difficultés dûes au
 
 \subsection{Décodeurs d'entrée}
 Le fichier contenant les liens entre les AS est une succession de lignes ``\verb|AS1 AS2 TYPE|'' représentant le lien entre l'AS1 et l'AS2 et son type. Or nous nous ne souhaitons conserver que le numéro de l'AS. C'est à dire une ligne de type ``\verb|1 2 TYPE|''. C'est pourquoi, la première étape lorsque nous récupérons un fichier de données est d'effectuer un traitement à l'aide de sed (figure \ref{sed}) afin de retirer les ``\verb|AS|'' et d'accélérer les traitements lors de la lecture du fichier. 
-\begin{figure}[ht]
+\begin{figure}[H]
    \begin{center}
       \begin{tabular}{l}
          \hline
@@ -38,7 +38,7 @@ L'étape de lecture à proprement parler peut commencer une fois ce pré-traitem
 Au début du projet, nous avons utilisé une méthode ``C++'' classique pour lire et parser le fichier. 
 Représenté en figure \ref{parse_cpp}, le parsing dit classique est beaucoup moins performant que le parsing de boost, en outre il augmente considérablement le nombre de \verb|if| imbriqués ce qui rend le code plus difficile à lire, il faut ajouter autant de \verb|else| pour la gestion des erreurs qui a été retirée du présent rapport. L'avantage de cette méthode est que nous récupérons directement \verb|asn1| et \verb|asn2| les numéros des AS correspondant à la ligne du fichier en cours de lecture en tant qu'entier.
 
-\begin{figure}[ht]
+\begin{figure}[H]
    \begin{center}
       \begin{tabular}{l}
         \hline 
@@ -76,7 +76,7 @@ Au final, le traitement d'une ligne se déroule comme présenté figure \ref{fil
 
 Les fonctions utilisées pour ajouter des sommets et des arêtes (\verb|add_vertex| et \verb|add_edge|) au graphe montrent, encore une fois, que la partie graphe de boost est assez éloignée de l'objet.
 
-\begin{figure}[ht]
+\begin{figure}[H]
    \begin{center}
       \begin{tabular}{l}
         \hline 
@@ -102,7 +102,7 @@ Les fonctions utilisées pour ajouter des sommets et des arêtes (\verb|add_vert
 \end{figure}
  
 
-\begin{figure}[ht]
+\begin{figure}[H]
    \begin{center}
       \begin{tabular}{l}
         \hline 
@@ -113,7 +113,7 @@ Les fonctions utilisées pour ajouter des sommets et des arêtes (\verb|add_vert
 \caption{\label{cast_boost} Exemple de ``cast'' avec les outils de boost}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 \begin{center}
         \includegraphics[width=0.7\textwidth]{./schema/file_parser2.png}
 \caption{``Diagramme de séquence'' du parsing d'une ligne }
