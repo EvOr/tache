@@ -5,9 +5,9 @@ Les deux objectifs présentés en \ref{obj} étaient à l'origine plus vagues. N
 \subsection{Fonctionnement global}
 A partir de fichiers de données recensant la topologie d'internet et sa structure. Nous devons, en outre, construire un graphe et permettre son affichage dans une fenêtre en Qt.
 
-Nous venons de voir que la base de l'application est \textit{Boost} et que nous avons adopté le pattern MVC afin de développer de manière plus sereine. La coeur de ce système est la communication entre le modèle et la vue, en d'autres termes : le contrôleur. Voyons ce qu'il permet de faire :
+Nous venons de voir que la base de l'application est \textit{Boost} et que nous avons adopté le pattern MVC afin de développer de manière plus sereine. La coeur de ce système est la communication entre le modèle et la vue, en d'autres termes : le contrôleur. Voici la liste de ses fonctionnalités :
 \begin{itemize}
- \item Lancer la lecture des fichiers de données afin de construire le graphe,
+ \item lancer la lecture des fichiers de données afin de construire le graphe,
 \item obtenir le nombre d'AS, de liens, et d'autres informations globales sur le graphe,
 \item de récupérer le graphe sans les stubs,
 \item de récupérer l'adjacence d'un AS,
@@ -92,3 +92,5 @@ La barre de status est mise \`a jour avec des informations telles que le nombre 
 
 \subsection{Mise en évidence des caractéristiques d'internet}
 %TODO en fonction de ce que l'on a...
+
+\subsection{Bilan}
