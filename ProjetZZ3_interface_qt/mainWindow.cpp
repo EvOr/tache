@@ -43,8 +43,10 @@ void mainWindow::initMenu()
    _optionMenu.addAction(_zoomAct);
    _optionMenu.addAction(_unzoomAct);
    _optionMenu.addSeparator();
+   _optionMenu.addAction(_centralityAct);
    _optionMenu.addAction(_infWeightAct);
    _optionMenu.addAction(_supWeightAct);
+   _optionMenu.addSeparator();
    _optionMenu.addAction(_infASNumAct);
    _optionMenu.addAction(_supASNumAct);
    _optionMenu.addSeparator();
@@ -145,6 +147,10 @@ void mainWindow::initAction()
    _cliqueAct->setStatusTip("Compute number of clique in the graph.");
    QObject::connect(_cliqueAct, SIGNAL(triggered()), this, SLOT(clique()));
  
+   _centralityAct= new QAction("compute centrality", this);
+   _centralityAct->setStatusTip("Compute centrality to weight each edges.");
+   QObject::connect(_centralityAct, SIGNAL(triggered()), this, SLOT(centrality()));
+
    disableAction();
 }
 
@@ -480,3 +486,16 @@ void mainWindow::clique()
    _controler->computeClique();
    setNbClique(_controler->getNbClique());
 }
+
+
+void mainWindow::centrality()
+{
+
+//   _controler->computeCentrality();
+
+   QMessageBox::information(this, QString::fromStdString("Program information."), "Not implemented yet.", QMessageBox::Ok, QMessageBox::NoButton);
+
+
+}
+
+

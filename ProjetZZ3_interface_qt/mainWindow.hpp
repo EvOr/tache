@@ -78,11 +78,12 @@ class mainWindow : public QMainWindow
       QAction * _infASNumAct;
       QAction * _supASNumAct;
       QAction * _cliqueAct;
+      QAction * _centralityAct;
 
       Controler * _controler;
 
-      void enableAction() { _stubAct->setEnabled(true); _infoAct->setEnabled(true); _eraseAct->setEnabled(true); _zoomAct->setEnabled(true); _unzoomAct->setEnabled(true); _infWeightAct->setEnabled(true); _supWeightAct->setEnabled(true);  _infASNumAct->setEnabled(true); _supASNumAct->setEnabled(true); _cliqueAct->setEnabled(true); }
-      void disableAction() { _stubAct->setEnabled(false); _infoAct->setEnabled(false); _eraseAct->setEnabled(false); _zoomAct->setEnabled(false); _unzoomAct->setEnabled(false); _infWeightAct->setEnabled(false); _supWeightAct->setEnabled(false);  _infASNumAct->setEnabled(false);  _supASNumAct->setEnabled(false); _cliqueAct->setEnabled(false); }
+      void enableAction() { _stubAct->setEnabled(true); _infoAct->setEnabled(true); _eraseAct->setEnabled(true); _zoomAct->setEnabled(true); _unzoomAct->setEnabled(true); _infASNumAct->setEnabled(true); _supASNumAct->setEnabled(true); _centralityAct->setEnabled(true); _cliqueAct->setEnabled(true); }
+      void disableAction() { _stubAct->setEnabled(false); _infoAct->setEnabled(false); _eraseAct->setEnabled(false); _zoomAct->setEnabled(false); _unzoomAct->setEnabled(false); _infWeightAct->setEnabled(false); _supWeightAct->setEnabled(false);  _infASNumAct->setEnabled(false);  _supASNumAct->setEnabled(false); _cliqueAct->setEnabled(false); _centralityAct->setEnabled(false); }
 
 
    public :
@@ -115,6 +116,7 @@ class mainWindow : public QMainWindow
       void infASNum();
       void supASNum();
       void clique();
+      void centrality();
 
 };
 

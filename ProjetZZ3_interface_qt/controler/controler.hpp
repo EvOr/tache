@@ -10,6 +10,8 @@ class Controler{
       Graph graph;
       std::string filename;
       std::map< vertex_descriptor , coordonnes> mescoords;
+      //std::map<vertex_descriptor, double> mespoids;
+      //tableau_de_poids vc_map;
       std::map< vertex_descriptor , coordonnes> mescoords_tmp;
       std::vector< std::pair<vertex_descriptor , vertex_descriptor> > liens;
       std::vector< std::pair<vertex_descriptor , vertex_descriptor> > liens_tmp;
@@ -42,6 +44,7 @@ class Controler{
       void getSubGraph(int i, int j);
       int getNbClique() {return clique.size(); }
       void computeClique();
+      void computeCentrality();
       
 
       //inline Graph & getPeersGraph(){return file_reader.getPeersGraph();};

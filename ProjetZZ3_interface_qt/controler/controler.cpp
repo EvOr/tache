@@ -190,6 +190,7 @@ void Controler::getGraphWeightInf(int i, Graph & g2)
       // on ajoute l'arete reliant les deux sommet si elle est inferieure a un certain poids
       as_number_to_vertex_type::const_iterator found_i1 =  as_number_to_vertex.find(graph[source].asn);
       as_number_to_vertex_type::const_iterator found_i2 =  as_number_to_vertex.find(graph[target].asn);
+
       if(g2[e].weight < i)
       {
 	 boost::tie(e,found) = boost::add_edge( mapping[source], mapping[target], g2);
@@ -447,3 +448,11 @@ std::cout << "calcul du nombre de cliques" << std::endl;
 std::cout << "fin du calcul du nombre de cliques" << std::endl;
    }
 }
+
+
+void Controler::computeCentrality()
+{
+//   brandes_betweenness_centrality(graph, vc_map);
+}
+
+
