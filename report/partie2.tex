@@ -1,26 +1,29 @@
 \section{Le logiciel de visualisation et d'analyse de l'internet}
 \subsection{Objectifs}
-Le but du projet est de produire un logiciel qui permette la visualisation de la topologie d'internet :
+Le but du projet est de produire un logiciel qui permette la visualisation de la topologie d'internet et en particulier du coeur du réseau.
+
 \subsubsection{Objectifs de l'application}
 \label{obj}
 \paragraph{Analyse de la topologie}
-Construire un graphe contenant la topologie d'internet et permettant son analyse en se servant des méthodes disponibles dans la librairie graphe de \textit{Boost}.
+Construire la topologie de l'Internet et l'analyser grâce à différents algorithmes. La librairie \textit{Boost} servant de base pour ces derniers.
 
 \paragraph{Affichage de la topologie}
 Réaliser une interface agréable dans la librairie de notre choix et lui permettre d'afficher l'intégralité de l'analyse réalisée.
 
+
+\paragraph{Evolutivité}
+Permettre l'implémentation de nouveau algorithmes d'analyse et de placement de points facilement.
+
 \subsubsection{Objectif pédagogiques}
-Au delà, de l'objectif de réalisation d'une application et de l'organisation que cela suppose. Un certains nombre d'objectifs pédagogique ont été fixés par notre tuteur ou par nous-même.
+Au delà de l'objectif de réalisation d'une application et de l'organisation que cela nécessite, un certain nombre d'objectifs pédagogique ont été convenus.
 
 \paragraph{Objectifs fixés dès le départ : } 
-\paragraph{}L'objectif principal est bien évidemment d'apprendre à maîtriser la librairie boost de C++, principalement sa partie sur les graphs. Il était aussi question d'approfondir notre connaissance de la topologie d'internet.
+\paragraph{} L'objectif principal est bien évidemment d'apprendre à maîtriser la librairie boost (C++), principalement sa partie sur les graphs. Il était aussi question d'approfondir notre connaissance de la topologie de l'Internet.
 
-\paragraph{Objectifs personnels suppl\'ementaires : }
-\paragraph{} En outre, nous nous sommes nous-même fixés des objectifs. En effet, l'utilisation d'une librairie graphique pour représenter la topologie d'internet était nécessaire mais son choix nous était réservé. Nous avons choisi d'utiliser Qt, et ce pour deux raisons. La première est que nous voulions approfondir le cours sur Qt que nous allions avoir dans le cadre de nos études à l'ISIMA.
+\paragraph{Objectifs d'auto-apprentissage : }
+\paragraph{}  Est nécessaire l'utilisation d'une librairie graphique pour représenter la topologie de l'Internet. Son choix nous était réservé. Nous avons choisi d'utiliser Qt pour deux raisons. La première est que nous voulions approfondir le cours sur Qt que nous allions avoir dans le cadre de nos études à l'ISIMA. La seconde est que, sous la pression de Nokia, cette librairie est récemment passé sous licence LGPL ce qui veut dire que les développeurs d'applications commerciales vont pouvoir développer gratuitement autour de Qt (sans payer les très onéreuses licences jusqu'à présent nécessaires pour vendre quelque chose). Il est fort probable que Qt prennent beaucoup plus d'ampleur dans les prochaines années.
 
-La seconde est que, sous la pression de Nokia, cette librairie est récemment passé sous licence LGPL ce qui veut dire que les développeurs d'applications commerciales vont pouvoir développer gratuitement autour de Qt (sans payer les très onéreuses licences jusqu'à présent nécessaires pour vendre quelque chose). Il est fort probable que Qt prennent beaucoup plus d'ampleur dans les prochaines années.
-
-\paragraph{} Nous nous sommes fixés un autre objectif, celui d'apprendre à utiliser git, pour les raisons évoqué en \ref{gitPar} subversion ne nous convenait pas, mais nous ne connaissions pas vraiment git pour autant, néanmoins après avoir visionner une conférence de Linus Torvalds sur le sujet, il nous a semblé logique et nécessaire d'appréhender git et de s'en servir pour le projet. D'autant plus que l'un comme l'autre nous avions effectué nos stages avec subversion ou cvs.
+\paragraph{} Nous nous sommes fixés un autre objectif, celui d'apprendre à utiliser git, pour les raisons évoqué en \ref{gitPar} subversion ne nous convenait pas, mais nous ne connaissions pas vraiment git pour autant. Néanmoins, après avoir visionner une conférence de Linus Torvalds sur le sujet, il nous a semblé logique et nécessaire d'appréhender git et de s'en servir en particulier pour nôtre projet. D'autant plus que l'un comme l'autre nous avions effectué nos stages avec subversion ou cvs.
 
 \subsubsection{Déroulement du projet}
 
