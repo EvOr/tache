@@ -473,4 +473,49 @@ void Controler::computeCentrality()
 //}   
 }
 
+std::string Controler::getInfoAS(int i)
+{
+   std::string s = "";
+
+   boost::graph_traits<Graph>::vertex_iterator vit, vend;
+   Graph::vertex_descriptor vd1 = -1, vd2 = -1;
+
+   std::ostringstream out;
+   out << i;
+
+   for( boost::tie ( vit,vend)  = boost::vertices( graph ); vit != vend; ++vit)
+   {
+      if(graph[*vit].asn == i)
+      {
+         vd1 = *vit;
+         break;
+      }
+   }
+
+   for( boost::tie ( vit,vend)  = boost::vertices( noStubGraph ); vit != vend; ++vit)
+   {
+      if(graph[*vit].asn == i)
+      {
+         vd2 = *vit;
+         break;
+      }
+   }
+
+   if(vd1 != -1)
+   {
+      s += "As number :\t" + out.str() + "\n";
+      s += (graph[vd1].is_transit)?"\ttransit\n":"\tstub\n";  
+      if(vd2 != -1)
+      {
+         std::ostringstream out2;
+         out2 << mespoids[vd2];
+         s += "Centrality :\t" + out2.str(); 
+      }
+   }
+   else
+      s = "No such AS " + out.str();
+   
+return s;
+}
+
 

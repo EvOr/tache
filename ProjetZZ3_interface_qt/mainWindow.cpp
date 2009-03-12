@@ -278,7 +278,7 @@ void mainWindow::afficherInfoAs()
    int value = -1;
    value = QInputDialog::getInteger(this, "Information about an AS", "AS Number : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);    
    if (ok && value > -1)
-       QMessageBox::information(this, QString::fromStdString("AS Information"), "You request information about the AS number " + QString::number(value), QMessageBox::Ok, QMessageBox::NoButton);
+       QMessageBox::information(this, QString::fromStdString("AS Information"), QString::fromStdString(_controler->getInfoAS(value)), QMessageBox::Ok, QMessageBox::NoButton);
 
 }
 

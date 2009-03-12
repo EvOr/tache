@@ -4,6 +4,7 @@
 #include "../graph/graph.hpp"
 #include "../graph/bron_kerbosch.hpp"
 #include <string>
+#include <sstream>
 
 class Controler{
    protected:
@@ -45,7 +46,7 @@ class Controler{
       int getNbClique() {return clique.size(); }
       void computeClique();
       void computeCentrality();
-      
+      std::string getInfoAS(int i);
 
       //inline Graph & getPeersGraph(){return file_reader.getPeersGraph();};
 };
