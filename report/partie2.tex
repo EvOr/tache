@@ -119,9 +119,11 @@ Centraliser nos sources sur la toile, nous a semblé être la meilleure solution
 \label{mvcText}
 Lorsque l'on développe une application disposant d'une interface graphique, la base du développement est de séparer la partie traitement ou métier de l'interface à proprement parler. Il est souvent utile de rajouter une couche d'interfaçage entre la partie métier et la partie affichage. Cette modélisation s'appelle Modèle Vue Controlleur. Nous avons choisi d'implémenter ce modèle dans notre projet. La partie métier étant le graph représentant les AS de l'internet et leur liens. Un schéma très superficiel du pattern est présenté en figure \ref{mvc}.
 
-L'utilisation que nous avons faites de l'objet Graph une fois créé, analysé et rempli, peut être assimiler à l'accès à une base de données. L'ensemble des méthodes d'accès se trouvant dans le controlleur, la partie métier n'en a absolument aucune connaissance. De même, la partie affichage n'a accès qu'aux méthodes du controlleur.
+L'utilisation que nous avons faites de l'objet Graph une fois créé, analysé et rempli, peut être assimiler à l'accès à une base de données. L'ensemble des méthodes d'accès se trouvant dans le controlleur, la partie métier n'en a absolument aucune connaissance. De même, la partie affichage n'a accès qu'aux méthodes du contrôleur.
 
-Le but de ce pattern est de permettre aux développeurs de changer la vue en ne modifiant aucune autre partie du code, ou de modifier la partie métier sans modifier le code de la vue. En outre, un tel découpage facilite la répartition des tâches dans l'équipe.
+Le but de ce pattern est de permettre aux développeurs de changer la vue en ne modifiant aucune autre partie du code, ou de modifier la partie métier sans modifier le code de la vue. Ce modèle met l'accent sur l'évolutivité et la maintenabilité du code. 
+
+En outre, un tel découpage facilite la répartition des tâches dans l'équipe.
 
 \begin{figure}[H]
 \begin{center}
