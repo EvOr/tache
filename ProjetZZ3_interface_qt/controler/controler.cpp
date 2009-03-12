@@ -93,17 +93,19 @@ void Controler::load_triplet(std::string const & filename){
 
    read_triplet(filename,transit_as);
    //Parcours du graph
+   int i=0;
    for( boost::tie ( vit,vend)  = boost::vertices( graph ); vit != vend; ++vit)
    {
-      //TODO Gestion des vrais numéros d'AS...
       v=*vit;
       //      int asnumber=graph[].as
       found=transit_as.find(graph[v].asn);
       //Affectation de la propriété transit
       graph[v].is_transit=(found == transit_as.end())?false:true; 
+
       if(graph[v].is_transit)
-	 std::cout << graph[v].asn << " : " << graph[v].is_transit << std::endl;
+	 i++;
    }
+   std::cout<< i << std::endl;
 }
 
 void Controler::getNonStubsGraph(Graph & g2)
