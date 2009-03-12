@@ -113,7 +113,7 @@ void mainWindow::initAction()
    QObject::connect(_infoAct, SIGNAL(triggered()), this, SLOT(afficherInfoAs()));
    
 
-   _stubAct = new QAction("Display without stub", this);
+   _stubAct = new QAction("Load triplet file", this);
    _stubAct->setStatusTip("Display the graph without its stub.");
    QObject::connect(_stubAct, SIGNAL(triggered()), this, SLOT(afficherNonStub()));
 
@@ -121,13 +121,13 @@ void mainWindow::initAction()
    _zoomAct->setStatusTip("Zoom on the neighborhood of a specific AS.");
    QObject::connect(_zoomAct, SIGNAL(triggered()), this, SLOT(zoom()));
 
-   _unzoomAct= new QAction("UnZoom", this);
+   _unzoomAct= new QAction("Return to global graph", this);
    _unzoomAct->setStatusTip("Return on the global graph.");
    QObject::connect(_unzoomAct, SIGNAL(triggered()), this, SLOT(unzoom()));
 
    _infWeightAct= new QAction("Display AS by inferior weigth", this);
    _infWeightAct->setStatusTip("Display only AS with a weight inferior to a given one.");
-   QObject::connect(_infWeightAct, SIGNAL(triggered()), this, SLOT(infweight()));
+   QObject::connect(_infWeightAct, SIGNAL(triggered()), this, SLOT(infWeight()));
 
    _supWeightAct= new QAction("Display AS by superior weigth", this);
    _supWeightAct->setStatusTip("Display only AS with a weight superior to a given one.");
@@ -291,6 +291,8 @@ void mainWindow::afficherNonStub()
    {
       try{
          _controler->load_triplet(tripletFile.toStdString());
+         _controler->getSubGraph(0, 0);
+         drawGraphTmp();
       }
       catch(ReaderException & e)
       {
@@ -380,28 +382,17 @@ void mainWindow::infWeight()
    bool ok;
    int value = -1;
    double t;
-   std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
 
    value = QInputDialog::getInteger(this, "Display by weight", "Maximum weight : ", 0, 0, 10000, 1, &ok);
 
    if (ok && value > -1)
    {
-      int l = _controler->findAS(value);  
+      t = time(0);
+      _controler->getSubGraph(value, 1);
+      t = t - time(0);
+      setTemps(t);
 
-      if( l > -1)
-      {
-         t = time(0);
-         _controler->getSubGraph(value, 1);
-         t = t - time(0);
-         setTemps(t);
-
-         drawGraphTmp();
-      }
-      else
-      {
-         QMessageBox::warning(this, QString::fromStdString("Display by Weight"), "Bad request", QMessageBox::Ok, QMessageBox::NoButton);
-      }
-
+      drawGraphTmp();
    }
    else
    {
@@ -415,28 +406,17 @@ void mainWindow::supWeight()
    bool ok;
    int value = -1;
    double t;
-   std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
 
    value = QInputDialog::getInteger(this, "Display by weight", "Minimum weight : ", 0, 0, 10000, 1, &ok);
 
    if (ok && value > -1)
    {
-      int l = _controler->findAS(value);  
+      t = time(0);
+      _controler->getSubGraph(value, 2);
+      t = t - time(0);
+      setTemps(t);
 
-      if( l > -1)
-      {
-         t = time(0);
-         _controler->getSubGraph(value, 2);
-         t = t - time(0);
-         setTemps(t);
-
-         drawGraphTmp();
-      }
-      else
-      {
-         QMessageBox::warning(this, QString::fromStdString("Display by Weight"), "Bad request", QMessageBox::Ok, QMessageBox::NoButton);
-      }
-
+      drawGraphTmp();
    }
    else
    {
@@ -450,28 +430,17 @@ void mainWindow::infASNum()
    bool ok;
    int value = -1;
    double t;
-   std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
 
    value = QInputDialog::getInteger(this, "Display by AS number", "Maximum AS number : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);
 
    if (ok && value > -1)
    {
-      int l = _controler->findAS(value);  
+      t = time(0);
+      _controler->getSubGraph(value, 3);
+      t = t - time(0);
+      setTemps(t);
 
-      if( l > -1)
-      {
-         t = time(0);
-         _controler->getSubGraph(value, 3);
-         t = t - time(0);
-         setTemps(t);
-
-         drawGraphTmp();
-      }
-      else
-      {
-         QMessageBox::warning(this, QString::fromStdString("Display by AS number"), "Bad request", QMessageBox::Ok, QMessageBox::NoButton);
-      }
-
+      drawGraphTmp();
    }
    else
    {
@@ -485,28 +454,17 @@ void mainWindow::supASNum()
    bool ok;
    int value = -1;
    double t;
-   std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
 
    value = QInputDialog::getInteger(this, "Display by AS number", "Minimum AS number : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);
 
    if (ok && value > -1)
    {
-      int l = _controler->findAS(value);  
+      t = time(0);
+      _controler->getSubGraph(value, 4);
+      t = t - time(0);
+      setTemps(t);
 
-      if( l > -1)
-      {
-         t = time(0);
-         _controler->getSubGraph(value, 4);
-         t = t - time(0);
-         setTemps(t);
-
-         drawGraphTmp();
-      }
-      else
-      {
-         QMessageBox::warning(this, QString::fromStdString("Display by AS number"), "Bad request", QMessageBox::Ok, QMessageBox::NoButton);
-      }
-
+      drawGraphTmp();
    }
    else
    {
