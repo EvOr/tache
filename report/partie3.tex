@@ -1,21 +1,29 @@
 \section{Utilisation du logiciel}
+
+Les deux objectifs présentés en \ref{obj} étaient à l'origine plus vagues. Nous avions le choix entre pousser l'analyse très loin et ne pas faire une interface graphique très évoluée, ou trouver un juste milieu. Ambitieux, nous souhaitions pousser l'analyse loin et réaliser une interface graphique évoluée.
+
 \subsection{Fonctionnement global}
+A partir de fichiers de données recensant la topologie d'internet et sa structure. Nous devons, en outre, construire un graphe et permettre son affichage dans une fenêtre en Qt.
 
-\begin{figure}[!ht]
-\begin{center}
-        \includegraphics[width=0.7\textwidth]{./schema/file_parser.png}
-\caption{Le fonctionnement du file\_parser (EVOR dit : ``Sch\'ema useless'' }
-\label{file_parser}
-\end{center}
-\end{figure}
+Nous venons de voir que la base de l'application est \textit{Boost} et que nous avons adopté le pattern MVC afin de développer de manière plus sereine. La coeur de ce système est la communication entre le modèle et la vue, en d'autres termes : le contrôleur. Voici la liste de ses fonctionnalités :
+\begin{itemize}
+ \item lancer la lecture des fichiers de données afin de construire le graphe,
+\item obtenir le nombre d'AS, de liens, et d'autres informations globales sur le graphe,
+\item de récupérer le graphe sans les stubs,
+\item de récupérer l'adjacence d'un AS,
+\item de récupérer les informations concernant un AS (centrality, numéro),
+\item de ne récupérer qu'une partie du graphe en fonction de la centralité des sommets,
+\item de calculer les coordonnées que les sommets doivent avoir sur l'interface graphique.
+\end{itemize}
 
+L'ensemble de ses fonctionnalités se retrouve dans l'interface graphique, qui sera présentée ci-dessous.
 
-ATTENTION : \'ebauche pour cette partie.
+%ATTENTION : \'ebauche pour cette partie.
 \subsection{Description du programme}
 
 Le programme tel que le voit l'utilisateur est une fen\^etre graphique avec un menu en haut, une zone d'affichage au centre, et une zone de notification en bas.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
  \fbox
  {
@@ -38,7 +46,7 @@ Lors du lancement du programme, l'utilisateur se retrouve devant un fen\^etre o\
 \par
 \`A ce stade l\`a, l'utilisation des options ne lui est d'aucune utilit\'e. Il peut aller dans le menu \textit{About} pour avoir des informations sur le programme, comme montrt\'e figure \ref{ecran_about}.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
  \fbox
  {
@@ -50,7 +58,7 @@ Lors du lancement du programme, l'utilisateur se retrouve devant un fen\^etre o\
 \par
 Il peut aussi d\'ecider d'aller explorer le menu \textit{Fichier}, ce qui lui laissera le choix entre ouvrir un fichier de donn\'ees pour construire un graphe ou quitter le programme. Ce menu est illustr\'e figure \ref{ecran_fichier}.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
  \fbox
  {
@@ -61,7 +69,7 @@ Il peut aussi d\'ecider d'aller explorer le menu \textit{Fichier}, ce qui lui la
 
 S'il choisit d'ouvrir un fichier de donn\'ees, une nouvelle fen\^etre de navigation s'ouvre et lui demande de choisir son fichier, c'est la figure \ref{ecran_donnees}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
  \fbox
  {
@@ -73,7 +81,7 @@ S'il choisit d'ouvrir un fichier de donn\'ees, une nouvelle fen\^etre de navigat
 L'utilisateur choisit un fichier de donn\'ees \`a ouvrir et le logiciel se charge d'afficher le graphe correspondant en organisant les sommets sur un polyg\^one r\'egulier \`a n c\^ot\'es.
 La barre de status est mise \`a jour avec des informations telles que le nombre de sommets, le nombre d'ar\^etes ou le nombre de clique. Il obtient ainsi un \'ecran comme on peut en voir un figure \ref{ecran_graph}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
  \fbox
  {
@@ -81,3 +89,8 @@ La barre de status est mise \`a jour avec des informations telles que le nombre 
  }
   \caption{\label{ecran_graph}Ecran principal du programme}
 \end{figure}
+
+\subsection{Mise en évidence des caractéristiques d'internet}
+%TODO en fonction de ce que l'on a...
+
+\subsection{Bilan}

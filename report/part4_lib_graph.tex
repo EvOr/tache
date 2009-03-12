@@ -4,7 +4,7 @@ Le developpement avec Qt s'est fait \`a l'aide de la documentation tr\`es fourni
 La principale difficult\'e de d\'evelopper avec Qt r\'eside dans la compr\'ehension des slots et signaux. Ceux sont eux qui font toute l'interactivit\'e d'une interface graphique. Pour rendre op\'erationnelle une entr\'ee dans un menu, il faut connecter l'action qu'elle repr\'esente au slot correspondant dans son objet parent.
 \par
 Notre fen\^etre principale contient donc les d\'eclarations des actions correspondant aux diff\'erentes entr\'es des menus, par exemple sur la figure \ref{exemple_action_qt}, on voit la d\'eclaration de l'action permettant de quitter le programme en fermant toutes les fen\^etres.
-\begin{figure}[ht]
+\begin{figure}[H]
    \begin{center}
       \begin{tabular}{l}
          \hline
@@ -17,7 +17,7 @@ Notre fen\^etre principale contient donc les d\'eclarations des actions correspo
 Ensuite, lors de l'initialiation de la fen\^etre, il faut associer les 
 entr\'ees du menu \`a une action, ce qui est pr\'esent\'e figure \ref{exemple_menu_qt}.
 
-\begin{figure}[ht]
+\begin{figure}[H]
    \begin{center}
       \begin{tabular}{l}
          \hline
@@ -30,7 +30,7 @@ entr\'ees du menu \`a une action, ce qui est pr\'esent\'e figure \ref{exemple_me
 
 Enfin, il faut associer l'action \`a un slot d'un des \'el\'ement du programme si on veut que cela fasse quelque chose lorsque l'on clique sur l'entr\'e du menu. Figure \ref{exemple_initAction_qt}, on peut voir que l'action est d'abord cr\'e\'ee avec un nom, et attach\'ee \`a un objet, ici \textit{this} fait r\'ef\'erence \`a la fen\^etre principale. On assigne ensuite un raccourcis et une description \`a l'action. Finalement, l'\'etape la plus importante, on connecte l'action au slot de fermeture de la fen\^etre principale.
 
-\begin{figure}[ht]
+\begin{figure}[H]
    \begin{center}
       \begin{tabular}{l}
          \hline

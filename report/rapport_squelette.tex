@@ -7,9 +7,10 @@
 \usepackage{fancyhdr}
 \usepackage[pdftex]{graphicx}
 \usepackage{graphics}
+\usepackage{float}
 \usepackage{latexsym}
 \usepackage{amsmath,amsfonts,amssymb}
-\usepackage{tikz}
+%\usepackage{tikz}
 % \usepackage{placeins}
 % \usepackage[french, figure, boxed, longend]{algorithm2e}
 \usepackage[francais,english]{babel}
@@ -44,7 +45,7 @@
 \author{Jan Villeminot \& Bastien Legrand}
 
 \begin{document}
-
+\selectlanguage{francais}
 \input{titre}
 
 \newpage
@@ -57,10 +58,10 @@
 
 
 \newpage
-\selectlanguage{francais}
+
 \addtocontents{toc}{\protect\contentsline{section}{R\'esum\'e}{}}
 \begin{abstract}
-
+%\input{resume}
 \end{abstract}
 \thispagestyle{empty}
 
@@ -72,8 +73,9 @@
 
 \end{abstract}
 \thispagestyle{empty}
-\selectlanguage{francais}
 
+
+\selectlanguage{francais}
 \newpage
 \fancyhead[R]{Lexique}
 \input{lexique}
@@ -91,13 +93,13 @@
 
 \input{representation_internet}
 
-\newpage
+\pagebreak
 \input{partie2}
 
-\newpage
+\pagebreak
 \input{partie3}
 
-\newpage
+\pagebreak
 \input{partie4}
 
 \end{document}
