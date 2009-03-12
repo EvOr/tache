@@ -504,14 +504,16 @@ std::string Controler::getInfoAS(int i)
    if(vd1 != -1)
    {
       s += "As number :\t" + out.str() + "\n";
-      s += (graph[vd1].is_transit)?"\ttransit\n":"\tstub\n";  
       if(vd2 != -1)
       {
+         s += "type :\t" + (graph[vd1].is_transit)?"\ttransit\n":"\tstub\n";  
          std::ostringstream out2;
          out2 << mespoids[vd2];
-         s += "Centrality :\t" + out2.str(); 
+         s += "Centrality :\t" + out2.str();
       }
-   }
+      else
+         s += "type :\tunknown"; 
+      }
    else
       s = "No such AS " + out.str();
    
