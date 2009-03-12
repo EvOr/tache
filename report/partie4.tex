@@ -1,12 +1,20 @@
 \section{Développement du logiciel}
 \subsection{Développement avec boost}
-La prise en main de \textit{Boost} a été la principale difficulté du projet. En effet, la documentation fournie avec la librairie, disponible sur le site officiel, ne ressemble en rien aux documentations de la stl ou de java... C'est d'autant plus difficile que la philosophie de développement de \boost est assez éloignée de ce que nous connaissions juqu'alors et finalement assez éloignée de la programmation objet : la plupart des méthodes que nous utilisons sont en fait des fonctions.
+\subsubsection{Des difficultés de prise en main}
+La prise en main de \textit{Boost} a été la principale difficulté du projet. En effet, la documentation fournie avec la librairie, disponible sur le site officiel, ne ressemble en rien aux documentations de la stl ou de java... C'est d'autant plus difficile que la philosophie de développement de \boost est assez éloignée de ce que nous connaissions juqu'alors et finalement assez éloignée de la programmation objet (pour la partie graph) : la plupart des méthodes que nous utilisons sont en fait des fonctions.
 
-Pour trouver les fonctions relatives aux objets, ou comment les utiliser, il faut parcourir une dizaine de pages web de documentation par fonction expliquant comment les appeler i.e. : comment créer les structures adéquates, quels arguments et structures passés en paramètres, le type de retour, etc. Cette documentation n'est pas exhaustive et manque cruellement d'exemples, elle est clairement destinée à un public d'experts.
+Pour trouver les fonctions relatives aux objets, ou comment les utiliser, il faut parcourir une dizaine de pages web de documentation par fonction expliquant comment les appeler i.e. : comment créer les structures adéquates, quels arguments et structures passés en paramètres et comment les créer... Cette documentation n'est pour autant pas exhaustive et manque cruellement d'exemples, elle est clairement destinée à un public d'experts.
 
-Enfin, les erreurs retournées par gcc à la compilation de la librairie sont incompréhensibles, c'est pourquoi il faut utiliser un compilateur particulier. \verb|gfilt| est compilateur utilisant perl pour analyser les erreurs de compilation et afficher des erreurs intelligibles. 
+\subsubsection {Compilateur spécifique}
+Les erreurs retournées par gcc à la compilation de la librairie sont incompréhensibles, c'est pourquoi il faut utiliser un compilateur particulier. \verb|gfilt| est compilateur utilisant perl pour analyser les erreurs de compilation et afficher des erreurs intelligibles. 
 
-Tout au long du projet, la méthode la plus efficace pour avancer lorsque nous bloquions sur \boost a été d'appeler à l'aide notre tuteur de projet. 
+Malheureusement, il n'est pas possible de compiler Qt avec ce compilateur. Nous avons donc créé un dossier de développement spécifique à \textit{Boost} que nous mergions avec la partie Qt quand nous étions satisfaits du résultat. La solution la plus efficace aurait été de créer une branche sous git, mais nous n'avions pas encore décidé d'utiliser git lorsque nous avons rencontré ce problème.
+
+\subsubsection{Bilan}
+
+Tout au long du projet, la méthode la plus efficace pour avancer lorsque nous bloquions sur \boost a été de demander l'éclairage de notre tuteur de projet. 
+
+\textit{Boost} est une librairie véritablement complexe dans sa construction, son code, sa compilation et son fonctionnement. L'utilisation massive des génériques et de la méta-programmation rend la compilation relativemnet longue.
 ~\\
 Un exemple d'utilisation  concrète de \textit{Boost}, des difficultés dûes au côté ``non objet'' de la partie graphe et de ses apports en terme de performance est le traitement du fichier contenant la ``table de routage d'internet''.
 
@@ -125,15 +133,24 @@ Pour signaler, l'erreur à la couche supérieure (le controlleur), nous remonton
 
 \subsection{Expérimentation sur le code}
 Notre connaissance grandissante des librairies utilisées nous a permis de pratiquer diverses expérimentations sur nos algorithmes, traitements et affichages.
+\subsubsection{Expérimentation avec Qt}
+\paragraph{A la recherche du Thread perdu\\}
+%TODO pala
 
 \subsubsection{Expérimentation avec boost}
-\paragraph{Recherche des peers\\}
-\par La recherche des peers a été développé en deux étapes. La première étape fut de trouver un moyen de recenser les Peers à partir de fichier de routage uniquement, afin de permettre de trouver les cliques avec un algorithme ``maison''. Cette méthode se basait sur le ciblage des AS qui n'avaient ni client, ni peer : ce sont n\'ecessairement des stubs. A ce moment là, nous stockions plusieurs graphs dans l'objet contrôleur dont le principale, et celui sans les stubs... 
 
-En revanche, cette méthode présupposait que le fichier était ordonné et bien que ce soit le cas avec le fichier qui nous servait de base cela ne le serait pas forcément avec tous les fichiers devant être utilisés. Et ordonner un fichier de 100000 lignes reléverait presque de la mythologie grecque s'il fallait le faire à la main. Ordonner ce fichier avec une fonction dédiée était possible, mais il fallait trouver un moyen plus ``propre'' et performant.
+\paragraph{Kamada Kawai Layout}
+%TODO pala
+
+\paragraph{Recherche des peers\\}
+\par La recherche des peers a été développé en deux étapes. La première étape fut de trouver un moyen de recenser les Peers à partir de fichier de routage uniquement, afin de permettre de trouver les cliques avec un algorithme ``maison''. Cette méthode se basait sur le ciblage des AS qui n'avaient ni client, ni peer : ce sont n\'ecessairement des stubs. A ce moment là, nous stockions plusieurs graphs dans l'objet contrôleur dont le principale et celui sans les stubs.
+
+Cette méthode présupposait que le fichier était ordonné et bien que ce soit le cas avec le fichier qui nous servait de base cela ne le serait pas forcément avec tous les fichiers devant être utilisés. Et ordonner manuellement un fichier de 100000 lignes reléverait d'un exploit digne d'un héros de la mythologie grecque. Ordonner ce fichier avec une fonction dédiée était possible, mais il fallait trouver un moyen plus ``propre'' et performant.
 
 \par Notre tuteur de projet, Monsieur Meulle, nous a fourni un nouveau fichier, avec des relations entre AS sous la forme de triplets, permettant d'identifier tr\`es rapidement les AS feuilles.
-Les liens entre AS sont plac\'ees sous la forme de triplets : {AS1, AS2, AS3} signifiant que pour joindre l'AS3, l'AS1 a du passer par l'AS2. Les AS du milieu sont donc forcément des AS de transit, les AS stubs sont alors facilement identifiables comme \'etant tous les autres... 
+Les liens entre AS sont plac\'ees sous la forme : {AS1, AS2, AS3} signifiant que pour joindre l'AS3, l'AS1 a dû passer par l'AS2. Les AS du milieu sont donc forcément des AS de transit, les AS stubs sont alors facilement identifiables comme \'etant tous les autres... 
 
-C'est à ce moment-là que le structure actuelle du programme a été clairement établie, nous ne stockons qu'un seul graphe dans le controlleur et celui-ci réalise un traitement de création d'un graphe spécifique en fonction de ce qui lui ait demandé. Un fonctionnement proche d'une base de données décrit en \ref{mvcText}.
+C'est à ce moment-là que le structure actuelle du programme a été clairement établie, nous ne stockons qu'un seul graphe dans le controlleur et celui-ci réalise un traitement de création d'un graphe spécifique en fonction de ce qui lui ait demandé. Un fonctionnement proche d'une base de données décrit en \ref{mvcText}. 
+
+C'est aussi à ce moment que l'utilisation du modèle MVC nous a permis de continuer à travailler sur l'ensemble du projet, pendant que l'un d'entre nous apportait les corrections nécessaires à la partie lecture de fichier, l'autre continuait de développer l'interface graphique. La fusion des deux parties s'est révélée triviale le contrôleur ne perdant pas de fonctionnalités, il ne restait plus qu'à l'adapter et à lui en ajouter de nouvelles.
 
