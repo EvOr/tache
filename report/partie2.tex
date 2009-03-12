@@ -28,6 +28,10 @@ Nous n'avons que très peu vu notre tuteur de projet en personne, la quasi total
 
 En contre-partie, cela demande une bonne organisation. En effet, quelques soient les décisions ou les problèmes rencontrés, il faut en rendre compte au tuteur lors de la prochaine réunion de travail suivante, réunion qui avait régulièrement lieu le Jeudi après-midi.
 
+\subsubsection{Méthode de travail}
+
+Afin d'optimiser la production, nous avons adopté une méthode de développement par itération. En fait, nous nous sommes répartis les tâches selon des fonctionnalités ``élémentaires'', par exemple afficher le graph avec circle_graph_layout ou réaliser l'extension du file_parser permettant de trouver les AS de transit. Après avoir isolé l'ensemble des fonctionnalités nécessaires d'une semaine à l'autre, nous affectons des priorités aux une est aux autres afin de pouvoir répartir les tâches entre les différents membres du binôme.
+
 \subsubsection{La librairie graph de boost}
 \input{presentation_boost}
 
@@ -130,7 +134,7 @@ Dès le départ, nous savions que nous allions manipuler un graphe. Nous avons, 
 
 Le contenu du graphe est identifié par des descripteurs, l'un pour les sommets, \verb|vertex_descriptor| et l'autre pour les arêtes, \verb|edge_descriptor|. Bien que ces descripteurs soient des simples entiers, il ne nous était pas possible d'utiliser les numéros des AS. \textit{Boost} génère donc un entier auto-incrémenté utilisé comme identifiant vis à vis d'un objet AS contenant notamment son véritable numéro. Cette objet est stocké par le Graph.
 
-Notre utilisation de l'objet graph ressemble à celui que l'on ferait d'une base de données. En considérant l'objet Graph comme une base de données, nous possèderions une table de sommets, et une table d'arêtes. La clé primaire de chacune de ces tables serait le descripteur correspondant (\verb|edge_descriptor| et \verb|vertex_descriptor|). Et nos entités seraient en faites des objets AS et ASLink (figure \ref{bdd}).
+Notre utilisation de l'objet graph ressemble à celui que l'on ferait d'une base de données. En considérant l'objet Graph comme tel, nous possèderions une table de sommets, et une table d'arêtes. La clé primaire de chacune de ces tables serait le descripteur correspondant (\verb|edge_descriptor| et \verb|vertex_descriptor|). Et nos entités seraient en faites des objets AS et ASLink (figure \ref{bdd}).
 
 Ces objets possèdent un certain nombre d'attributs nécessaires au bon fonctionnement de boost en plus de ceux qui nous intéressent : le type et le numéro de l'AS. Pour récupérer le type de l'un de ces objets il suffit de faire \verb|graph[descriptor].type|.
 
