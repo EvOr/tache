@@ -10,7 +10,6 @@ Construire la topologie de l'Internet et l'analyser grâce à différents algori
 \paragraph{Affichage de la topologie}
 Réaliser une interface agréable dans la librairie de notre choix et lui permettre d'afficher l'intégralité de l'analyse réalisée.
 
-
 \paragraph{Evolutivité}
 Permettre l'implémentation de nouveau algorithmes d'analyse et de placement de points facilement.
 
@@ -21,19 +20,19 @@ Au delà de l'objectif de réalisation d'une application et de l'organisation qu
 \paragraph{} L'objectif principal est bien évidemment d'apprendre à maîtriser la librairie boost (C++), principalement sa partie sur les graphs. Il était aussi question d'approfondir notre connaissance de la topologie de l'Internet.
 
 \paragraph{Objectifs d'auto-apprentissage : }
-\paragraph{}  Est nécessaire l'utilisation d'une librairie graphique pour représenter la topologie de l'Internet. Son choix nous était réservé. Nous avons choisi d'utiliser Qt pour deux raisons. La première est que nous voulions approfondir le cours sur Qt que nous allions avoir dans le cadre de nos études à l'ISIMA. La seconde est que, sous la pression de Nokia, cette librairie est récemment passé sous licence LGPL ce qui veut dire que les développeurs d'applications commerciales vont pouvoir développer gratuitement autour de Qt (sans payer les très onéreuses licences jusqu'à présent nécessaires pour vendre quelque chose). Il est fort probable que Qt prennent beaucoup plus d'ampleur dans les prochaines années.
+\paragraph{}  L'utilisation d'une librairie graphique pour représenter la topologie de l'Internet était nécessaire. Son choix nous était réservé. Nous avons choisi d'utiliser Qt pour deux raisons. La première est que nous voulions approfondir le cours sur Qt que nous allions avoir dans le cadre de nos études à l'ISIMA. La seconde est que, sous la pression de Nokia, cette librairie est récemment passée sous licence LGPL ce qui veut dire que les développeurs d'applications commerciales vont pouvoir développer gratuitement autour de Qt (sans payer les très onéreuses licences jusqu'à présent nécessaires pour vendre quelque chose). Il est fort probable que Qt prennent beaucoup plus d'ampleur dans les prochaines années.
 
-\paragraph{} Nous nous sommes fixés un autre objectif, celui d'apprendre à utiliser git, pour les raisons évoqué en \ref{gitPar} subversion ne nous convenait pas, mais nous ne connaissions pas vraiment git pour autant. Néanmoins, après avoir visionner une conférence de Linus Torvalds sur le sujet, il nous a semblé logique et nécessaire d'appréhender git et de s'en servir en particulier pour nôtre projet. D'autant plus que l'un comme l'autre nous avions effectué nos stages avec subversion ou cvs.
+\paragraph{} Nous nous sommes fixés un autre objectif : celui d'apprendre à utiliser git. Pour les raisons évoquées en \ref{gitPar}, subversion ne nous convenait pas, mais nous ne connaissions pas vraiment git pour autant. Après avoir visionner une conférence de Linus Torvalds sur le sujet, il nous a semblé logique et nécessaire d'appréhender git et de s'en servir en particulier pour notre projet. D'autant plus que l'un comme l'autre nous avions effectué nos stages avec subversion ou cvs.
 
 \subsubsection{Déroulement du projet}
 
-Nous n'avons que très peu vu notre tuteur de projet en personne, la quasi totalité du projet a été mené par des échanges de mails, et des discussions sur des messageries instantannées (Skype, gchat). De plus, il nous a donné une grande autonomie sur les décisions à prendre pour mener à bien nos objectifs.
+La quasi totalité du projet a été mené par des échanges de mails, et des discussions sur des messageries instantannées (Skype, gchat). De plus, il nous a donné une grande autonomie sur les décisions à prendre pour mener à bien nos objectifs. Ce mode de communication nous a permis d'avoir plus d'expérience dans le travail à distance.
 
-En contre-partie, cela demande une bonne organisation. En effet, quelques soient les décisions ou les problèmes rencontrés, il faut en rendre compte au tuteur lors de la prochaine réunion de travail suivante, réunion qui avait régulièrement lieu le Jeudi après-midi.
+L'autonomie demande une bonne organisation. En effet, quelques soient les décisions ou les problèmes rencontrés, il faut en rendre compte au tuteur lors de la prochaine réunion de travail suivante, réunion qui avait régulièrement lieu le Jeudi après-midi.
 
 \subsubsection{Méthode de travail}
 
-Afin d'optimiser la production, nous avons adopté une méthode de développement par itération. En fait, nous nous sommes répartis les tâches selon des fonctionnalités ``élémentaires'', par exemple afficher le graph avec Circle Graph Layout ou réaliser l'extension du file\_parser permettant de trouver les AS de transit. Après avoir isolé l'ensemble des fonctionnalités nécessaires d'une semaine à l'autre, nous affectons des priorités aux une est aux autres afin de pouvoir mieux répartir les tâches entre les différents membres du binôme.
+Afin d'optimiser la production, nous avons adopté une méthode de développement par itération. En fait, nous nous sommes répartis les tâches selon des fonctionnalités ``élémentaires''. Après avoir isolé l'ensemble des fonctionnalités nécessaires d'une semaine à l'autre, nous ré-affectons des priorités aux différentes tâches afin d'être plus efficace dans leur parallèlisation et leur ordonnancement.
 
 \subsubsection{La librairie graph de boost}
 \input{presentation_boost}
@@ -57,7 +56,7 @@ Afin d'optimiser la production, nous avons adopté une méthode de développemen
 
 \begin{figure}[H]
 \begin{center}
-        \includegraphics[width=0.7\textwidth]{./schema/svn.png}
+        \includegraphics[width=0.65\textwidth]{./schema/svn.png}
 \caption{La gestion classique des sources : centralisation totale }
 \label{svn}
 \end{center}
@@ -70,7 +69,7 @@ Afin d'optimiser la production, nous avons adopté une méthode de développemen
 \subparagraph{} Git a été créé par Linus Torvalds en 2004, il avait besoin de remplacer BitKeeper pour la gestion des sources du noyau Linux, et il est évident qu'il ne peut pas mettre en place un serveur subversion pour un projet aussi vaste et avec autant de développeurs répartis au quatre coins du monde. Il a donc écrit, en quelques jours, un gestionnaire de sources distribué performant et qui a pour objectif de ne pas géner le développeur. En outre, Git effectue un checksum SHA1 des sources à chaque fois qu'une modifications est effectuée (commit ou push) ce qui permet d'être sûr de l'unicité des données...
 
 \paragraph{Que veut dire distribué ?} 
-\subparagraph{}Git est distribué, cela veut dire que chaque machine l'utilisant est un serveur et un client. En d'autres termes, chaque développeur peut ``commiter'' et effectuer des \verb|revert| en local. Ce qui permet de développer de manière beaucoup plus efficace, puisque les commits sont effectués en quelques millisecondes (le temps d'afficher la trace). Une fois que le développeur est satisfait de son travail, il peut demander aux autres de \verb|pull| (récupérer les sources) depuis sa machine, ou il peut \verb|push| (envoyer les sources) sur un serveur de fichiers central par exemple (figure \ref{git}). Tout ce que nécessite git pour fonctionner est un client et/ou un serveur ssh.
+\subparagraph{}Git est distribué, cela veut dire que chaque machine l'utilisant est à la fois un serveur et un client. En d'autres termes, chaque développeur peut ``commiter'' et effectuer des \verb|revert| en local. Ce qui permet de développer de manière beaucoup plus efficace, puisque les commits sont effectués en quelques millisecondes (le temps d'afficher la trace). Une fois que le développeur est satisfait de son travail, il peut demander aux autres de récupérer les sources (\verb|pull|)  depuis sa machine, ou il peut  envoyer les sources (\verb|push|) sur un serveur de fichiers central par exemple (figure \ref{git}). Tout ce que nécessite git pour fonctionner est un client et/ou un serveur ssh.
 
 
 \begin{figure}[H]
@@ -82,7 +81,6 @@ Afin d'optimiser la production, nous avons adopté une méthode de développemen
 \end{figure}
 
 \paragraph{Fonctionnement :} 
-
 \subparagraph{}La comparaison de fichiers sous git est un peu particulière, contrairement à subversion qui se base sur le nom du fichier et le numéro du commit, git se base sur un checksum du fichier. Il se sert en fait d'une base interne contenant l'intégralité des checksums des fichiers en fonction du numéro du commit correspondant mais ne se base que sur le checksum pour vérifier si deux fichiers sont différents, l'opération est donc très rapide et sûr.
 
 \subparagraph{} Concrètement, la clé du fonctionnement de git est l'utilisation massive des branches. En effet, dans git tout est une branche : chaque machine de chaque développeur est une branche et ce de manière totalement transparente. C'est à dire que le développeur peut \verb|commit| et \verb|revert| sa propre branche et l'envoyer ensuite sur la branche principale \verb|push| (\verb|master|). Avec les sources, l'historique des commits effectués en local est envoyé et n'importe quel développeur peut annuler n'importe quel commit...
@@ -112,8 +110,6 @@ Centraliser nos sources sur la toile, nous a semblé être la meilleure solution
 \end{itemize}
 
 \subsection{Aperçu du logiciel}
-
-
 
 \subsubsection{Modèle Vue Controlleur}
 \label{mvcText}
