@@ -1,11 +1,11 @@
 \section{Utilisation du logiciel}
 
-Les deux objectifs présentés en \ref{obj} étaient à l'origine plus vagues. Nous avions le choix entre pousser l'analyse très loin et ne pas faire une interface graphique très évoluée, ou trouver un juste milieu. Ambitieux, nous souhaitions pousser l'analyse loin et réaliser une interface graphique évoluée.
+Au cours de l'avancement du projet nous avons choisi un juste milieu entr ela quantit\'e de d\'eveloppementde l'interface graphique et les fonctionnalit\'es d'analyse du graphe. Ambitieux, nous souhaitions pousser l'analyse loin et réaliser une interface graphique évoluée.
 
 \subsection{Fonctionnement global}
-A partir de fichiers de données recensant la topologie d'internet et sa structure. Nous devons, entre autre, construire un graphe et permettre son affichage dans une fenêtre en Qt.
+Le logiciel fonctionne \`a partir de fichiers de données recensant la topologie d'internet et sa structure. Il doit permettre entre autre de construire un graphe et de permettre son affichage dans une fenêtre en Qt.
 
-Nous venons de voir que la base de l'application est \textit{Boost} et que nous avons adopté le pattern MVC afin de développer de manière plus sereine. La coeur de ce système est la communication entre le modèle et la vue, en d'autres termes : le contrôleur. Voici la liste de ses fonctionnalités :
+Rappelons le voeu de l'application est d'utiliser les structures de donn\'ees \textit{Boost} et que nous avons adopté le pattern MVC afin de développer de manière plus ind\'ependante l'interface graphique du coeur de l'application. La coeur de ce système est la communication entre le modèle et la vue, en d'autres termes : le contrôleur. Voici la liste de ses fonctionnalités :
 \begin{itemize}
  \item lancer la lecture des fichiers de données afin de construire le graphe,
 \item obtenir le nombre d'AS, de liens, et d'autres informations globales sur le graphe,
@@ -41,16 +41,16 @@ Le menu comporte trois types d'entr\'ees :
 \end{description}
 
 \par
-De nombreuses options sont disponibles pour l'utilisateur, et selon celles qu'il choisira d'utiliser, il en d\'ebloquera d'autres. Ces options permettent de jouer sur l'affichage du graphe et d'obtenir des informations sur les AS. Il y a :
+De nombreuses options sont disponibles pour l'utilisateur, et selon celles qu'il choisira d'utiliser, il en d\'ebloquera d'autres. Ces options permettent de jouer sur l'affichage du graphe et d'obtenir des informations sur les AS. Les fonctionnalit\'es impl\'ement\'ees sont les suivantes :
 \begin{itemize}
  \item R\'ecup\'eration d'informations sur un AS,
- \item Calcul du nombre de clique dans le graphe,
+ \item Calcul du nombre de cliques maximum dans le graphe gr\^ace \`a l'algorithme de Bron and Kerbosch,
  \item Chargement d'un fichier de triplets pour \'eliminer les stubs du graphe,
  \item Zoomer sur le proche voisinage d'un AS,
  \item Revenir au graphe de base,
- \item Calculer la centralit\'e des sommets,
- \item Afficher seulement les sommets avec un poids sup\'erieur \`a une certaine valeur,
- \item Afficher seulement les sommets avec un poids inf\'erieur \`a une certaine valeur
+ \item Calculer la centralit\'e de Freeman des sommets,
+ \item Afficher seulement les sommets avec une centralit\'e sup\'erieure \`a une certaine valeur,
+ \item Afficher seulement les sommets avec une centralit\'e inf\'erieure \`a une certaine valeur
  \item Afficher seulement les sommets avec un num\'ero d'AS sup\'erieur \`a une certaine valeur,
  \item Afficher seulement les sommets avec un num\'ero d'AS inf\'erieur \`a une certaine valeur
  \item effacer le graphe pour commencer une nouvelle \'etude.
@@ -61,41 +61,39 @@ Ces fonctions sont d\'ebloqu\'ees comme suit :
 \begin{figure}[H]
 \centering
  \includegraphics[width=0.8\textwidth]{./schema/seqMenu.png}
-  \caption{\label{seq_option}S\'equence des d\'eve\'erouillage d'options}
+  \caption{\label{seq_option}S\'equence des d\'ev\'erouillage d'options}
 \end{figure}
 
 
 \subsection{L'exp\'erience utilisateur}
 \par
-Lors du lancement du programme, l'utilisateur se retrouve devant un fen\^etre o\`u la zone d'affichage est vide et les compteurs de la zone de notification sontt tous \`a z\'ero comme c'est le cas sur la figure \ref{ecran_principal}.
+Lors du lancement du programme, l'utilisateur se retrouve devant un fen\^etre o\`u la zone d'affichage est vide et les compteurs de la zone de notification sont tous \`a z\'ero comme c'est le cas sur la figure \ref{ecran_principal}.
 \par
-\`A ce stade l\`a, l'utilisation des options ne lui est d'aucune utilit\'e car elles sont toutes bloqu\'ees en attendant qu'il charge un fichier. Il peut aller dans le menu \textit{About} pour avoir des informations sur le programme, comme montrt\'e figure \ref{ecran_about}.
+\`A ce stade, l'utilisation des options est inutile car elles sont toutes bloqu\'ees en attendant qu'un fichier soit charg\'e prooduisant un nouveau graphe. L'action du menu \textit{About} permet d'avoir des informations sur le programme, comme montr\'e figure \ref{ecran_about}.
 
 \begin{figure}[H]
 \centering
  \fbox
  {
- \includegraphics[width=16cm]{./schema/capture_ecran_about.png}
+ \includegraphics[width=8cm]{./schema/capture_ecran_about.png}
  }
-  \caption{\label{ecran_about}Informations sur le programme}
+  \caption{\label{ecran_about}Fen\^etre d'informations sur le programme}
 \end{figure}
 
 \par
-Il peut aussi d\'ecider d'aller explorer le menu \textit{Fichier}, ce qui lui laissera le choix entre ouvrir un fichier de donn\'ees pour construire un graphe ou quitter le programme. Ce menu est illustr\'e figure \ref{ecran_fichier}.
+Dans le menu \textit{Fichier}, l'utilisateur a le choix entre ouvrir un fichier de donn\'ees pour construire un graphe ou quitter le programme. Ce menu est illustr\'e figure \ref{ecran_fichier}.
 
 \begin{figure}[H]
 \centering
  \fbox
  {
- \includegraphics[width=16cm]{./schema/capture_ecran_fichier.png}
+ \includegraphics[width=12cm]{./schema/capture_ecran_fichier.png}
  }
   \caption{\label{ecran_fichier}Menu fichier}
 \end{figure}
 
-S'il choisit d'ouvrir un fichier de donn\'ees, une nouvelle fen\^etre de navigation s'ouvre et lui demande de choisir son fichier.
-
-L'utilisateur choisit un fichier de donn\'ees \`a ouvrir et le logiciel se charge d'afficher le graphe correspondant en organisant les sommets sur un polyg\^one r\'egulier \`a n c\^ot\'es.
-La barre de status est mise \`a jour avec des informations telles que le nombre de sommets, le nombre d'ar\^etes ou le temps de calcul. Il obtient ainsi un \'ecran comme on peut en voir un figure \ref{ecran_graph}
+Lorsque l'utilisateur choisit d'ouvrir un fichier de donn\'ees, une nouvelle fen\^etre de navigation s'ouvre et lui demande de choisir son fichier. Il choisit un fichier de donn\'ees \`a ouvrir et le logiciel se charge d'afficher le graphe correspondant en organisant les sommets sur un polyg\^one r\'egulier \`a n c\^ot\'es.
+La barre de statut est mise \`a jour avec des informations telles que le nombre de sommets, le nombre d'ar\^etes ou le temps de calcul. Un exemple de graphe est donn\'e figure \ref{ecran_graph}
 
 \begin{figure}[H]
 \centering
