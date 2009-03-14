@@ -3,15 +3,15 @@
 % \begin{document}
 
 \subsection{Repr\'esentation de la topologie}
+\subparagraph{}
+Repr\'esenter l'Internet sous la forme d'un graphe peut s'av\'erer particulièrement difficile. En effet, si l'on regarde les donn\'ees r\'ecolt\'ees au niveau de diff\'erentes sources, on s'aperçoit que le graphe \`a repr\'esenter est immense : pour la topologie IPv4, il comporte 30079 sommets et 159368 ar\^etes.
+\par
+La topologie en IPv6 est compos\'ee quant\`a elle de 1308 sommets et 9420 ar\^etes.
 
-Repr\'esenter l'Internet sous la forme d'un graphe peut s'av\'erer particulièrement difficile. En effet, si l'on regarde les donn\'ees r\'ecolt\'ees au niveau de diff\'erentes sources, on s'aperçoit que le graphe \`a repr\'esenter est immense : pour la topologie IPv4, il comporte 30079 sommets et 159368 ar\`etes.
 \par
-La topologie en IPv6 est compos\'ee quant\`a elle de 1308 sommets et 9420 sommets.
-
+Au tout d\'ebut du projet, nous avons essayé de repr\'esenter le graphe complet, avec tous ses sommets et toutes ses ar\^etes. Le r\'esultat obtenu est confu et illisible. Il nous a donc fallu envisager des solutions pour all\'eger nos traitements et notre affichage.
 \par
-Au tout d\'ebut du projet, nous avons essayé de repr\'esenter le graphe complet, avec tous ses sommets et toutes ses ar\^etes. Le r\'esultat obtenu \'est confu et illisible. Il nous a donc fallu envisager des solutions pour all\'eger nos traitements et notre affichage.
-\par
-Le principe est de nettoyer le graphe en enlevant les AS stubs qui sont tr\`es nombreux et pas nécessairement tr\`es pertinents pour une \'etude de la topologie du coeur de l'Internet. 
+Le principe est de nettoyer le graphe en enlevant les AS stubs qui sont tr\`es nombreux et pas nécessairement pertinents pour une \'etude de la topologie du coeur de l'Internet. 
 %\par
 \par
 \'Etant donn\'e qu'Internet joue aujourd'hui un r\^ole important dans notre vie de tous les jours, tant au niveau professionnel que priv\'e, plusieurs \'etudes ont d\'ej\`a \'et\'e men\'ees pour mieux en comprendre la structure.

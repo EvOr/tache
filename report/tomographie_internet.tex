@@ -6,22 +6,18 @@
 
 \subsubsection{Pr\'esentation d'Internet}
 
+\subparagraph{}
+Aujourd'hui, le r\'eseau le plus connu de part le monde est l'Internet. Il est le fruit combin\'e de la recherche militaire et de l'inter\^et que lui ont ensuite port\'e les universitaires. Mais que se cache-t-il r\'eellement derri\`ere cette appellation?
 \par
-Aujourd'hui, le r\'eseau le plus connu de part le monde est l'Internet. Il est le fruit combin\'e de la recherche militaire et de l'inter\^et que lui ont ensuite port\'e les universitaires.
-\par
-%TODO Déplacer en Accroche d'introduction doit pas être là ce truc... mais gg pala ça a la classe pour l'accroche.
-Au d\'ebut utilis\'e pour relier entre eux les principaux sites militaires des \'Etats-Unis, puis les universit\'es, Internet relie aujourd'hui des millions de foyers de part le monde, mais que se cache-t-il r\'eellement derri\`ere cette appellation?
-\par
-%TODO Fin deplacer
-Internet est en fait un r\'eseau de r\'eseaux. Des r\'eseaux ind\'ependants appartenant \`a des entreprises priv\'ees, des universit\'es, des op\'erateurs. Ces r\'eseaux ind\'ependants sont appel\'es syst\`emes autonomes AS. Chaque r\'eseau est connect\'e \`a plusieurs autres et lorsque deux ordinateurs appartenant \`a des AS diff\'erents souhaitent communiquer, leurs paquets de donn\'ees seront rout\'es \`a travers l'Internet en passant par plusieurs AS interm\'ediaires. Aucun des \'el\'ements ne connait la totalit\'e de la topologie du r\'eseau et les paquets sont dirig\'es suivant des r\`egles de routage locales.
+Internet est en fait un r\'eseau de r\'eseaux. Ces r\'eseaux ind\'ependants appartiennent \`a des entreprises priv\'ees, des universit\'es, des op\'erateurs. Ils sont appel\'es syst\`emes autonomes not\'es AS dans la suite de cce rapport. Chaque r\'eseau est connect\'e \`a plusieurs autres et lorsque deux ordinateurs appartenant \`a des AS diff\'erents souhaitent communiquer, leurs paquets de donn\'ees sont rout\'es \`a travers l'Internet en passant par plusieurs AS interm\'ediaires. Aucun des \'el\'ements ne connait la totalit\'e de la topologie du r\'eseau et les paquets sont dirig\'es suivant des r\`egles de routage locales.
 \par
 Lorsque l'on parle de repr\'esenter Internet sous forme de graphe, dans la pr\'esente \'etude, il s'agit en fait de repr\'esenter les liens entre les diff\'erents AS. Cependant, il est n\'ecessaire de connaitre la topologie inter-AS au pr\'ealable pour pouvoir la repr\'esenter.
 
 \subsubsection{Origine des donn\'ees}
-\par
-Il existe diff\'erents outils pour connaitre les liens entre les diff\'erents AS. Comme indiqu\'e sur le site \textit{www.caida.org} il existe au moins trois outils pour obtenir la topologie inter-AS :
+\subparagraph{}
+Il existe diff\'erents outils pour connaitre les liens entre les diff\'erents AS. Comme indiqu\'e sur le site \textit{www.caida.org}, il existe au moins trois outils pour obtenir la topologie inter-AS :
 \begin{description}
- \item[traceroute : ] outil permettant de capturer les adresses IP des diff\'erents \'equipements r\'eseau sur un chemin entre une source et une destination en utilisant des paquets sonde UDP ou ICMP. La r\'esolution du num\'ero d'AS associ\'e \'a chaque adresse IP permet d'obtenir une carte inter-AS.
+ \item[traceroute : ] outil permettant de capturer les adresses IP des diff\'erents \'equipements r\'eseau sur un chemin entre une source et une destination en utilisant des paquets sonde UDP ou ICMP. La r\'esolution du num\'ero d'AS associ\'e \`a chaque adresse IP permet d'obtenir une carte inter-AS.
  \item[BGP : ] protocole de routage inter-domaine utilis\'e pour le routage entre les AS. Ses tables de routage contiennent des chemins d'AS, on peut ainsi avoir une idée des liens entre les diff\'erents AS.
  \item[WHOIS : ] collection de bases de donn\'ees contenant des informations utiles aux op\'erateurs. Malheureusement, ces bases de donn\'ees sont maintenues \`a la main et ne  sont donc pas toujours tr\`es fiables. La plus sûre est la RIPE WHOIS qui regroupe des informations collect\'ees par la RIPE (service d'information sur les R\'eseaux IP Europ\'eens).
 \end{description}
@@ -29,8 +25,8 @@ Il existe diff\'erents outils pour connaitre les liens entre les diff\'erents AS
 Nous utiliserons principalement la m\'ethode BGP en raison de sa fiabilit\'e.
 
 \subsubsection{Internet IPv4 et IPv6}
-\par
-Aujourd'hui, un changement majeur qui est en train de s'op\'erer dans les r\'eseaux : le passage de l'IPv4 \`a l'IPv6. En effet, si IPv4 permet l'utilisation d'un peu plus de quatre milliards d'adresses ($2^{32}$), IPv6 permet quant \`a lui d'utiliser $2^{128}$ adresses diff\'erentes, ce qui permet de combler les nouveaux besoins.
+\subparagraph{}
+Aujourd'hui, un changement majeur est en train de s'op\'erer dans les r\'eseaux : le passage de l'IPv4 \`a l'IPv6. En effet, si IPv4 permet l'utilisation d'un peu plus de quatre milliards d'adresses ($2^{32}$), IPv6 permet quant \`a lui d'utiliser $2^{128}$ adresses diff\'erentes, ce qui permet de combler les nouveaux besoins.
 \par
 La mise en place progressive de l'IPv6 se traduit au sein des grands r\'eseaux par une cohabitation entre les deux syst\`emes. On peut ainsi trouver des informations pour cr\'eer le graphe de topologie pour l'internet IPv4 mais aussi pour l'internet IPv6.
 \par
