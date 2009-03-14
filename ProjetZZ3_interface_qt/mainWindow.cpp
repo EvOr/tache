@@ -31,7 +31,7 @@ void mainWindow::initMenu()
 {
    _fileMenu.setTitle("Fichier");
    _optionMenu.setTitle("Options");
-   _aboutMenu.setTitle("About");
+   _aboutMenu.setTitle("A propos");
 
    _fileMenu.addAction(_openAct);
    _fileMenu.addAction(_quitAct);
@@ -64,7 +64,7 @@ void mainWindow::initStatus()
 {
    QHBoxLayout * layout = new QHBoxLayout;
 //    _status = new QGroupBox("Status");
-   _status.setTitle("Status");
+   _status.setTitle("Statut");
 
    _labelsommet.setText("NB sommet");
    _labelarete.setText("NB arete");
@@ -91,64 +91,64 @@ void mainWindow::initStatus()
 
 void mainWindow::initAction()
 {
-   _quitAct = new QAction("Quit", this);
+   _quitAct = new QAction("Quitter", this);
    _quitAct->setShortcut(tr("Ctrl+Q"));
-   _quitAct->setStatusTip("Quit the program");
+   _quitAct->setStatusTip("Quitter le  programme");
    QObject::connect(_quitAct, SIGNAL(triggered()), this, SLOT(close()));
 
-   _openAct = new QAction("Open", this);
+   _openAct = new QAction("Ouvrir", this);
    _openAct->setShortcut(tr("Ctrl+O"));
-   _openAct->setStatusTip("Open a datafile");
+   _openAct->setStatusTip("Ouvrir un fichier de données");
    QObject::connect(_openAct, SIGNAL(triggered()), this, SLOT(choixFichier()));
 
-   _eraseAct = new QAction("Erase Graphe", this);
-   _eraseAct->setStatusTip("Erase the graph en re-initialize data structures");
+   _eraseAct = new QAction("Effacer le graphe", this);
+   _eraseAct->setStatusTip("Efface le graphe et remett à zéro les structures de données");
    QObject::connect(_eraseAct, SIGNAL(triggered()), this, SLOT(eraseGraph()));
    
 
-   _aboutAct = new QAction("About program...", this);
-   _aboutAct->setStatusTip("Give information about this program");
+   _aboutAct = new QAction("A propos", this);
+   _aboutAct->setStatusTip("Donne des informations sur ce programme.");
    QObject::connect(_aboutAct, SIGNAL(triggered()), this, SLOT(afficherAbout()));
 
-   _infoAct = new QAction("Information about an As", this);
-   _infoAct->setStatusTip("Give informations about a specific AS.");
+   _infoAct = new QAction("Info sur un AS", this);
+   _infoAct->setStatusTip("Donne es informations sur un AS particulier.");
    QObject::connect(_infoAct, SIGNAL(triggered()), this, SLOT(afficherInfoAs()));
    
 
-   _stubAct = new QAction("Load triplet file", this);
-   _stubAct->setStatusTip("Display the graph without its stub.");
+   _stubAct = new QAction("Charger un fichier de triplets", this);
+   _stubAct->setStatusTip("Permet l'affichage du graphe sans les stubs.");
    QObject::connect(_stubAct, SIGNAL(triggered()), this, SLOT(afficherNonStub()));
 
    _zoomAct = new QAction("Zoom", this);
-   _zoomAct->setStatusTip("Zoom on the neighborhood of a specific AS.");
+   _zoomAct->setStatusTip("Zoom sur le voisinage d'un AS particulier.");
    QObject::connect(_zoomAct, SIGNAL(triggered()), this, SLOT(zoom()));
 
-   _unzoomAct= new QAction("Return to global graph", this);
-   _unzoomAct->setStatusTip("Return on the global graph.");
+   _unzoomAct= new QAction("Dezoom", this);
+   _unzoomAct->setStatusTip("Retourner au graphe entier.");
    QObject::connect(_unzoomAct, SIGNAL(triggered()), this, SLOT(unzoom()));
 
-   _infWeightAct= new QAction("Display AS by inferior weigth", this);
-   _infWeightAct->setStatusTip("Display only AS with a weight inferior to a given one.");
+   _infWeightAct= new QAction("Filter par poids max", this);
+   _infWeightAct->setStatusTip("Filtre les AS en n'affichant que ceux inférieurs à un certain poids.");
    QObject::connect(_infWeightAct, SIGNAL(triggered()), this, SLOT(infWeight()));
 
-   _supWeightAct= new QAction("Display AS by superior weigth", this);
-   _supWeightAct->setStatusTip("Display only AS with a weight superior to a given one.");
+   _supWeightAct= new QAction("Filtrer par poids min", this);
+   _supWeightAct->setStatusTip("Filtre les AS en n'affichant que ceux supérieurs à un certain poids.");
    QObject::connect(_supWeightAct, SIGNAL(triggered()), this, SLOT(supWeight()));
 
-   _infASNumAct= new QAction("Display AS by inferior number", this);
-   _infASNumAct->setStatusTip("Display only AS with a number inferior to a given one.");
+   _infASNumAct= new QAction("Filtrer par numero max", this);
+   _infASNumAct->setStatusTip("Filtre les AS en n'affichant que ceux avec un numero inférieur à un certain numero.");
    QObject::connect(_infASNumAct, SIGNAL(triggered()), this, SLOT(infASNum()));
 
-   _supASNumAct= new QAction("Display AS by superior number", this);
-   _supASNumAct->setStatusTip("Display only AS with a weight superior to a given one.");
+   _supASNumAct= new QAction("Filter par numero min", this);
+   _supASNumAct->setStatusTip("Filtre les AS en n'affichant que ceux avec un numero superieur à un certain numero.");
    QObject::connect(_supASNumAct, SIGNAL(triggered()), this, SLOT(supASNum()));
 
-   _cliqueAct= new QAction("compute number of clique", this);
-   _cliqueAct->setStatusTip("Compute number of clique in the graph.");
+   _cliqueAct= new QAction("Calcul du nombre de clique", this);
+   _cliqueAct->setStatusTip("Calcul du nombre de clique maximale dans le graphe sans stub.");
    QObject::connect(_cliqueAct, SIGNAL(triggered()), this, SLOT(clique()));
  
-   _centralityAct= new QAction("compute centrality", this);
-   _centralityAct->setStatusTip("Compute centrality to weight each edges.");
+   _centralityAct= new QAction("Calcul de la centralite ", this);
+   _centralityAct->setStatusTip("Calcul de la centralité pour affecter des poids aux sommets dans le graphe sans stub.");
    QObject::connect(_centralityAct, SIGNAL(triggered()), this, SLOT(centrality()));
 
    disableAction();
@@ -208,7 +208,7 @@ void mainWindow::choixFichier()
    std::string s;
 //   size_t found = 0, prec = 0;
 
-   _datafile = QFileDialog::getOpenFileName(this,"Choose a file...", "./", "All Files (*.*)");
+   _datafile = QFileDialog::getOpenFileName(this,"Choisissez un fichier...", "./", "All Files (*.*)");
    
    //petit traitement pour récupérer le nom du fichier sans le chemin
 //   s = _datafile.toStdString();
@@ -219,7 +219,7 @@ void mainWindow::choixFichier()
 //   }
 //   s = s.substr(prec);
 
-   _status.setTitle("Status : " + _datafile);
+   _status.setTitle("Statut : " + _datafile);
 
    if(_controler == NULL)
    {
@@ -259,7 +259,7 @@ void mainWindow::choixFichier()
 void mainWindow::eraseGraph()
 {
    _graphe.eraseGraph();
-   _status.setTitle("Status");
+   _status.setTitle("Statut");
    razCompteur();
    disableAction();
 }
@@ -276,15 +276,15 @@ void mainWindow::afficherInfoAs()
 {
    bool ok;
    int value = -1;
-   value = QInputDialog::getInteger(this, "Information about an AS", "AS Number : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);    
+   value = QInputDialog::getInteger(this, "Information sur un AS", "AS Numero : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);    
    if (ok && value > -1)
-       QMessageBox::information(this, QString::fromStdString("AS Information"), QString::fromStdString(_controler->getInfoAS(value)), QMessageBox::Ok, QMessageBox::NoButton);
+       QMessageBox::information(this, QString::fromStdString("Informations sur un AS"), QString::fromStdString(_controler->getInfoAS(value)), QMessageBox::Ok, QMessageBox::NoButton);
 
 }
 
 void mainWindow::afficherNonStub()
 {
-   QString tripletFile = QFileDialog::getOpenFileName(this,"Choose a triplet file...", "./", "All Files (*.*)");
+   QString tripletFile = QFileDialog::getOpenFileName(this,"Choisir un fichier de triplets...", "./", "All Files (*.*)");
    
 
    _centralityAct->setEnabled(true);
@@ -293,8 +293,8 @@ void mainWindow::afficherNonStub()
 
    if(tripletFile.isEmpty())
    {
-      Logger::getInstance()->logMessage("File error",Logger::ERR_UNEXP);
-      QMessageBox::warning(this, QString::fromStdString("file Error !"), QString::fromStdString("You must chose a triplet file to display graph without its stub !"), QMessageBox::Ok, QMessageBox::NoButton);
+      Logger::getInstance()->logMessage("Erreur de fichier",Logger::ERR_UNEXP);
+      QMessageBox::warning(this, QString::fromStdString("Erreur de fichier !"), QString::fromStdString("Vous devez choisir un fichier de triplets pour afficher le graphe sans stub!"), QMessageBox::Ok, QMessageBox::NoButton);
    }
    else
    {
@@ -350,7 +350,7 @@ void mainWindow::zoom()
    double t;
    std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
 
-   value = QInputDialog::getInteger(this, "Zoom on AS number ?", "AS Number : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);
+   value = QInputDialog::getInteger(this, "Zoom sur un AS", "AS Numero : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);
 
    if (ok && value > -1)
    {
@@ -369,13 +369,13 @@ void mainWindow::zoom()
       }
       else
       {
-         QMessageBox::warning(this, QString::fromStdString("Zoom"), "Bad request : AS number " + QString::number(value) + " not in the graph !", QMessageBox::Ok, QMessageBox::NoButton);
+         QMessageBox::warning(this, QString::fromStdString("Zoom"), "Erreur : AS numero " + QString::number(value) + " ne fait pas partie du graphe !", QMessageBox::Ok, QMessageBox::NoButton);
       }
 
    }
    else
    {
-    QMessageBox::warning(this, QString::fromStdString("Zoom"), "Bad request !" + QString::number(value), QMessageBox::Ok, QMessageBox::NoButton);
+    QMessageBox::warning(this, QString::fromStdString("Zoom"), "Erreur !" + QString::number(value), QMessageBox::Ok, QMessageBox::NoButton);
    }   
 }
 
@@ -392,7 +392,7 @@ void mainWindow::infWeight()
    int value = -1;
    double t;
 
-   value = QInputDialog::getInteger(this, "Display by weight", "Maximum weight : ", 0, 0, 10000, 1, &ok);
+   value = QInputDialog::getInteger(this, "Filtrage par poids", "Poids max : ", 0, 0, 10000, 1, &ok);
 
    if (ok && value > -1)
    {
@@ -405,7 +405,7 @@ void mainWindow::infWeight()
    }
    else
    {
-    QMessageBox::warning(this, QString::fromStdString("Display by Weight"), "Bad request !", QMessageBox::Ok, QMessageBox::NoButton);
+    QMessageBox::warning(this, QString::fromStdString("Filtrage par poids"), "Erreur !", QMessageBox::Ok, QMessageBox::NoButton);
    }  
 }
 
@@ -416,7 +416,7 @@ void mainWindow::supWeight()
    int value = -1;
    double t;
 
-   value = QInputDialog::getInteger(this, "Display by weight", "Minimum weight : ", 0, 0, 10000, 1, &ok);
+   value = QInputDialog::getInteger(this, "Filtrage par poids", "Poids min : ", 0, 0, 10000, 1, &ok);
 
    if (ok && value > -1)
    {
@@ -429,7 +429,7 @@ void mainWindow::supWeight()
    }
    else
    {
-    QMessageBox::warning(this, QString::fromStdString("Display by Weight"), "Bad request !", QMessageBox::Ok, QMessageBox::NoButton);
+    QMessageBox::warning(this, QString::fromStdString("Filtrage par poids "), "Erreur !", QMessageBox::Ok, QMessageBox::NoButton);
    }
 }
 
@@ -440,7 +440,7 @@ void mainWindow::infASNum()
    int value = -1;
    double t;
 
-   value = QInputDialog::getInteger(this, "Display by AS number", "Maximum AS number : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);
+   value = QInputDialog::getInteger(this, "Filtrage par numero d'AS", "Numero max : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);
 
    if (ok && value > -1)
    {
@@ -453,7 +453,7 @@ void mainWindow::infASNum()
    }
    else
    {
-    QMessageBox::warning(this, QString::fromStdString("Display by AS number"), "Bad request !", QMessageBox::Ok, QMessageBox::NoButton);
+    QMessageBox::warning(this, QString::fromStdString("Filtrage par numero d'AS"), "Erreur !", QMessageBox::Ok, QMessageBox::NoButton);
    }
 }
 
@@ -464,7 +464,7 @@ void mainWindow::supASNum()
    int value = -1;
    double t;
 
-   value = QInputDialog::getInteger(this, "Display by AS number", "Minimum AS number : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);
+   value = QInputDialog::getInteger(this, "Filtrage par numero d'AS", "Numero min : ", 0, 0, _controler->getNumberOfAs(), 1, &ok);
 
    if (ok && value > -1)
    {
@@ -477,14 +477,14 @@ void mainWindow::supASNum()
    }
    else
    {
-    QMessageBox::warning(this, QString::fromStdString("Display by AS number"), "Bad request !", QMessageBox::Ok, QMessageBox::NoButton);
+    QMessageBox::warning(this, QString::fromStdString("Filtrage par numero d'AS"), "Erreur !", QMessageBox::Ok, QMessageBox::NoButton);
    }
 }
 
 
 void mainWindow::clique()
 {
-   QMessageBox::information(this, QString::fromStdString("Program information."), "This may take some minutes.", QMessageBox::Ok, QMessageBox::NoButton);
+   QMessageBox::information(this, QString::fromStdString("Information."), "Ce calcul peut prendre quelques minutes.", QMessageBox::Ok, QMessageBox::NoButton);
 
    _controler->computeClique();
    setNbClique(_controler->getNbClique());

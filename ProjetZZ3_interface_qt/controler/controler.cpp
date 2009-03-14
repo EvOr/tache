@@ -503,19 +503,19 @@ std::string Controler::getInfoAS(int i)
 
    if(vd1 != -1)
    {
-      s += "As number :\t" + out.str() + "\n";
+      s += "As numero :\t" + out.str() + "\n";
       if(vd2 != -1)
       {
          s += "type :\t" + (graph[vd1].is_transit)?"\ttransit\n":"\tstub\n";  
          std::ostringstream out2;
          out2 << mespoids[vd2];
-         s += "Centrality :\t" + out2.str();
+         s += "Centralite :\t" + out2.str();
       }
       else
-         s += "type :\tunknown"; 
+         s += "type :\tinconnu"; 
       }
    else
-      s = "No such AS " + out.str();
+      s = "Cet AS n'exsite pas " + out.str();
    
 return s;
 }

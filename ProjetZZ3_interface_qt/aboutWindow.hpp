@@ -34,12 +34,12 @@ class aboutWindow : public QObject
          _fenetre.setParent(parent);
          _fenetre.setWindowFlags(Qt::Window);
          //_fenetre.setGeometry(100,100,200,250);
-         _fenetre.setWindowTitle("About program...");
+         _fenetre.setWindowTitle("A propos...");
          _fenetre.setMinimumSize(300, 75);
 
-         _desc.setText("Jan Villeminot, Bastien Legrand, ZZ3 project.");
+         _desc.setText("Jan Villeminot, Bastien Legrand, projet de troisième année.");
 
-         _quit = new QPushButton("Quit", &_fenetre);
+         _quit = new QPushButton("Quitter", &_fenetre);
          QObject::connect( _quit, SIGNAL(clicked()), &_fenetre, SLOT(close()) );
 
          vlayout->addWidget(&_desc);
