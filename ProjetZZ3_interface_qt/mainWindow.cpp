@@ -169,9 +169,9 @@ void mainWindow::drawLine(double a, double b, double c, double d, Qt::GlobalColo
 void mainWindow::afficherPoint()
 {
    std::map< vertex_descriptor , coordonnes> coords = _controler->get_position();
-   std::vector< std::pair<vertex_descriptor , vertex_descriptor> > liens = _controler->get_liens();
+      std::vector< std::pair< std::pair<vertex_descriptor , vertex_descriptor>, int > > liens = _controler->get_liens();
    std::map< vertex_descriptor , coordonnes>::iterator it;
-   std::vector< std::pair<vertex_descriptor , vertex_descriptor> >::iterator it2;
+      std::vector< std::pair< std::pair<vertex_descriptor , vertex_descriptor>, int > >::iterator it2;
 
    //affichage des points
    for(it = coords.begin(); it != coords.end() ; ++it)
@@ -187,7 +187,10 @@ void mainWindow::afficherPoint()
    for(it2 = liens.begin(); it2 != liens.end() ; ++it2)
    {
 // std::cout << "line : " << "(" << coords[(*it2).first].x << ";" << coords[(*it2).first].y << ") (" << coords[(*it2).second].x << ";" << coords[(*it2).second].y << ")" << std::endl;
-      drawLine(coords[(*it2).first].x, coords[(*it2).first].y, coords[(*it2).second].x, coords[(*it2).second].y);
+      if(it2->second == 2)      
+         drawLine(coords[(*it2).first.first].x, coords[(*it2).first.first].y, coords[(*it2).first.second].x, coords[(*it2).first.second].y, Qt::darkMagenta);
+      else
+         drawLine(coords[(*it2).first.first].x, coords[(*it2).first.first].y, coords[(*it2).first.second].x, coords[(*it2).first.second].y, Qt::darkGreen);
       nbliens++;
    }
    setNbArete(nbliens);
@@ -315,9 +318,9 @@ void mainWindow::afficherNonStub()
 void mainWindow::drawGraphTmp()
 {
    std::map< vertex_descriptor , coordonnes> coords = _controler->get_position_tmp();
-   std::vector< std::pair<vertex_descriptor , vertex_descriptor> > liens = _controler->get_liens_tmp();
+   std::vector< std::pair< std::pair<vertex_descriptor , vertex_descriptor>, int > > liens = _controler->get_liens_tmp();
    std::map< vertex_descriptor , coordonnes>::iterator it;
-   std::vector< std::pair<vertex_descriptor , vertex_descriptor> >::iterator it2;
+   std::vector< std::pair< std::pair<vertex_descriptor , vertex_descriptor>, int > >::iterator it2;
 
    _graphe.eraseGraph();
 
@@ -334,8 +337,10 @@ std::cout << "dessin du graph tmp" << std::endl;
    int nbliens = 0;
    for(it2 = liens.begin(); it2 != liens.end() ; ++it2)
    {
-      drawLine(coords[(*it2).first].x, coords[(*it2).first].y, coords[(*it2).second].x, coords[(*it2).second].y);
-      nbliens++;
+      if(it2->second == 2)      
+         drawLine(coords[(*it2).first.first].x, coords[(*it2).first.first].y, coords[(*it2).first.second].x, coords[(*it2).first.second].y, Qt::darkMagenta);
+      else
+         drawLine(coords[(*it2).first.first].x, coords[(*it2).first.first].y, coords[(*it2).first.second].x, coords[(*it2).first.second].y, Qt::darkGreen);
    }
    setNbArete(nbliens);
 

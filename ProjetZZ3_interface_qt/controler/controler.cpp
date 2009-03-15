@@ -48,7 +48,8 @@ int Controler::displayCircle(double r)
       vertex_descriptor source = boost::source(edge,graph);
       vertex_descriptor target = boost::target(edge,graph);
       std::pair<vertex_descriptor, vertex_descriptor> p(source, target);
-      liens.push_back(p);
+      std::pair< std::pair<vertex_descriptor , vertex_descriptor>, int > p2(p, graph[*it].link_type);
+      liens.push_back(p2);
    }
 
    return 0;
@@ -446,7 +447,8 @@ void Controler::getSubGraph(int i, int j)
       vertex_descriptor source = boost::source(edge,g2);
       vertex_descriptor target = boost::target(edge,g2);
       std::pair<vertex_descriptor, vertex_descriptor> p(source, target);
-      liens_tmp.push_back(p);
+      std::pair< std::pair<vertex_descriptor , vertex_descriptor>, int > p2(p, g2[edge].link_type);
+      liens_tmp.push_back(p2);
    }
 }
 

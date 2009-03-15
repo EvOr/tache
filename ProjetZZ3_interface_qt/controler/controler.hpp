@@ -14,8 +14,8 @@ class Controler{
       std::map< vertex_descriptor , coordonnes> mescoords;
       std::map<vertex_descriptor, double> mespoids;
       std::map< vertex_descriptor , coordonnes> mescoords_tmp;
-      std::vector< std::pair<vertex_descriptor , vertex_descriptor> > liens;
-      std::vector< std::pair<vertex_descriptor , vertex_descriptor> > liens_tmp;
+      std::vector< std::pair< std::pair<vertex_descriptor , vertex_descriptor>, int > > liens;
+      std::vector< std::pair< std::pair<vertex_descriptor , vertex_descriptor>, int > > liens_tmp;
       tableau_de_coordonnees position;
       tableau_de_coordonnees position_tmp;
       int nbAS;
@@ -30,9 +30,9 @@ class Controler{
       bool displayKamada();
       Graph const & getGraph() const {return graph;}
       inline std::map< vertex_descriptor , coordonnes> get_position(){return mescoords;};
-      inline std::vector< std::pair<vertex_descriptor , vertex_descriptor> > get_liens() { return liens; }
+      inline std::vector< std::pair< std::pair<vertex_descriptor , vertex_descriptor>, int > > get_liens() { return liens; }
       inline std::map< vertex_descriptor , coordonnes> get_position_tmp(){return mescoords_tmp;};
-      inline std::vector< std::pair<vertex_descriptor , vertex_descriptor> > get_liens_tmp() { return liens_tmp; }
+      inline std::vector< std::pair< std::pair<vertex_descriptor , vertex_descriptor>, int > > get_liens_tmp() { return liens_tmp; }
       int getNumberOfAs() { return nbAS; }
       void load_triplet(std::string const & filename);
       void getNonStubsGraph(Graph & g2);
