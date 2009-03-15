@@ -47,18 +47,15 @@
 \begin{document}
 \selectlanguage{francais}
 \input{titre}
+\input{titre}
 
 \newpage
+\addtocontents{toc}{\protect\contentsline{section}{Remerciements}{}}
+\input{remerciements}
 \thispagestyle{empty}
-\tableofcontents
-
-\newpage
-\thispagestyle{empty}
-\listoffigures
 
 
 \newpage
-
 \addtocontents{toc}{\protect\contentsline{section}{R\'esum\'e}{}}
 \begin{abstract}
 \input{resume}
@@ -70,12 +67,19 @@
 \selectlanguage{english}
 \addtocontents{toc}{\protect\contentsline{section}{Abstract}{}}
 \begin{abstract}
-
+\input{abstract}
 \end{abstract}
 \thispagestyle{empty}
-
-
 \selectlanguage{francais}
+
+\newpage
+\thispagestyle{empty}
+\tableofcontents
+
+\newpage
+\thispagestyle{empty}
+\listoffigures
+
 \newpage
 \addtocontents{toc}{\protect\contentsline{section}{Lexique}{}}
 \fancyhead[R]{Lexique}
@@ -87,6 +91,7 @@
 \input{introduction}
 
 \newpage
+\setcounter{page}{1}
 \fancyhead[R]{\rightmark}
 \section{Visualisation de la topologie inter-domaine de l'Internet}
 

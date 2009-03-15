@@ -1,6 +1,7 @@
 \section{Le logiciel de visualisation et d'analyse de l'internet}
 \subsection{Objectifs}
-Le but du projet est de produire un logiciel qui permette la visualisation de la topologie d'internet et en particulier du coeur du réseau.
+\subparagraph{}
+Le but du projet est de produire un logiciel qui permette la visualisation et l'analyse de la topologie d'Internet et en particulier du coeur du réseau.
 
 \subsubsection{Objectifs de l'application}
 \label{obj}
@@ -14,24 +15,28 @@ Réaliser une interface agréable dans la librairie de notre choix et lui permet
 Permettre l'implémentation de nouveau algorithmes d'analyse et de placement de points facilement.
 
 \subsubsection{Objectif pédagogiques}
-Au delà de l'objectif de réalisation d'une application et de l'organisation que cela nécessite, un certain nombre d'objectifs pédagogique ont été convenus.
+\subparagraph{}
+Au delà de l'objectif de réalisation d'une application et de l'organisation que cela nécessite, un certain nombre d'objectifs pédagogiques ont été convenus.
 
 \paragraph{Objectifs fixés dès le départ : } 
-\paragraph{} L'objectif principal est bien évidemment d'apprendre à maîtriser la librairie boost (C++), principalement sa partie sur les graphs. Il était aussi question d'approfondir notre connaissance de la topologie de l'Internet.
+\subparagraph{}
+L'objectif principal est bien évidemment d'apprendre à maîtriser la librairie boost (C++), principalement sa partie sur les graphes. Il était aussi question d'approfondir notre connaissance de la topologie de l'Internet.
 
 \paragraph{Objectifs d'auto-apprentissage : }
-\paragraph{}  L'utilisation d'une librairie graphique pour représenter la topologie de l'Internet était nécessaire. Son choix nous était réservé. Nous avons choisi d'utiliser Qt pour deux raisons. La première est que nous voulions approfondir le cours sur Qt que nous allions avoir dans le cadre de nos études à l'ISIMA. La seconde est que, sous la pression de Nokia, cette librairie est récemment passée sous licence LGPL ce qui veut dire que les développeurs d'applications commerciales vont pouvoir développer gratuitement autour de Qt (sans payer les très onéreuses licences jusqu'à présent nécessaires pour vendre quelque chose). Il est fort probable que Qt prennent beaucoup plus d'ampleur dans les prochaines années.
+\subparagraph{}
+L'utilisation d'une librairie graphique pour représenter la topologie de l'Internet était nécessaire. Son choix nous était réservé. Nous avons choisi d'utiliser Qt pour deux raisons. La première est que nous voulions approfondir le cours sur Qt que nous allions avoir dans le cadre de nos études à l'ISIMA. La seconde est que, sous la pression de Nokia, cette librairie est récemment passée sous licence LGPL ce qui veut dire que les développeurs d'applications commerciales vont pouvoir développer gratuitement autour de Qt (sans payer les très onéreuses licences jusqu'à présent nécessaires pour vendre quelque chose). Il est fort probable que Qt prennent beaucoup plus d'ampleur dans les prochaines années.
 
-\paragraph{} Nous nous sommes fixés un autre objectif : celui d'apprendre à utiliser git. Pour les raisons évoquées en \ref{gitPar}, subversion ne nous convenait pas, mais nous ne connaissions pas vraiment git pour autant. Après avoir visionner une conférence de Linus Torvalds sur le sujet, il nous a semblé logique et nécessaire d'appréhender git et de s'en servir en particulier pour notre projet. D'autant plus que l'un comme l'autre nous avions effectué nos stages avec subversion ou cvs.
+\subparagraph{}
+Nous nous sommes fixés un autre objectif : celui d'apprendre à utiliser \textit{git}. Pour les raisons évoquées en \ref{gitPar}, \textit{subversion} ne nous convenait pas, mais nous ne connaissions pas vraiment \textit{git} pour autant. Après avoir visionner une conférence de Linus Torvalds sur le sujet, il nous a semblé logique et nécessaire d'appréhender \textit{git} et de s'en servir en particulier pour notre projet. D'autant plus que l'un comme l'autre nous avions effectué nos stages avec subversion ou cvs, nous en connaissions les limites et d\'efauts.
 
 \subsubsection{Déroulement du projet}
+\subparagraph{}
+La quasi totalité du projet a été mené par des échanges de mails, et des discussions sur des messageries instantanées (Skype, gchat). De plus, notre tuteur nous a donné une grande autonomie sur les décisions à prendre pour mener à bien nos objectifs. Ce mode de communication nous a permis d'acqu\''erir de l'expérience dans le travail à distance.
 
-La quasi totalité du projet a été mené par des échanges de mails, et des discussions sur des messageries instantannées (Skype, gchat). De plus, il nous a donné une grande autonomie sur les décisions à prendre pour mener à bien nos objectifs. Ce mode de communication nous a permis d'avoir plus d'expérience dans le travail à distance.
-
-L'autonomie demande une bonne organisation. En effet, quelques soient les décisions ou les problèmes rencontrés, il faut en rendre compte au tuteur lors de la prochaine réunion de travail suivante, réunion qui avait régulièrement lieu le Jeudi après-midi.
+L'autonomie demande une bonne organisation. En effet, quelques soient les décisions ou les problèmes rencontrés, il faut en rendre compte au tuteur lors de la prochaine réunion de travail suivante, réunion qui avait régulièrement lieu le jeudi après-midi.
 
 \subsubsection{Méthode de travail}
-
+\subparagraph{}
 Afin d'optimiser la production, nous avons adopté une méthode de développement par itération. En fait, nous nous sommes répartis les tâches selon des fonctionnalités ``élémentaires''. Après avoir isolé l'ensemble des fonctionnalités nécessaires d'une semaine à l'autre, nous ré-affectons des priorités aux différentes tâches afin d'être plus efficace dans leur parallèlisation et leur ordonnancement.
 
 \subsubsection{La librairie graph de boost}
@@ -52,7 +57,8 @@ Afin d'optimiser la production, nous avons adopté une méthode de développemen
 %La plupart des personnes ayant utilisé subversion de manière professionnelle en sont conscientes il est loin d'être agréable à utiliser, sa gestion des branches est désastreuses, et les conflits sont gérés de manière abruptes et souvent inefficaces, pour palier à ses défauts les entreprises mettent en place des politiques de fonctionnement autour du gestionnaire de version drastique avec par exemple interdiction de commiter ce qui ne marche pas. Au delà de ses problèmes de fonctionnement subversion est lent, très lent et nécessite en plus la présenced'un serveur pour pouvoir commiter.
 %Fin EvOr se défoule
 
-\paragraph{} L'une des bases du développement est d'utiliser un gestionnaire de sources afin de pouvoir modifier ses fichiers sans se soucier des conséquences. La première chose que nous avons faite, avant même de passer au développement, est de mettre en place un serveur subversion sur l'une de nos machines. Le problème qui s'est très vite posé est le suivant : quelque soit l'endroit où l'autre travaille, s'il n'a pas accès au serveur, il ne peut pas l'utiliser (\verb|commit/checkout|) et doit donc développer sans gestionnaire de sources (figure \ref{svn})... Il nous fallait un moyen de contrôler nos sources de manière distribuée : git.
+\subparagraph{}
+L'une des bases du développement est d'utiliser un gestionnaire de sources afin de pouvoir modifier ses fichiers sans se soucier des conséquences. La première chose que nous avons faite, avant même de passer au développement, est de mettre en place un serveur subversion sur l'une de nos machines. Le problème qui s'est très vite posé est le suivant : quelque soit l'endroit où l'autre travaille, s'il n'a pas accès au serveur, il ne peut pas l'utiliser (\verb|commit/checkout|) et doit donc développer sans gestionnaire de sources (figure \ref{svn})... Il nous fallait un moyen de contrôler nos sources de manière distribuée : \textit{git}.
 
 \begin{figure}[H]
 \begin{center}
@@ -63,13 +69,14 @@ Afin d'optimiser la production, nous avons adopté une méthode de développemen
 \end{figure}
 
 
-\paragraph{git : Le gestionnaire de source distribué}
 \label{gitPar}
-\paragraph{Histoire :}
-\subparagraph{} Git a été créé par Linus Torvalds en 2004, il avait besoin de remplacer BitKeeper pour la gestion des sources du noyau Linux, et il est évident qu'il ne peut pas mettre en place un serveur subversion pour un projet aussi vaste et avec autant de développeurs répartis au quatre coins du monde. Il a donc écrit, en quelques jours, un gestionnaire de sources distribué performant et qui a pour objectif de ne pas géner le développeur. En outre, Git effectue un checksum SHA1 des sources à chaque fois qu'une modifications est effectuée (commit ou push) ce qui permet d'être sûr de l'unicité des données...
+\paragraph{\textit{git} : Le gestionnaire de source distribué\\~\\Histoire :}
+\subparagraph{}
+\textit{Git} a été créé par Linus Torvalds en 2004, il avait besoin de remplacer \textit{BitKeeper} pour la gestion des sources du noyau Linux, et il est évident qu'il ne peut pas mettre en place un serveur subversion pour un projet aussi vaste et avec autant de développeurs répartis au quatre coins du monde. Il a donc écrit, en quelques jours, un gestionnaire de sources distribué performant et qui a pour objectif de ne pas géner le développeur. En outre, \textit{Git} effectue un checksum SHA1 des sources à chaque fois qu'une modifications est effectuée (commit ou push) ce qui permet d'être sûr de l'unicité des données...
 
 \paragraph{Que veut dire distribué ?} 
-\subparagraph{}Git est distribué, cela veut dire que chaque machine l'utilisant est à la fois un serveur et un client. En d'autres termes, chaque développeur peut ``commiter'' et effectuer des \verb|revert| en local. Ce qui permet de développer de manière beaucoup plus efficace, puisque les commits sont effectués en quelques millisecondes (le temps d'afficher la trace). Une fois que le développeur est satisfait de son travail, il peut demander aux autres de récupérer les sources (\verb|pull|)  depuis sa machine, ou il peut  envoyer les sources (\verb|push|) sur un serveur de fichiers central par exemple (figure \ref{git}). Tout ce que nécessite git pour fonctionner est un client et/ou un serveur ssh.
+\subparagraph{}
+\textit{Git} est distribué, cela veut dire que chaque machine l'utilisant est à la fois un serveur et un client. En d'autres termes, chaque développeur peut effectuer des \verb|commit| et des \verb|revert| en local. Ceci permet de développer de manière beaucoup plus efficace puisque les \verb|commits| sont effectués en quelques millisecondes (le temps d'afficher la trace). Une fois que le développeur est satisfait de son travail, il peut demander aux autres de récupérer les sources (\verb|pull|)  depuis sa machine, ou il peut  envoyer les sources (\verb|push|) sur un serveur de fichiers central par exemple (figure \ref{git}). Tout ce que nécessite \textit{git} pour fonctionner est un client et/ou un serveur ssh.
 
 
 \begin{figure}[H]
@@ -81,44 +88,53 @@ Afin d'optimiser la production, nous avons adopté une méthode de développemen
 \end{figure}
 
 \paragraph{Fonctionnement :} 
-\subparagraph{}La comparaison de fichiers sous git est un peu particulière, contrairement à subversion qui se base sur le nom du fichier et le numéro du commit, git se base sur un checksum du fichier. Il se sert en fait d'une base interne contenant l'intégralité des checksums des fichiers en fonction du numéro du commit correspondant mais ne se base que sur le checksum pour vérifier si deux fichiers sont différents, l'opération est donc très rapide et sûr.
+\subparagraph{}
+La comparaison de fichiers sous \textit{git} est un peu particulière, contrairement à subversion qui se base sur le nom du fichier et le numéro du \verb|commit|, \textit{git} se base sur un checksum du fichier. Il se sert en fait d'une base interne contenant l'intégralité des checksums des fichiers en fonction du numéro du \verb|commit| correspondant mais ne se base que sur le checksum pour vérifier si deux fichiers sont différents, l'opération est donc très rapide et sûr.
 
-\subparagraph{} Concrètement, la clé du fonctionnement de git est l'utilisation massive des branches. En effet, dans git tout est une branche : chaque machine de chaque développeur est une branche et ce de manière totalement transparente. C'est à dire que le développeur peut \verb|commit| et \verb|revert| sa propre branche et l'envoyer ensuite sur la branche principale \verb|push| (\verb|master|). Avec les sources, l'historique des commits effectués en local est envoyé et n'importe quel développeur peut annuler n'importe quel commit...
+\subparagraph{}
+Concrètement, la clé du fonctionnement de \textit{git} est l'utilisation massive des branches. En effet, dans \textit{git} tout est une branche : chaque machine de chaque développeur est une branche et ce de manière totalement transparente. C'est à dire que le développeur peut effectuer des \verb|commit| et \verb|revert| de sa propre branche et l'envoyer ensuite sur la branche principale en r\'ealisant un \verb|push| (\verb|master|). Avec les sources, l'historique des \verb|commits| effectués en local est envoyé et n'importe quel développeur peut annuler n'importe quel \verb|commit|.
 
-\subparagraph{} Il est donc très facile de créer, de merger et de supprimer une branche avec git, tellement facile qu'on se demande comment ça peut être aussi difficile avec subversion.
+\subparagraph{}
+Il est donc très facile de créer, de merger et de supprimer une branche avec \textit{git}, tellement facile qu'on se demande comment ça peut être aussi difficile avec \textit{subversion}.
 
-\subparagraph{} En cas de conflit, git ne fait rien ; pour git le simple fait que deux fichiers devant être ``mergés'' soient plus ``récents'' que leur dernière version commune est un conflit. Il signale alors à l'utilisateur qu'il faut ``merger''. Et ce merge est très aisé, il se déroule automatiquement la plupart du temps, à la main parfois : git est capable de ne montrer uniquement les parties de fichiers en conflit.
+\subparagraph{}
+En cas de conflit, \textit{git} ne fait rien ; pour \textit{git} le simple fait que deux fichiers devant être unifi\'es soient plus ``récents'' que leur dernière version commune est un conflit. Il signale alors à l'utilisateur qu'il faut unifier les fichiers. Et cette op\'eration est très aisée, elle se déroule automatiquement la plupart du temps, à la main parfois : \textit{git} est capable de ne montrer uniquement les parties de fichiers en conflit.
 
 
-\subparagraph{}Nous vous renvoyons à notre annexe sur git pour un descriptif détaillé des commandes à connaître avec git.
+\subparagraph{}
+Nous vous renvoyons à notre annexe sur \textit{git} pour un descriptif détaillé des commandes à connaître.
 
 %TODO en annexe les commandes de git
 %Git fonctionne en ligne de commande, néanmoins ses développeur l'ont doté d'une interface graphique plutôt fonctionnelle. Git possède un nombre impressionant de fonctionnalités, nous allons toutefois lister celles qui nous semblemt les plus importantes.
 
 \paragraph{Et l'accès aux données depuis l'extérieur ?}
-\subparagraph{} A l'instar de sourceforge pour subversion, il existe quelques sites communautaires permettant de déposer les sources de ses projets sur des serveurs distants, github en fait partie. En choisissant git, nous voulions, outre la puissance et la distribution, avoir accès aux modifications de l'un et de l'autre sans avoir besoin de s'appeler pour se demander d'allumer nos machines.
+\subparagraph{}
+A l'instar de sourceforge pour \textit{subversion}, il existe quelques sites communautaires permettant de déposer les sources de ses projets sur des serveurs distants, \textit{github} en fait partie. En choisissant \textit{git}, nous voulions, outre la puissance et la distribution, avoir accès aux modifications de l'un et de l'autre sans avoir besoin de s'appeler pour se demander d'allumer nos machines.
 
-Centraliser nos sources sur la toile, nous a semblé être la meilleure solution. Github fonctionne avec git, il lui suffit d'avoir votre clé publique rsa et il est possible d'utiliser git avec le site. 
+Centraliser nos sources sur la toile, nous a semblé être la meilleure solution. \textit{Github} fonctionne avec \textit{git}, il lui suffit d'avoir votre clé publique rsa et il est possible d'utiliser \textit{git} avec le site. 
 
 \paragraph{En résumé}
 
-\subparagraph{}L'utilisation conjuguée de git et de github nous permet :
+\subparagraph{}
+L'utilisation conjuguée de \textit{git} et de \textit{github} nous permet :
 \begin{itemize}
- \item De développer avec un gestionnaire de source sans accès au réseau ;
+ \item De développer avec un gestionnaire de sources sans accès au réseau ;
  \item D'avoir accès à notre projet par une simple commande quelque soit la machine sur laquelle nous travaillons ;
 \item De développer avec un outil puissant, rapide et efficace.
 \end{itemize}
 
 \subsection{Aperçu du logiciel}
+\subparagraph{}
 Après avoir vu les outils et les méthodes utilisés pour développer le logiciel, passons à la présentation de l'application à proprement parler.
 
 \subsubsection{Modèle Vue Controlleur}
 \label{mvcText}
-Lorsque l'on développe une application disposant d'une interface graphique, la base du développement est de séparer la partie traitement ou métier de l'interface à proprement parler. Il est souvent utile de rajouter une couche d'interfaçage entre la partie métier et la partie affichage. Cette modélisation s'appelle Modèle Vue Controlleur. Nous avons choisi d'implémenter ce modèle dans notre projet. La partie métier étant le graphe représentant les AS de l'internet et leur liens. Un schéma très superficiel du pattern est présenté en figure \ref{mvc}.
+\subparagraph{}
+Lorsque l'on développe une application disposant d'une interface graphique, la base du développement est de séparer la partie traitement ou métier de l'interface à proprement parler. Il est souvent utile de rajouter une couche d'interfaçage entre la partie métier et la partie affichage. Cette modélisation s'appelle Modèle Vue Controlleur. Nous avons choisi d'implémenter ce modèle dans notre projet. La partie métier étant le graphe représentant les AS de l'internet et leur liens. Un schéma très superficiel du patron de conception est présenté en figure \ref{mvc}.
 
-L'utilisation que nous avons faites de l'objet Graph une fois créé, analysé et rempli, peut être assimiler à l'accès à une base de données. L'ensemble des méthodes d'accès se trouvant dans le controlleur, la partie métier n'en a absolument aucune connaissance. De même, la partie affichage n'a accès qu'aux méthodes du contrôleur.
+L'utilisation que nous avons faites de l'objet \verb|Graph| une fois créé, analysé et rempli, peut être assimiler à l'accès à une base de données. L'ensemble des méthodes d'accès se trouvant dans le contr\^oleur, la partie métier n'en a absolument aucune connaissance. De même, la partie affichage n'a accès qu'aux méthodes du contrôleur.
 
-Le but de ce pattern est de permettre aux développeurs de changer la vue en ne modifiant aucune autre partie du code, ou de modifier la partie métier sans modifier le code de la vue. Ce modèle met l'accent sur l'évolutivité et la maintenabilité du code. 
+Le but de ce patron est de permettre aux développeurs de changer la vue en ne modifiant aucune autre partie du code, ou de modifier la partie métier sans modifier le code de la vue. Ce modèle met l'accent sur l'évolutivité et la maintenabilité du code. 
 
 En outre, un tel découpage facilite la répartition des tâches dans l'équipe.
 
@@ -131,13 +147,13 @@ En outre, un tel découpage facilite la répartition des tâches dans l'équipe.
 \end{figure}
 
 \subsubsection{La base du développement : l'objet Graph}
+\subparagraph{}
+Pour manipuler une structure de graphe en mémoire nous avons défini un objet \verb|Graph| à partir des templates exisants dans \textit{Boost}. Notre objet repose sur une liste d'ajdacence de la librairie \textit{Boost} dont nous avons adapté les données stockées par les noeuds et les arcs.
 
-Pour manipuler, une structure de graphe en mémoire nous avons défini un objet \verb|Graph| à partir des templates exisants dans \textit{Boost}. Notre object se repose sur une liste d'ajacence de la librairie \textit{Boost} que nous avons adapté les données stockées par les noeuds et les arcs.
+Les éléments du graphe sont identifiés par des descripteurs. Pour les sommets : \verb|vertex_descriptor|, pour les arêtes : \verb|edge_descriptor|. Bien que ces descripteurs soient de simples entiers, il ne nous était pas possible d'utiliser les numéros des AS. Chaque numéro d'AS est stocké pour chaque descripteur dans les données associées aux noeuds de la classe \verb|Graph|. %Dans le cas général ces descripteurs ne sont pas des entiers, néanmoins, afin de 
 
-Les éléments du graphe sont identifiés par des descripteurs. Pour les sommets : \verb|vertex_descriptor|, pour les arêtes : \verb|edge_descriptor|. Bien que ces descripteurs soient des simples entiers, il ne nous était pas possible d'utiliser les numéros des AS. Chaque numéro d'AS est stocké pour chaque descripteurdans les données associés aux noeuds de la classe \verb|Graph|. %Dans le cas général ces descripteurs ne sont pas des entiers, néanmoins, afin de 
-
-Notre utilisation de l'objet \verb|Graph| ressemble à celui que l'on ferait d'une base de données. Par analogie, nous possèderions une table de sommets, et une table d'arêtes. Chacune de ces tables conservent un ensemble d'attributs relatifs à chacun de ses éléments. La clé primaire de chacune de ces tables serait le descripteur correspondant (\verb|edge_descriptor| pour les arcs et \verb|vertex_descriptor| pour les noeuds). Les champs des tables corspondent aux atttributs des classes AS et ASLink (figure \ref{bdd}).
-Ces objets possèdent un certain nombre d'attributs nécessaires au bon fonctionnement de boost en plus de ceux qui nous intéressent : le type et le numéro de l'AS. Ils sont accessibles de la manière suivant : \verb|graph[descriptor].type|.
+Notre utilisation de l'objet \verb|Graph| ressemble à celui que l'on ferait d'une base de données. Par analogie, nous possèderions une table de sommets, et une table d'arêtes, chacune de ces tables conservant un ensemble d'attributs relatifs à chacun de ses éléments. La clé primaire de chacune de ces tables serait le descripteur correspondant (\verb|edge_descriptor| pour les arcs et \verb|vertex_descriptor| pour les noeuds). Les champs des tables corspondent aux atttributs des classes AS et ASLink (figure \ref{bdd}).
+Ces objets possèdent un certain nombre d'attributs nécessaires au bon fonctionnement de la librairie \boost en plus de ceux qui nous intéressent : le type et le numéro de l'AS. Ils sont accessibles de la manière suivant : \verb|graph[descriptor].type|.
 
 
 \begin{figure}[H]
@@ -149,9 +165,9 @@ Ces objets possèdent un certain nombre d'attributs nécessaires au bon fonction
 \end{figure}
 
 \subsubsection{Représentation idéale}
-La figure 8 montre un exemple de représentation de l'Internet. Le but de notre logiciel est d'obtenir une représentation de ce type qui permet de distinguer la structure d'interconnexion de l'Internet.
+\subparagraph{}
+La figure \ref{ideal} montre un exemple de représentation de l'Internet. Le but de notre logiciel est d'obtenir une représentation de ce type qui permet de distinguer la structure d'interconnexion de l'Internet.
 
- \ref{ideal}. 
 \begin{figure}[H]
 \begin{center}
         \includegraphics[width=0.8\textwidth]{./schema/Internet_map_1024_transparent.png}

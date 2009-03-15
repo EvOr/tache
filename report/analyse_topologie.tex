@@ -6,23 +6,23 @@
 \subsection{Analyse de la topologie}
 
 \subsubsection{Les outils de la Th\'eorie des graphes}
-\par
+\subparagraph{}
 Pour analyser la topologie de l'Internet \`a partir du graphe le repr\'esentant, nous disposons de plusieurs outils fournis par la th\'eorie des graphes. Nous pr\'esentons ici cetaines caract\'eristiques int\'eressantes.
 
-Par exemple, la recherche des cliques maximum (algorithme de Bron and Kerbosch) permet d'identifier les endroits o\`u les AS sont tous reli\'es deux \`a deux, un de ces ensembles est constitu\'e des op\'erateurs du \textit{Tier One}, sous r\'eserve de bien observer tous les liens les reliant dans les donn\'ees d'entr\'e. On retrouve aussi d'autres cliques localement.
+Par exemple, la recherche des cliques maximales (algorithme de Bron and Kerbosch) permet d'identifier les endroits o\`u les AS sont tous reli\'es deux \`a deux, un de ces ensembles est constitu\'e des op\'erateurs du \textit{Tier One}, sous r\'eserve de bien observer tous les liens les reliant dans les donn\'ees d'entr\'e. On retrouve aussi d'autres cliques localement.
 \par
-Ensuite, comme il a été expliqu\'e lors de la pr\'esentation de la topologie de l'Internet, le graphe a une structure connexe, c'est-\`a-dire que si l'on prend deux sommets quelconques, il existe un chemin entre ces deux sommets.
+Ensuite, comme il a été expliqu\'e lors de la pr\'esentation de la topologie de l'Internet, le graphe a une structure connexe, c'est-\`a-dire que si l'on prend deux sommets quelconques, il existe un chemin entre eux.
 Ce chemin passe par un certain nombre d'ar\^etes, et il est int\'eressant de savoir si telle ou telle ar\^ete est plus emprunt\'ee que d'autre.
 
 \subsubsection{La centralit\'e}
 
 \par
-Prenons l'exemple de deux AS A et B reli\'es entre eux. Nous savons qu'il existe une ar\^ete sur notre graphe entre A et B, supposons alors qu'il n'existe pas d'autres liens que celui entre A et B pour que les clients de A puissent joindre les clients de B. Ce lien revet donc une importance capitale puisque l'ensemble des routes partant des clients de A vers les clients de B passent par celui-ci.
+Prenons l'exemple d'un groupe d'AS A et B. Il existe au moins un chemin entre les diff\'erents AS de ces deux groupes. Supposons maintenant que tous ces chemins passent \`a un endroit du graphe par la m\^eme ar\^ete, celle-ci revet alors une importance capitale puisque l'ensemble des routes partant des membres du groupe A vers ceux du groupe B passent par l\`a.
 \par
 Il nous faut alors assigner des poids aux liens ou aux sommets afin de tenir compte de leur importance dans la structure globale.
 
 \par
-En th\'eorie des graphes, il existe une m\'etrique permettant d'\'evaluer l'importance des sommets ou des ar\^etes d'un graphe : la \textit{centralit\'e}. La centralit\'e de Freeman permet de calculer le ratio du nombre de chemins passant par cette ar\^ete ou ce sommet par rapport au nombre de chemins total dans le graphe. Plus ce ratio est important plus le noeud ou l'ar\^ete est vital pour garder le caract\`ere connexe du graphe. La centralit\'e se calcule gr\^ace \`a la formule suivante :
+En th\'eorie des graphes, il existe une m\'etrique permettant d'\'evaluer l'importance des sommets ou des ar\^etes d'un graphe : la \textit{centralit\'e de Freeman}. Elle permet de calculer le ratio du nombre de chemins passant par cette ar\^ete ou ce sommet par rapport au nombre de chemins total dans le graphe. Plus ce ratio est important plus le noeud ou l'ar\^ete est vital pour garder le caract\`ere connexe du graphe. La centralit\'e se calcule gr\^ace \`a la formule suivante :
 
 \begin{figure}[H]
    \centering
@@ -32,9 +32,9 @@ En th\'eorie des graphes, il existe une m\'etrique permettant d'\'evaluer l'impo
       {
          Soit un graphe G=(V,E) avec n sommets, la centralité $c_b(v)$ d'une arête v est :
          \begin{equation}
-               c_b(v) = \sum_{\underset{s \neq v}s \neq v \neq t V} \frac{\sigma_st(v)}{\sigma_st}
+               c_b(v) = \sum_{\underset{s \neq v}s \neq v \neq t V} \frac{\sigma_{st}(v)}{\sigma_{st}}
          \end{equation}
-	o\`u $\sigma_st$ est le nombre de plus court chemin allant de s vers t et $\sigma_st(v)$ est le nombre de plus court chemin de s vers t passant par v.
+	o\`u $\sigma_{st}$ est le nombre de plus court chemin allant de s vers t et $\sigma_{st}(v)$ est le nombre de plus court chemin de s vers t passant par v.
       }
    }
   \caption{\label{centralit\'e}Calcul de la centralit\'e}
