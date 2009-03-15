@@ -1,0 +1,83 @@
+\paragraph{Création d'une branche locale}
+La première étape est de récupérer ou de créer un dépot. On peut le créer depuis un répertoire local, ou depuis un dépot distant. Il y a de nombreuses syntaxes, nous avons choisi de montrer celle utilisée pour récupérer le projet sur github (il faut être inscrit sur le github).
+
+\begin{figure}[H]
+      \begin{tabular}{l}
+	\textit{Récupérer un dépot existant :} \\
+        \verb|     git clone ~/existing/depot ~/nouveau/depot|\\
+	\verb|     git clone git@github.com:EvOr/tache.git|\\
+	\textit{Créer un nouveau dépot :}\\
+	\verb|     git init|\\
+      \end{tabular}
+\end{figure}
+
+\paragraph{Configuration du dépot distant} Après avoir récupérer les sources, il faut affecter un alias à l'adresse de dépot.
+
+\begin{figure}[H]
+      \begin{tabular}{l}
+	\textit{Définition du nom du dépot}\\
+	\verb|     git remote add <alias du dépot> <adresse du début>|\\
+	\verb|     git remote add origin ~/existant/depot|\\
+	\verb|     git remote add origin git@github.com:EvOr/tache.git|\\
+      \end{tabular}
+\end{figure}
+
+\paragraph{Récupération et envoie des sources} Cet alias est utilisé dans les commandes permettant d'envoyer les sources et de récupérer des sources depuis un dépot distant.
+
+\begin{figure}[H]
+      \begin{tabular}{l}
+	\textit{Récupération des sources}\\
+	\verb|     git pull <alias du depot> <nom de la branche>|\\
+	\verb|     git pull origin master|\\
+	\verb|     git pull origin refactor|\\
+	\verb|     git remote add origin git@github.com:EvOr/tache.git|\\
+      \end{tabular}
+\end{figure}
+
+\paragraph{Gestion du dépot local} Le dépot local est celui qui a été cloné ou initialisé, il est possible d'effectuer les même opération qu'avec subversion ou cvs.
+
+\begin{figure}[H]
+      \begin{tabular}{l}
+	\textit{Ajout de fichiers à un commit}\\
+	\verb|     git add file1 file2 file3|\\
+	\textit{Commit l'ensemble des fichiers modifiés et/ou ajoutés}\\
+	\verb|     git commit -a|\\
+	\textit{Annule toutes les modification en cours et revient à l'état du dernier commit}\\
+	\verb|     git reset --hard|\\
+	\textit{Revient n commits en arrière}\\
+	\verb|     git reset --hard HEAD~n|\\
+	\textit{Revient à l'état du dernier pull}\\
+	\verb|     git reset --hard origin|\\
+      \end{tabular}
+\end{figure}
+
+
+\paragraph{Gestion du dépot local} Le dépot local est celui qui a été cloné ou initialisé, il est possible d'effectuer les même opération qu'avec subversion ou cvs.
+
+\begin{figure}[H]
+      \begin{tabular}{l}
+	\textit{Ajout de fichiers à un commit}\\
+	\verb|     git add file1 file2 file3|\\
+	\textit{Commit l'ensemble des fichiers modifiés et/ou ajoutés}\\
+	\verb|     git commit -a|\\
+	\textit{Annule toutes les modification en cours et revient à l'état du dernier commit}\\
+	\verb|     git reset --hard|\\
+	\textit{Revient n commits en arrière}\\
+	\verb|     git reset --hard HEAD~n|\\
+	\textit{Revient à l'état du dernier pull}\\
+	\verb|     git reset --hard origin|\\
+      \end{tabular}
+\end{figure}
+
+\paragraph{Gestion des branches} Passons à ce qui fait de git une merveille de gestionnaire de sources : les branches. Comme nous l'avons dit, dès que vous modifiez un fichier en local vous êtes dans une branche.
+
+\begin{figure}[H]
+      \begin{tabular}{l}
+	\textit{}\\
+	\verb|     git add file1 file2 file3|\\
+     \end{tabular}
+\end{figure}
+
+\paragraph{Particularité d'un push local}
+Lorsque l'on a utilisé un dépot local, il faut faire un reset hard sur ce dépot pour modifier les fichiers du dépot. Sinon il ne peuvent être utilisé comme tel. Néanmoins, il n'y a pas besoin de ce reset pour faire un pull des dernières sources pushées.
+
