@@ -35,9 +35,9 @@ class aboutWindow : public QObject
          _fenetre.setWindowFlags(Qt::Window);
          //_fenetre.setGeometry(100,100,200,250);
          _fenetre.setWindowTitle("A propos...");
-         _fenetre.setMinimumSize(300, 75);
+         _fenetre.setMinimumSize(500, 75);
 
-         _desc.setText("Jan Villeminot, Bastien Legrand, projet de troisième année.");
+         _desc.setText("Jan Villeminot, Bastien Legrand, projet de troisieme annee.");
 
          _quit = new QPushButton("Quitter", &_fenetre);
          QObject::connect( _quit, SIGNAL(clicked()), &_fenetre, SLOT(close()) );

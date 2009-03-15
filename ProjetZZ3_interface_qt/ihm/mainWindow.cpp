@@ -139,7 +139,7 @@ void mainWindow::initAction()
    _infASNumAct->setStatusTip("Filtre les AS en n'affichant que ceux avec un numero inférieur à un certain numero.");
    QObject::connect(_infASNumAct, SIGNAL(triggered()), this, SLOT(infASNum()));
 
-   _supASNumAct= new QAction("Filter par numero min", this);
+   _supASNumAct= new QAction("Filtrer par numero min", this);
    _supASNumAct->setStatusTip("Filtre les AS en n'affichant que ceux avec un numero superieur à un certain numero.");
    QObject::connect(_supASNumAct, SIGNAL(triggered()), this, SLOT(supASNum()));
 
@@ -507,6 +507,7 @@ void mainWindow::centrality()
    _centralityAct->setEnabled(false);
 
    _controler->computeCentrality();
+   _controler->getSubGraph(0,0);
 
    //dessin du graphe avec couleur pour les sommets selon leur poids
    std::map< vertex_descriptor , coordonnes> coords = _controler->get_position_tmp();

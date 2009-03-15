@@ -25,14 +25,14 @@
 #include <sstream>
 #include <ctime>
 #include <string>
-#include "aboutWindow.hpp"
-#include "grapheZone.hpp"
+#include "./aboutWindow.hpp"
+#include "./grapheZone.hpp"
 #include "./calculWindow.hpp"
 
-#include "./controler/controler.hpp"
-#include "./graph/graph.hpp"
-#include "exceptions/ReaderException.hpp"
-#include "utils/logger.hpp"
+#include "../controler/controler.hpp"
+#include "../graph/graph.hpp"
+#include "../exceptions/ReaderException.hpp"
+#include "../utils/logger.hpp"
 
 #define X 800
 #define Y 600

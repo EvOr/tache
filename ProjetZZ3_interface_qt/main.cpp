@@ -1,4 +1,4 @@
-#include "mainWindow.hpp"
+#include "./ihm/mainWindow.hpp"
 #include <iostream>
 #include <ctime>
 
