@@ -2,15 +2,15 @@
 \subsection{Développement avec boost}
 \subsubsection{Des difficultés de prise en main}
 \subparagraph{}
-La prise en main de la librairie \textit{Boost} a été la principale difficulté du projet. En effet, la documentation fournie avec la librairie se r\'ev\`ele asses difficile \`a exploiter au premier abord. La philosophie de développement de \boost, souvent compl\`etement novatrice, est assez éloignée de ce que nous connaissions juqu'alors et finalement assez éloignée de la programmation objet (pour la partie graph) : la plupart des méthodes que nous utilisons sont en fait des fonctions. Cette librairie pousse \`a l'extr\^eme la notion de g\'en\'ericit\'e en ne proposant que des fonctions templates relatives \`a des objets conecptuels.
+La prise en main de la librairie \textit{Boost} a été la principale difficulté du projet. En effet, la documentation fournie avec la librairie se r\'ev\`ele assez difficile \`a exploiter au premier abord. La philosophie de développement de \boost, souvent compl\`etement novatrice, est assez éloignée de ce que nous connaissions juqu'alors et finalement assez éloignée de la programmation objet (pour la partie graphe) : la plupart des méthodes que nous utilisons sont en fait des fonctions. Cette librairie pousse \`a l'extr\^eme la notion de g\'en\'ericit\'e en ne proposant que des fonctions templates relatives \`a des objets conceptuels.
 
 Pour trouver les fonctions relatives aux objets, ou comment les utiliser, il faut parcourir une dizaine de pages web de documentation par fonction expliquant comment les appeler i.e. comment créer les structures adéquates, quels arguments et structures passées en paramètres et comment les créer... Cette documentation n'est pour autant pas exhaustive et manque cruellement d'exemples, elle est clairement destinée à un public d'experts.
 
 \subsubsection {Compilateur spécifique}
 \subparagraph{}
-Les erreurs retournées par gcc à la compilation de la librairie sont incompréhensibles ou trop longues avec des messages d'erreur redondants et en cascade. C'est pourquoi il faut utiliser un compilateur particulier : \verb|gfilt|, utilisant perl pour analyser les erreurs de compilation et les afficher de mani\`ere intelligibles. 
+Les erreurs retournées par gcc à la compilation de la librairie sont incompréhensibles ou trop longues avec des messages d'erreur redondants et en cascade. C'est pourquoi il faut utiliser un compilateur particulier : \verb|gfilt|, utilisant perl pour analyser les erreurs de compilation et les afficher de mani\`ere intelligible. 
 
-Malheureusement, il n'est pas possible de compiler Qt avec ce compilateur. Nous avons donc créé un dossier de développement spécifique à \textit{Boost} que nous int\'egrions avec la partie Qt quand nous étions satisfaits du résultat. La solution la plus efficace aurait été de créer une branche sous git, mais nous n'avions pas encore décidé d'utiliser git lorsque nous avons rencontré ce problème.
+Malheureusement, il n'est pas possible de compiler Qt avec ce compilateur. Nous avons donc créé un dossier de développement spécifique à \textit{Boost} que nous int\'egrions avec la partie Qt quand nous étions satisfaits du résultat. La solution la plus efficace aurait été de créer une branche sous \textit{git}, mais nous n'avions pas encore décidé d'utiliser \textit{git} lorsque nous avons rencontré ce problème.
 
 \subsubsection{Bilan}
 \subparagraph{}
@@ -37,7 +37,7 @@ Le fichier contenant les liens entre les AS est une succession de lignes ``\verb
 \subsubsection{Méthode C++}
 \subparagraph{}
 Au début du projet, nous avons utilisé une méthode ``C++'' classique pour lire et analyser le fichier. 
-Représenté en figure \ref{parse_cpp}, l'analyse dite classique est beaucoup moins performante que le celle de boost, en outre il augmente considérablement le nombre de \verb|if| imbriqués ce qui rend le code plus difficile à lire, il faut ajouter autant de \verb|else| pour la gestion des erreurs qui a été retirée du présent rapport. L'avantage de cette méthode est que nous récupérons directement \verb|asn1| et \verb|asn2| les numéros des AS correspondant à la ligne du fichier en cours de lecture en tant qu'entier.
+Représenté en figure \ref{parse_cpp}, l'analyse dite classique est beaucoup moins performante que celle de boost. En outre, elle augmente considérablement le nombre de \verb|if| imbriqués ce qui rend le code plus difficile à lire ; il faut ajouter autant de \verb|else| pour la gestion des erreurs qui a été retirée du présent rapport. L'avantage de cette méthode est que nous récupérons directement \verb|asn1| et \verb|asn2| les numéros des AS correspondant à la ligne du fichier en cours de lecture en tant qu'entier.
 
 \begin{figure}[H]
    \begin{center}
@@ -70,9 +70,9 @@ Représenté en figure \ref{parse_cpp}, l'analyse dite classique est beaucoup mo
 
 \subsubsection{Méthode Boost}
 \subparagraph{}
-Le parsing avec boost utilise un \verb|tokenizer| et un \verb|char_separator| qui permet de décrire la chaine re\c cue en entrée. Représentée en figure \ref{parse_boost}, Cette méthode de lecture des fichiers est beaucoup plus performantes que celle du C++ classique. Si la ligne n'est pas conforme à nos critères la taille du vector de string est différente de 3 et nous retournons une erreur (ici non représentée). 
+L'analyse de fichier (parsing) avec \textit{Boost} utilise un \verb|tokenizer| et un \verb|char_separator| qui permet de décrire la chaine re\c cue en entrée. Représentée en figure \ref{parse_boost}, cette méthode de lecture des fichiers est beaucoup plus performante que celle du C++ classique. Si la ligne n'est pas conforme à nos critères la taille du vector de string est différente de 3 et nous retournons une erreur (ici non représentée). 
 
-Contrairement à la version C++, si la ligne est découpée correctment, nous ne récupérons pas directement des entiers. Heureusement boost dispose d'outils de conversion entre type très performant, qui permettent notamment de ``caster'' un \verb|string| en \verb|int| (figure \ref{cast_boost}) sans pertes de performances visibles. A titre d'exemple, la méthode C++ classique prenait environ 8 secondes à s'exécuter, tandis que celle de boost ne prend plus que 4 secondes, les deux mesures contiennent les traitements et ont été exécuter sur un fichier d'environ 150000 lignes...
+Contrairement à la version C++, si la ligne est découpée correctement, nous ne récupérons pas directement des entiers. Heureusement, \textit{Boost} dispose d'outils de conversion entre type très performant, qui permettent notamment de ``caster'' un \verb|string| en \verb|int| (figure \ref{cast_boost}) sans pertes de performances visibles. A titre d'exemple, la méthode C++ classique prenait environ 8 secondes à s'exécuter, tandis que celle de boost ne prend plus que 4 secondes, les deux mesures contiennent les traitements et ont été exécutées sur un fichier d'environ 150000 lignes...
 
 Au final, le traitement d'une ligne se déroule comme présenté figure \ref{file_parser}. Nous nous servons d'une map de traduction qui permet de trouver quel AS est déjà présent dans le graphe et de récupérer son \verb|vertex_descriptor|. En effet, chaque \verb|vertex_descriptor| est un entier mais il ne correspond pas au numéro de l'AS en question. Utiliser le numéro de l'AS comme \verb|vertex_descriptor| reviendrait à créer des AS fantômes, le graphe serait donc trop gros et surtout la représentation graphique et les données correspondants aux AS seraient éronnées.
 
@@ -125,7 +125,7 @@ Les fonctions utilisées pour ajouter des sommets et des arêtes (\verb|add_vert
 
 \subsubsection{Gestion des erreurs}
 \subparagraph{}
-La gestion des erreurs lors du parsing du fichier se fait de manière un peu particulière. Afin de rendre le bloc parsing de fichier totalement indépendant du reste, nous avons choisi d'utiliser un simple booléen qui indique si une erreur s'est produite à cause de la lecture d'une ligne, dans le cas où l'erreur est critique (fichier inexistant, illisible ou toutes autres raisons de ce type), un autre type d'erreur est détectée. 
+La gestion des erreurs lors de l'analyse du fichier se fait de manière un peu particulière. En effet, afin de rendre cette partie totalement indépendante du reste, nous avons choisi d'utiliser un simple booléen qui indique si une erreur s'est produite à cause de la lecture d'une ligne, dans le cas où l'erreur est critique (fichier inexistant, illisible ou toutes autres raisons de ce type), un autre type d'erreur est détectée. 
 
 Pour signaler, l'erreur à la couche supérieure (le controlleur), nous remontons une exception \verb|ReaderException| de nature \verb|CRITICAL| n'importe quand ou \verb|NON_BLOCKING| une fois le graphe rempli de maniètre à empêcher ou non l'exécution de la suite du code.
 
@@ -139,13 +139,13 @@ Pour signaler, l'erreur à la couche supérieure (le controlleur), nous remonton
 Notre connaissance grandissante des librairies utilisées nous a permis de pratiquer diverses expérimentations sur nos algorithmes, traitements et affichages.
 \subsubsection{Expérimentation avec Qt}
 \subparagraph{}
-Au cours de la premi\`ere phase du projet, nous avions un module de lecture sur fichier vraiment lent, aussi, il arrivait souvent lors du chargement du fichier que notre fen\^etre principale devienne grise. En fait, l'OS cherchait \`a signifier par l\`a que la fen\^etre ne réponde plus depuis un moment, ce qui \'est normal au vu des traitements réalisés par le programme.
+Au cours de la premi\`ere phase du projet, nous avions un module de lecture sur fichier vraiment lent, aussi, il arrivait souvent lors du chargement du fichier que notre fen\^etre principale devienne grise. En fait, l'OS cherchait \`a signifier par l\`a que la fen\^etre ne répondait plus depuis un moment, ce qui était normal au vu des traitements réalisés par le programme.
 
 Aussi nous avons décidé d'afficher une petite fen\^etre annon\c cant ``un calcul est en cours''. Pour cela, nous avons effectué des recherches sur les \textit{QThread}. Ceux-ci devaient permettre \`a notre fen\^etre de chargement de continuer d'\^etre active m\^eme si la fen\^etre principale cessait de répondre.
 
 Nos recherches nous ont appris que Qt ne permet pas de gérer l'affichage en dehors du thread principal. Donc, une fen\^etre de chargement doit être g\'er\'ee par le m\^eme thread que la fen\^etre principale. Ce sont les calculs qui doivent \^etre effectu\'es par un autre thread.
 
-Avec l'arriv\'ee du second module de lecture de fichier, le processus est devenu plus rapide et l'utilit\'e de cette fen\^etre pour faire patienter l'utilisateur nous semble moins importante, aussi l'id\'ee a été rel\'egu\'ee au second plan, et finalement ne se retrouve pas impl\'ement\'ee dans le programme final.
+Avec l'arriv\'ee du second module de lecture de fichier, le processus est devenu plus rapide et l'utilit\'e de cette fen\^etre pour faire patienter l'utilisateur nous semblant moins importante, l'id\'ee a été rel\'egu\'ee au second plan, pour finalement ne pas se retrouver impl\'ement\'ee dans le programme final.
 
 \subsubsection{Expérimentation avec boost}
 
@@ -154,7 +154,7 @@ Kamada Kawai Layout est une fonctions de \boost permettant de calculer les coord
 La fonction Kamada Kawai n'est pas impl\'ement\'ee dans la version finale.
 
 \subparagraph{Recherche des peers\\}
-La recherche des peers a été développé en deux étapes. La première étape fut de trouver un moyen de recenser les Peers à partir de fichier de routage uniquement, afin de permettre de trouver les cliques avec un algorithme ``maison''. Cette méthode se basait sur le ciblage des AS qui n'avaient ni client, ni peer : ce sont n\'ecessairement des stubs. A ce moment là, nous stockions plusieurs graphs dans l'objet contrôleur dont le principale et celui sans les stubs.
+La recherche des peers a été développée en deux étapes. La première étape fut de trouver un moyen de recenser les Peers à partir du fichier de routage uniquement, afin de permettre de trouver les cliques avec un algorithme ``maison''. Cette méthode se basait sur le ciblage des AS qui n'avaient ni client, ni peer : ce sont n\'ecessairement des stubs. A ce moment là, nous stockions plusieurs graphs dans l'objet contrôleur dont le principale et celui sans les stubs.
 
 Cette méthode présupposait que le fichier était ordonné et bien que ce soit le cas avec le fichier qui nous servait de base cela ne le serait pas forcément avec tous les fichiers devant être utilisés. Et ordonner manuellement un fichier de 100000 lignes reléverait d'un exploit digne d'un héros de la mythologie grecque. Ordonner ce fichier avec une fonction dédiée était possible, mais il fallait trouver un moyen plus ``propre'' et performant.
 

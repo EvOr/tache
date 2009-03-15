@@ -3,7 +3,7 @@ Le developpement avec Qt s'est fait \`a l'aide de la documentation tr\`es fourni
 \par
 La principale difficult\'e de d\'evelopper avec Qt r\'eside dans la compr\'ehension des slots et signaux. Ce sont eux qui font toute l'interactivit\'e d'une interface graphique. Pour rendre op\'erationnelle une entr\'ee dans un menu, il faut connecter l'action qu'elle repr\'esente au slot correspondant dans son objet parent.
 \par
-Notre fen\^etre principale contient donc les d\'eclarations des actions correspondant aux diff\'erentes entr\'es des menus, par exemple sur la figure \ref{exemple_action_qt}, on voit la d\'eclaration de l'action permettant de quitter le programme en fermant toutes les fen\^etres.
+Notre fen\^etre principale contient donc les d\'eclarations des actions correspondant aux diff\'erentes entr\'ees des menus, par exemple sur la figure \ref{exemple_action_qt}, on voit la d\'eclaration de l'action permettant de quitter le programme en fermant toutes les fen\^etres.
 \begin{figure}[H]
    \begin{center}
       \begin{tabular}{l}
@@ -28,7 +28,7 @@ entr\'ees du menu \`a une action, ce qui est pr\'esent\'e figure \ref{exemple_me
 \caption{\label{exemple_menu_qt} Exemple de d'association d'action Qt \`a une entr\'e d'un menu}
 \end{figure}
 
-Enfin, il faut associer l'action \`a un slot d'un des \'el\'ement du programme si on veut que cela fasse quelque chose lorsque l'on clique sur l'entr\'e du menu. Figure \ref{exemple_initAction_qt}, on peut voir que l'action est d'abord cr\'e\'ee avec un nom, et attach\'ee \`a un objet, ici \textit{this} fait r\'ef\'erence \`a la fen\^etre principale. On assigne ensuite un raccourcis et une description \`a l'action. Finalement, l'\'etape la plus importante, on connecte l'action au slot de fermeture de la fen\^etre principale.
+Enfin, il faut associer l'action \`a un slot d'un des \'el\'ement du programme si on veut que cela fasse quelque chose lorsque l'on clique sur l'entr\'ee du menu. Figure \ref{exemple_initAction_qt}, on peut voir que l'action est d'abord cr\'e\'ee avec un nom, et attach\'ee \`a un objet, ici \textit{this} fait r\'ef\'erence \`a la fen\^etre principale. On assigne ensuite un raccourci et une description \`a l'action. Finalement, l'\'etape la plus importante est la connection de l'action au slot de fermeture de la fen\^etre principale.
 
 \begin{figure}[H]
    \begin{center}
@@ -72,6 +72,6 @@ Voici l'exemple de la classe \verb|mainWindow| de notre programme qui est la fen
 \caption{\label{exemple_mainWindow_qt} Exemple d'un classe Qt}
 \end{figure}
 
-La classe mainWindow h\'erite de la classe QMainWindow de Qt qui est la classe pour les fen\^etres principales d'un programme dans laquelle, on ajoute tous les \'el\'ements composant le programme (menu, zone de dessin, barre de statut) sous forme d'attributs de classe.
-Un certains nombre de m\'ethodes publiques sont d\'efinies pour int\'eragir avec ces \'el\'ements, par exemple : changer tel ou tel affichage dans la zone de dessin.
-Enfin, un certain nombre de slots publiques correspondent aux actions r\'ealisables dans les menus. Ces slots sont des fonctions qui sont appel\'ees en r\'eponse \`a un clique de souris sur un menu ou un bouton.
+La classe mainWindow h\'erite de la classe QMainWindow de Qt, la classe pour les fen\^etres principales d'un programme. On y ajoute tous les \'el\'ements composant le programme (menu, zone de dessin, barre de statut) sous forme d'attributs de classe.
+Un certains nombre de m\'ethodes publiques sont d\'efinies pour int\'eragir avec ces \'el\'ements : changer tel ou tel affichage dans la zone de dessin, par exemple.
+Enfin, un certain nombre de slots publiques correspondent aux actions r\'ealisables dans les menus. Ces slots sont des fonctions qui sont appel\'ees en r\'eponse \`a un clic de souris sur un menu ou un bouton.
