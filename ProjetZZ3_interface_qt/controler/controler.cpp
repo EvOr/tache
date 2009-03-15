@@ -522,4 +522,9 @@ std::string Controler::getInfoAS(int i)
 return s;
 }
 
+double Controler::getPoids(int i)
+{
+   std::map<vertex_descriptor, double>::iterator it = mespoids.find(i);
+   return it->second;
+}
 

@@ -19,7 +19,7 @@ QSize grapheZone::sizeHint() const
    return QSize(400, 200);
 }
 
-void grapheZone::drawLine(double a, double b, double c, double d, Qt::GlobalColor col)
+void grapheZone::drawLine(double a, double b, double c, double d, QColor col)
 {
    std::pair<double, double> p(a, b);
    std::pair<double, double> p2(c, d);
@@ -31,7 +31,7 @@ void grapheZone::drawLine(double a, double b, double c, double d, Qt::GlobalColo
    update();
 }
 
-void grapheZone::drawPoint(double a, double b, Qt::GlobalColor col)
+void grapheZone::drawPoint(double a, double b, QColor col)
 {
    std::pair<double, double> p(a, b);
 // std::cout << "point : " << "(" << a << ";" << b << ")" << std::endl;

@@ -33,6 +33,7 @@ class Controler{
       inline std::vector< std::pair< std::pair<vertex_descriptor , vertex_descriptor>, int > > get_liens() { return liens; }
       inline std::map< vertex_descriptor , coordonnes> get_position_tmp(){return mescoords_tmp;};
       inline std::vector< std::pair< std::pair<vertex_descriptor , vertex_descriptor>, int > > get_liens_tmp() { return liens_tmp; }
+      double getPoids(int i);
       int getNumberOfAs() { return nbAS; }
       void load_triplet(std::string const & filename);
       void getNonStubsGraph(Graph & g2);

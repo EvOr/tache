@@ -155,13 +155,13 @@ void mainWindow::initAction()
 }
 
 
-void mainWindow::drawPoint(double x, double y, Qt::GlobalColor c)
+void mainWindow::drawPoint(double x, double y, QColor c)
 {
    _graphe.drawPoint(x, y, c);
 
 }
 
-void mainWindow::drawLine(double a, double b, double c, double d, Qt::GlobalColor col)
+void mainWindow::drawLine(double a, double b, double c, double d, QColor col)
 {
    _graphe.drawLine(a, b, c, d, col);
 }
@@ -341,6 +341,8 @@ std::cout << "dessin du graph tmp" << std::endl;
          drawLine(coords[(*it2).first.first].x, coords[(*it2).first.first].y, coords[(*it2).first.second].x, coords[(*it2).first.second].y, Qt::darkMagenta);
       else
          drawLine(coords[(*it2).first.first].x, coords[(*it2).first.first].y, coords[(*it2).first.second].x, coords[(*it2).first.second].y, Qt::darkGreen);
+      
+      nbliens++;
    }
    setNbArete(nbliens);
 
@@ -506,9 +508,53 @@ void mainWindow::centrality()
 
    _controler->computeCentrality();
 
-   //QMessageBox::information(this, QString::fromStdString("Program information."), "Not implemented yet.", QMessageBox::Ok, QMessageBox::NoButton);
+   //dessin du graphe avec couleur pour les sommets selon leur poids
+   std::map< vertex_descriptor , coordonnes> coords = _controler->get_position_tmp();
+   std::vector< std::pair< std::pair<vertex_descriptor , vertex_descriptor>, int > > liens = _controler->get_liens_tmp();
+   std::map< vertex_descriptor , coordonnes>::iterator it;
+   std::vector< std::pair< std::pair<vertex_descriptor , vertex_descriptor>, int > >::iterator it2;
+   QColor c;
 
+   _graphe.eraseGraph();
 
+   //affichage des points
+   for(it = coords.begin(); it != coords.end() ; ++it)
+   {
+      //generation de la couleur selon le poids
+      if(_controler->getPoids(it->first) > 4375)
+         c.setRgb(102, 0, 255);
+      else if(_controler->getPoids(it->first) > 3750)
+         c.setRgb(102,153,255);
+      else if(_controler->getPoids(it->first) > 3125)
+         c.setRgb(51,255,255);
+      else if(_controler->getPoids(it->first) > 2500)
+         c.setRgb(102,255,153);
+      else if(_controler->getPoids(it->first) > 1875)
+         c.setRgb(102,255,0);
+      else if(_controler->getPoids(it->first) > 1250)
+         c.setRgb(255,255,0);
+      else if(_controler->getPoids(it->first) > 625)
+         c.setRgb(255,102,0);
+      else
+         c.setRgb(255,0,0);
+
+      drawPoint(it->second.x, it->second.y, c);
+   }
+   setNbSommets(coords.size());
+
+   
+   //affichage des liens
+   int nbliens = 0;
+   for(it2 = liens.begin(); it2 != liens.end() ; ++it2)
+   {
+      if(it2->second == 2)      
+         drawLine(coords[(*it2).first.first].x, coords[(*it2).first.first].y, coords[(*it2).first.second].x, coords[(*it2).first.second].y, Qt::darkMagenta);
+      else
+         drawLine(coords[(*it2).first.first].x, coords[(*it2).first.first].y, coords[(*it2).first.second].x, coords[(*it2).first.second].y, Qt::darkGreen);
+
+      nbliens++;
+   }
+   setNbArete(nbliens);
 }
 
 
