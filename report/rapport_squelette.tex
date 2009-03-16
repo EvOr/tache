@@ -30,11 +30,11 @@
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 \renewcommand{\headrulewidth}{0.5pt}
 \renewcommand{\footrulewidth}{0.5pt}
-\fancyhead{} % clear all header fields
-\fancyhead[L]{Etude de la topologie de l'Internet}
-\fancyhead[R]{\rightmark}
-\fancyfoot{} % clear all footer fields
-\fancyfoot[C]{\thepage}
+% \fancyhead{} % clear all header fields
+% \fancyhead[L]{Etude de la topologie de l'Internet}
+% \fancyhead[R]{\rightmark}
+% \fancyfoot{} % clear all footer fields
+% \fancyfoot[C]{\thepage}
 
 
 \newcommand{\boost}{\textit{Boost }}
@@ -50,6 +50,7 @@
 \input{titre}
 
 \newpage
+\thispagestyle{empty}
 \addtocontents{toc}{\protect\contentsline{section}{Remerciements}{}}
 \input{remerciements}
 \thispagestyle{empty}
@@ -73,26 +74,40 @@
 \selectlanguage{francais}
 
 \newpage
-\thispagestyle{empty}
+% \thispagestyle{empty}
+\fancyfoot{}
 \tableofcontents
 
 \newpage
-\thispagestyle{empty}
+% \thispagestyle{empty}
+\fancyfoot{}
 \listoffigures
 
 \newpage
+% \thispagestyle{empty}
 \addtocontents{toc}{\protect\contentsline{section}{Lexique}{}}
+\fancyhead{}
 \fancyhead[R]{Lexique}
+\fancyhead[L]{Etude de la topologie de l'Internet}
+\fancyfoot{} % clear all footer fields
 \input{lexique}
 
 \newpage
+% \thispagestyle{empty}
 \addtocontents{toc}{\protect\contentsline{section}{Introduction}{}}
+\fancyhead{}
 \fancyhead[R]{Introduction}
+\fancyhead[L]{Etude de la topologie de l'Internet}
+\fancyfoot{} % clear all footer fields
 \input{introduction}
 
 \newpage
-\setcounter{page}{1}
+\fancyhead{} % clear all header fields
+\fancyhead[L]{Etude de la topologie de l'Internet}
 \fancyhead[R]{\rightmark}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[C]{\thepage}
+\setcounter{page}{1}
 \section{Visualisation de la topologie inter-domaine de l'Internet}
 
 \input{tomographie_internet}
@@ -113,9 +128,24 @@
 \input{partie4}
 
 \pagebreak
+\thispagestyle{empty}
 \addtocontents{toc}{\protect\contentsline{section}{Conclusion}{}}
 \fancyhead[R]{Conclusion}
 \input{conclusion}
+
+\newpage
+\thispagestyle{empty}
+\vspace*{10cm}
+\begin{center}
+\begin{Huge}\textbf{Annexes}\end{Huge}
+\end{center}
+\newpage
+% \setcounter{page}{1}
+
+\newpage
+\appendix
+\section{Annexe : Git}
+\input{annexe_git}
 
 \pagebreak
 \addtocontents{toc}{\protect\contentsline{section}{R\'ef\'erences bibliographiques}{}}
