@@ -28,18 +28,29 @@ En th\'eorie des graphes, il existe une m\'etrique permettant d'\'evaluer l'impo
    \centering
    \frame
    {
+      \hspace{1em}
       \parbox{12cm}
       {
-         Soit un graphe G=(V,E) avec n sommets, la centralité $c_b(v)$ d'une arête v est :
+         \vspace{1em}Soit un graphe G=(V,E) avec n sommets, la centralité $c_b(v)$ d'une arête v est :
          \begin{equation}
-               c_b(v) = \sum_{\underset{s \neq v}s \neq v \neq t V} \frac{\sigma_{st}(v)}{\sigma_{st}}
+               c_b(v) = \sum_{\underset{s \neq t}s \neq v \neq t \in V} \frac{\sigma_{st}(v)}{\sigma_{st}}
          \end{equation}
 	o\`u $\sigma_{st}$ est le nombre de plus court chemin allant de s vers t et $\sigma_{st}(v)$ est le nombre de plus court chemin de s vers t passant par v.
-      }
+      \vspace{1em}
+      }\hspace{1em}
    }
+
+% \end{tabular}
+% \end{center}
   \caption{\label{centralit\'e}Calcul de la centralit\'e}
 \end{figure}
 
-
+% \begin{center}
+%       \begin{tabular}{l}
+%          \hline
+%          \verb|sed -i -e "s/AS//g" nom_du_fichier|\\
+%          \hline
+%       \end{tabular}
+%    \end{center}
 
 %\end{document}
