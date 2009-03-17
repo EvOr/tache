@@ -1,0 +1,64 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{beamerthemesplit}
+\usepackage[francais]{babel}
+% \usepackage{default}
+
+
+%déclaration du theme des slides
+\usetheme[hideothersubsections]{PaloAlto}
+\usecolortheme{seahorse}
+\useinnertheme[shadow=true]{rounded}
+
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+%petites lignes magiques pour la numérotation des pages
+\setbeamertemplate{footline}{
+    \leavevmode%
+    \hbox{\hspace*{-0.08cm}
+    \begin{beamercolorbox}[wd=.40\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+        \usebeamerfont{author in head/foot}\hspace{2em}Jan Villeminot, Bastien Legrand%\insertshortauthor%~~(\insertshortinstitute)
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.20\paperwidth,ht=2.25ex,dp=1ex,center]{section in head/foot}%
+        \usebeamerfont{section in head/foot}\insertframenumber%\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.40\paperwidth,ht=2.25ex,dp=1ex,right]{section in head/foot}%
+        \usebeamerfont{section in head/foot}Soutenance de projet de 3\`eme ann\'ee\hspace{2em}\null%\usebeamerfont{section in head/foot}\insertshortdate{}\hspace*{2em}
+        %\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}}%
+    \vskip0pt%
+}
+
+\title{Repr\'esentation et analyse de la topologie Internet}
+\date{\oldstylenums{20 mars 2009}}
+
+
+\begin{document}
+\logo{\includegraphics[width=1cm]{logo-isima.jpg}}
+
+%page de titre
+\begin{frame}[tc, plain]
+% \maketitle
+\end{frame}
+
+
+
+\input{intro}
+
+\begin{frame}[tc]
+ \frametitle{Plan}
+ \tableofcontents
+\end{frame}
+
+%input des parties
+
+\input{partie1}
+
+\input{partie2}
+
+\input{partie3}
+
+\input{conclusion}
+
+\end{document}
