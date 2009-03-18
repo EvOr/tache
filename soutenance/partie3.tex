@@ -1,20 +1,57 @@
 \section{Solution r\'ealis\'ee}
+
 \begin{frame}
  	\frametitle{Solution r\'ealis\'ee}
         \tableofcontents[currentsection,hideothersubsections]
 \end{frame}
+
 \subsection{Fonctionnalit\'es impl\'ement\'ees}
 \frame
 {
 \frametitle{Fonctionnalit\'es impl\'ement\'ees}
-
-
+\only<1>{
+Fonctionnalit\'es du programme final :
+\begin{itemize}
+ \item R\'ecup\'eration d'informations sur un AS,
+ \item Calcul du nombre de cliques maximum dans le graphe gr\^ace \`a l'algorithme de Bron and Kerbosch,
+ \item Chargement d'un fichier de triplets pour \'eliminer les stubs du graphe,
+ \item Zoomer sur le proche voisinage d'un AS,
+ \item Revenir au graphe de base,
+ \item Calculer la centralit\'e de Freeman des sommets,
+ \item Filtrer les sommets selon leur centralit\'e,
+ \item Filtrer les sommets selon leur num\'ero d'AS.
+\end{itemize}
+}
+\only<2>{\includegraphics[width=\textwidth]{./seqMenu.png}}
 }
 
 \subsection{Rendu final}
 \frame
 {
 \frametitle{Rendu final}
-
-
+\only<1>
+{
+   \includegraphics[width=\textwidth]{ecran_programme.png}
+   \centering Ecran principal du programme
+}
+\only<2>
+{
+   \includegraphics[width=\textwidth]{ecran_graphe.png}
+   \centering Graphe charg\'e
+}
+\only<3>
+{
+   \includegraphics[width=\textwidth]{×}
+   \centering Stubs \'elimi\'es
+}
+\only<4>
+{
+   \includegraphics[width=\textwidth]{×}
+   \centering Centralit\'e calcul\'ee
+}
+\only<4>
+{
+   \includegraphics[width=\textwidth]{×}
+   \centering Filtrage par num\'ero d'As
+}
 }
