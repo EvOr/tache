@@ -66,9 +66,9 @@ void mainWindow::initStatus()
 //    _status = new QGroupBox("Status");
    _status.setTitle("Statut");
 
-   _labelsommet.setText("NB sommet");
-   _labelarete.setText("NB arete");
-   _labelclique.setText("NB clique");
+   _labelsommet.setText("NB sommets");
+   _labelarete.setText("NB aretes");
+   _labelclique.setText("NB cliques");
    _labeltps.setText("Tps calcul");
 
    layout->addWidget(&_labelsommet);
