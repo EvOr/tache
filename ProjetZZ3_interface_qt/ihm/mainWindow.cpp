@@ -344,7 +344,7 @@ std::cout << "dessin du graph tmp" << std::endl;
       
       nbliens++;
    }
-   setNbArete(nbliens);
+   setNbArete(nbliens/2);
 
 std::cout << "fin de dessin du graph tmp avec : " << nbliens << " liens." << std::endl;
 }   
