@@ -3,7 +3,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif
 kileprversion=2
 kileversion=2.0
-lastDocument=partie1.tex
+lastDocument=intro.tex
 masterDocument=
 name=soutenance
 pkg_extIsRegExp=false
@@ -26,10 +26,10 @@ order=4
 
 [item:intro.tex]
 archive=true
-column=17
+column=48
 encoding=UTF-8
 highlight=LaTeX
-line=22
+line=6
 open=true
 order=3
 
@@ -44,10 +44,10 @@ order=0
 
 [item:partie1.tex]
 archive=true
-column=14
+column=12
 encoding=UTF-8
 highlight=LaTeX
-line=69
+line=68
 open=true
 order=1
 
@@ -62,9 +62,9 @@ order=2
 
 [item:partie3.tex]
 archive=true
-column=30
+column=1
 encoding=UTF-8
 highlight=LaTeX
-line=0
-open=false
-order=-1
+line=61
+open=true
+order=5
