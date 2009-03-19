@@ -9,20 +9,23 @@
 \frame
 {
 \frametitle{Fonctionnalit\'es impl\'ement\'ees}
-\only<1>{
-Fonctionnalit\'es du programme final :
+\framesubtitle{Fonctionnalit\'es du programme final}
 \begin{itemize}
- \item R\'ecup\'eration d'informations sur un AS,
- \item Calcul du nombre de cliques maximum dans le graphe gr\^ace \`a l'algorithme de Bron and Kerbosch,
- \item Chargement d'un fichier de triplets pour \'eliminer les stubs du graphe,
- \item Zoomer sur le proche voisinage d'un AS,
- \item Revenir au graphe de base,
- \item Calculer la centralit\'e de Freeman des sommets,
- \item Filtrer les sommets selon leur centralit\'e,
- \item Filtrer les sommets selon leur num\'ero d'AS.
+ \item<1-8> R\'ecup\'eration d'informations sur un AS
+ \item<2-8> Calcul du nombre de cliques maximum dans le graphe gr\^ace \`a l'algorithme de Bron and Kerbosch
+ \item<3-8> Chargement d'un fichier de triplets pour \'eliminer les stubs du graphe
+ \item<4-8> Zoomer sur le proche voisinage d'un AS
+ \item<5-8> Revenir au graphe de base
+ \item<6-8> Calculer la centralit\'e de Freeman des sommets
+ \item<7-8> Filtrer les sommets selon leur centralit\'e
+ \item<8> Filtrer les sommets selon leur num\'ero d'AS
 \end{itemize}
 }
-\only<2>{\includegraphics[width=\textwidth]{./seqMenu.png}}
+\frame
+{
+\frametitle{Fonctionnalit\'es impl\'ement\'ees}
+\framesubtitle{S\'equence des options}
+\includegraphics[width=\textwidth]{./seqMenu.png}
 }
 
 \subsection{Rendu final}
@@ -43,28 +46,28 @@ Fonctionnalit\'es du programme final :
    Graphe charg\'e
    \end{center}
 }
-\only<3>
+\only<5>
 {
    \begin{center}
    \includegraphics[width=0.9\textwidth]{ecran_graphe_nostubs.png}\\
    Stubs \'elimin\'es
    \end{center}
 }
-\only<4>
+\only<6>
 {
    \begin{center}
    \includegraphics[width=0.9\textwidth]{ecran_graphe_centrality.png}\\
    Centralit\'e calcul\'ee
    \end{center}
 }
-\only<5>
+\only<3>
 {
    \begin{center}
    \includegraphics[width=0.9\textwidth]{ecran_graphe_filtre.png}\\
    Filtrage par num\'ero d'AS
    \end{center}
 }
-\only<6>
+\only<4>
 {
    \begin{center}
    \includegraphics[width=0.9\textwidth]{ecran_graphe_zoom.png}\\
